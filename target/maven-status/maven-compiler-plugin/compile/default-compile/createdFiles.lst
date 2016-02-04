@@ -1,3 +1,5 @@
+grupp14/IV1201/view/UserinfoBean.class
 grupp14/IV1201/model/LoginEJB.class
+grupp14/IV1201/view/LoginFilter.class
 grupp14/IV1201/controller/ControllerEJB.class
-grupp14/IV1201/view/LoginBean.class
+grupp14/IV1201/view/LogoutBean.class

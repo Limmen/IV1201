@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui">
+    <ui:composition template="/templates/default/main.xhtml">
+        <ui:define name="content">
+            <b:button value="&lt;" outcome="index"/>
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <h:link value="Login" outcome="login" />
+                </li>
+                <li>
+                    <h:link value="Register" outcome="register" />
+                </li>
+            </ul>
+            <ui:fragment>
+                <form class="form-signing" method="POST" 
+                      action="j_security_check" prependId="false">
+                    <h4>Please Signin</h4>
+                    <div class="form-group">
+                        <label for="j_username" value="Username">Username:</label>
+                        <input class="form-control" type="text" name="j_username"
+                               required = "true"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="j_password" value="Password">Password:</label>
+                        <input class="form-control" type="password" name="j_password"
+                               required = "true"/>
+                    </div>
+                    <h:form>
+                        <b:commandButton value="submit" type="submit" 
+                                         action="j_security_check">
+                            Login
+                        </b:commandButton>
+                    </h:form>
+                </form>
+            </ui:fragment>
+        </ui:define>
+    </ui:composition>          
+</html>

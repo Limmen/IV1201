@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui">
+    
+    <ui:composition template="/templates/default/main.xhtml">
+        <ui:define name="content">
+            <b:button value="&lt;" outcome="/index"/>
+            <b:well><p class="it"><span class="bold">User: </span>#{userinfoBean.username} 
+                    <span class="bold">Role: </span>#{userinfoBean.role}</p></b:well>         
+            <b:panel>
+                <b:listLinks>
+                    <b:navLink href="#" value="Manage applications" icon="link"></b:navLink>                    
+                </b:listLinks>
+            </b:panel>
+            <h:form>
+                <b:commandButton styleClass="logOutButton" value="LogOut" 
+                                 action="#{logoutBean.logout}">
+                    Logout
+                </b:commandButton>
+            </h:form>
+        </ui:define>
+    </ui:composition>   
+</html>
+
