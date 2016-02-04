@@ -26,20 +26,20 @@ public class PasswordTest {
     public void generateTestPasswords() {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
-            md.update("admin".getBytes("UTF-8")); // Change this to "UTF-16" if needed
+            md.update("admin".getBytes("UTF-8"));
             byte[] digest = md.digest();
             BigInteger bigInt = new BigInteger(1, digest);
             String output = bigInt.toString(16);
             Assert.assertEquals("8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",output);
             System.out.println(output);
             
-            md.update("wl9nk23a".getBytes("UTF-8")); // Change this to "UTF-16" if needed
+            md.update("wl9nk23a".getBytes("UTF-8"));
             digest = md.digest();
             bigInt = new BigInteger(1, digest);
             output = bigInt.toString(16);
             System.out.println(output);
             
-            md.update("test".getBytes("UTF-8")); // Change this to "UTF-16" if needed
+            md.update("test".getBytes("UTF-8"));
             digest = md.digest();
             bigInt = new BigInteger(1, digest);
             output = bigInt.toString(16);

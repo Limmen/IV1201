@@ -8,6 +8,7 @@ package grupp14.IV1201.view;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
@@ -29,18 +30,19 @@ public class UserinfoBean implements Serializable{
      */
     @PostConstruct
     public void init(){
-        username = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
-        if(FacesContext.getCurrentInstance().getExternalContext().isUserInRole("recruit"))
+        updateUserInfo(FacesContext.getCurrentInstance().getExternalContext());       
+    }
+    void updateUserInfo(ExternalContext context){
+        username = context.getRemoteUser();
+        if(context.isUserInRole("recruit"))
             role = "recruit";
         else{
-            if(FacesContext.getCurrentInstance().getExternalContext().isUserInRole("applicant"))
+            if(context.isUserInRole("applicant"))
                 role = "applicant";
             else
                 role = "missing";
-        }
-        System.out.println("username is: " + username);
+        }       
     }
-
     /**
      * getUsername
      * @return username

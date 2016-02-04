@@ -13,7 +13,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 /**
  * ManagedBean to logout  user.
@@ -40,20 +39,18 @@ public class LogoutBean implements Serializable {
      * @return destination
      */
     public String logout() {
-        String destination = "/index?faces-redirect=true"; //redirect to index
-        FacesContext context = FacesContext.getCurrentInstance();
-        HttpServletRequest request =
-                (HttpServletRequest) context.getExternalContext().getRequest();
-        
-        try {
-            HttpSession session = request.getSession();
-            session.invalidate();
+        return invalidateSession((HttpServletRequest) 
+                FacesContext.getCurrentInstance().getExternalContext().getRequest());
+    }
+    String invalidateSession(HttpServletRequest request){
+        try{
+            request.getSession().invalidate();
             request.logout();
-        } catch (ServletException e) {
-            destination = "/loginerror?faces-redirect=true";//redirect to error-page
         }
-        
-        return destination; // go to index
+        catch (ServletException e) {
+            return "/loginerror?faces-redirect=true";//redirect to error-page
+        }
+        return "/index?faces-redirect=true"; //redirect to index
     }
     
 }
