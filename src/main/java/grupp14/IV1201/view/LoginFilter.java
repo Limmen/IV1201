@@ -37,7 +37,7 @@ public class LoginFilter implements Filter
 
     /**
      * This method does the interception of the http-request.
-     * It will redirect user to the approperiate page.
+     * It will redirect user to the appropriate page.
      * @param servletRequest
      * @param servletResponse
      * @param filterChain
