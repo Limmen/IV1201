@@ -1,9 +1,11 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui">
+    
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui">  
+          
     <ui:composition template="/templates/default/main.xhtml">
         <ui:define name="content">
             <b:button value="&lt;" outcome="index"/>
@@ -14,11 +16,64 @@
                 <li class="active">
                     <h:link value="Register" outcome="register" />
                 </li>                
-            </ul>
-            <ui:fragment>
+            </ul>          
+            <h:form styleClass="form" prependId="false">
                 <h4>Please Register</h4>
-            </ui:fragment>
+                <div class="form-group">
+                    <label for="regName">Name:</label>
+                    <h:inputText class="form-control" id="regName" 
+                                 value="#{registerBean.name}" 
+                                 required="true" 
+                                 requiredMessage="Please enter a name">
+                    </h:inputText>     
+                </div>
+                <div class="form-group">
+                    <label for="regSurname">Surname:</label>
+                    <h:inputText class="form-control" id="regSurname" 
+                                 value="#{registerBean.surname}" 
+                                 required="true" 
+                                 requiredMessage="Please enter a surname">
+                    </h:inputText>     
+                </div>
+                <div class="form-group">
+                    <label for="regSsn">ssn:</label>
+                    <h:inputText class="form-control" id="regSsn" 
+                                 value="#{registerBean.ssn}" 
+                                 required="false">
+                    </h:inputText>     
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email:</label>
+                    <h:inputText class="form-control" id="regEmail" 
+                                 value="#{registerBean.email}" 
+                                 required="true" 
+                                 requiredMessage="Please enter a email">
+                    </h:inputText> 
+                    <h:message for="regEmail" style="color:red"/>
+                </div>
+                <div class="form-group">
+                    <label for="regUsername">Username:</label>
+                    <h:inputText class="form-control" id="regUsername" 
+                                 value="#{registerBean.username}" 
+                                 required="true" 
+                                 requiredMessage="Please enter a username">
+                    </h:inputText>
+                    <h:message for="regUsername" style="color:red"/>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Password:</label>
+                    <h:inputSecret class="form-control" id="regPassword" 
+                                   value="#{registerBean.password}" 
+                                   required="true" 
+                                   requiredMessage="Please enter a password">
+                    </h:inputSecret>
+                    <h:message for="regPassword" style="color:red"/>
+                </div>
+                <b:commandButton value="Register" action="#{registerBean.register()}">
+                    Register
+                </b:commandButton>
+            </h:form>    
         </ui:define>
-    </ui:composition>  
-</html>
-
+    </ui:composition>        
+        
+</html>  
