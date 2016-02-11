@@ -5,7 +5,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:b="http://bootsfaces.net/ui">
     <ui:composition template="/templates/default/main.xhtml">
-        <ui:define name="content">
+         <ui:define name="content">
             <b:button value="&lt;" outcome="index"/>
             <ul class="nav nav-tabs">
                 <li class="active">
@@ -15,27 +15,37 @@
                     <h:link value="Register" outcome="register" />
                 </li>
             </ul>
-            <ui:fragment>
-                <form class="form-signing" method="POST" 
-                      action="j_security_check" prependId="false">
+            <ui:fragment rendered="#{empty username}">
+                <h:form styleClass="form-signin" prependId="false">
                     <h4>Please Signin</h4>
                     <div class="form-group">
-                        <label for="j_username" value="Username">Username:</label>
-                        <input class="form-control" type="text" name="j_username"
-                               required = "true"/>
+                        <label for="email">Username:</label>
+                        <h:inputText class="form-control" id="loginUsername"
+                                     value="#{loginBean.username}" 
+                                     required="true" 
+                                     requiredMessage="Please enter a username">
+                        </h:inputText>                            
                     </div>
                     <div class="form-group">
-                        <label for="j_password" value="Password">Password:</label>
-                        <input class="form-control" type="password" name="j_password"
-                               required = "true"/>
+                        <label for="pwd">Password:</label>
+                        <h:inputSecret class="form-control" id="loginPassword" 
+                                       value="#{loginBean.password}" 
+                                       required="true" 
+                                       requiredMessage="Please enter a password">
+                        </h:inputSecret>     
                     </div>
-                    <h:form>
-                        <b:commandButton value="submit" type="submit" 
-                                         action="j_security_check">
-                            Login
-                        </b:commandButton>
-                    </h:form>
-                </form>
+                    <b:commandButton value="Login" action="#{loginBean.login()}">
+                        Login
+                    </b:commandButton>
+                </h:form>
+            </ui:fragment>
+            <ui:fragment rendered="#{not empty username}">
+                <h4 class="margin-top">You are logged in as: <span class="username"> #{username} </span></h4>
+                <h:form>
+                    <b:commandButton styleClass="logOutButton" value="LogOut" action="#{loginBean.logout()}">
+                        Logout
+                    </b:commandButton>
+                </h:form>
             </ui:fragment>
         </ui:define>
     </ui:composition>          

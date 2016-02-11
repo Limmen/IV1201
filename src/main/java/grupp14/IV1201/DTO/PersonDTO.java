@@ -5,8 +5,6 @@
  */
 package grupp14.IV1201.DTO;
 
-import java.math.BigInteger;
-
 /**
  *
  * @author marcelmattsson

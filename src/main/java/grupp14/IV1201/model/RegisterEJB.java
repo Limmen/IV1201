@@ -5,8 +5,8 @@
  */
 package grupp14.IV1201.model;
 
+import grupp14.IV1201.DTO.PersonDTO;
 import grupp14.IV1201.entities.Person;
-import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -16,19 +16,14 @@ import javax.persistence.TypedQuery;
  * @author kim
  */
 @Stateless
-public class LoginEJB {
-
-    SHA512 sha;
+public class RegisterEJB {
     
-    @PostConstruct
-    public void init(){
-        sha = new SHA512();
+    public void register(EntityManager em, PersonDTO p){
+        em.persist(new Person(p));
     }
-    
-    public boolean validateLogin(EntityManager em, String username, String password){
+    public boolean validateRegistration(EntityManager em, String username){
         TypedQuery<Person> query = em.createNamedQuery("Person.findByUserName", Person.class);
         query.setParameter("username", username);
-        Person p = query.getSingleResult();
-        return p.getPassword().equals(sha.encrypt(password));
+        return query.getResultList().isEmpty();
     }
 }

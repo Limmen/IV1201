@@ -6,10 +6,14 @@
 package grupp14.IV1201.controller;
 
 import grupp14.IV1201.DTO.PersonDTO;
-import grupp14.IV1201.model.Person;
+import grupp14.IV1201.model.HttpSessionBean;
+import grupp14.IV1201.model.LoginEJB;
+import grupp14.IV1201.model.RegisterEJB;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -20,9 +24,31 @@ public class ControllerEJB {
 
     @PersistenceContext(unitName = "grupp14_IV1201_war_1.0-SNAPSHOTPU")
     private EntityManager entityManager;
-    //Controller methods
     
-    public void RegUser(PersonDTO person){
-        entityManager.persist(new Person(person));
+    @EJB
+    LoginEJB login;
+    @EJB
+    RegisterEJB register;
+ 
+    private final HttpSessionBean session = new HttpSessionBean();
+    
+    public void registerUser(PersonDTO person){
+        register.register(entityManager, person);
     }
+    public void unRegisterUser(String username){
+        
+    }
+    public boolean validateLogin(String username, String password){
+       return login.validateLogin(entityManager, username, password);
+    }
+    public boolean validateRegistration(String username){
+        return register.validateRegistration(entityManager, username);
+    }
+    public HttpSession getSession(){
+        return session.getSession();
+    }
+    public String getUsername(){
+        return session.getUserName();
+    }
+
 }

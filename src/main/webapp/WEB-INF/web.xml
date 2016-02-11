@@ -20,5 +20,20 @@
     </session-config>
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
-    </welcome-file-list>    
+    </welcome-file-list>  
+        <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>
+            grupp14.IV1201.view.LoginFilter
+        </filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/applicant/*</url-pattern>
+    </filter-mapping>   
+        <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/recruit/*</url-pattern>
+    </filter-mapping>   
 </web-app>
