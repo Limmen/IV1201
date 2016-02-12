@@ -8,9 +8,12 @@ package grupp14.IV1201.view;
 import grupp14.IV1201.DTO.PersonDTO;
 import grupp14.IV1201.controller.ControllerEJB;
 import grupp14.IV1201.util.ValidEmail;
+import java.io.IOException;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.validation.constraints.Size;
 
@@ -98,15 +101,16 @@ public class RegisterBean implements Serializable {
         this.roll_id = roll_id;
     }
     
-    public String register(){
+    public void register() throws IOException{
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         PersonDTO person = new PersonDTO(name,surname,ssn,email,username,password, "applicant");
         boolean valid = contr.validateRegistration(username);
         if (valid) {
             contr.registerUser(person);
-            return "/IV1201/index";
+            externalContext.redirect(externalContext.getRequestContextPath() + "/index.xhtml");
         }
         else
-            return "/IV1201/registererror";
+            externalContext.redirect(externalContext.getRequestContextPath() + "/registererror.xhtml");
     }
     
     private void clear(){
