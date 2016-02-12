@@ -7,10 +7,12 @@ package grupp14.IV1201.view;
 
 import grupp14.IV1201.DTO.PersonDTO;
 import grupp14.IV1201.controller.ControllerEJB;
+import grupp14.IV1201.util.ValidEmail;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import javax.validation.constraints.Size;
 
 /**
  * RegisterBean that handles requests for creation of users
@@ -21,12 +23,19 @@ import javax.inject.Named;
 public class RegisterBean implements Serializable {
     
     @EJB
-            ControllerEJB contr;
+    ControllerEJB contr;
+    @Size(min=1, message="You need to enter a name")
     private String name;
+    @Size(min=1, message="You need to enter a surname")
     private String surname;
     private String ssn;
+    @ValidEmail
     private String email;
+    @Size(min=2, max=16, message="username needs to be between"
+            + " 2 and 16 characters long")
     private String username;
+    @Size(min=6, max=16, message="Password needs to be between"
+            + " 6 and 16 characters long")
     private String password;
     private String roll_id;
     public RegisterBean(){

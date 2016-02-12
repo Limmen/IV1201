@@ -23,7 +23,26 @@
             <b:row>
                 <b:column span="4">
                 </b:column>
-                <b:column span="4">                    
+                <b:column span="4">          
+                    <ul class="nav nav-tabs center-block">
+    <!-- <li class="#{localeManager.locale.equals("sv") ? 'active' : 'non-active'}"> -->
+                        <li>
+                            <h:form>
+                                <h:commandLink action="#{localeManager.changeLocale}">
+                                    <f:param name="languageCode" value="sv"/>
+                                    <h:graphicImage value="/resources/images/sv.gif"/>
+                                </h:commandLink>
+                            </h:form>
+                        </li>
+                        <li>
+                            <h:form>
+                                <h:commandLink action="#{localeManager.changeLocale}">
+                                    <f:param name="languageCode" value="en"/>
+                                    <h:graphicImage value="/resources/images/en.gif"/>
+                                </h:commandLink>
+                            </h:form>
+                        </li>                
+                    </ul>  
                     <!-- Place-holder for page-specific content -->
                     <ui:insert name="content" />
                 </b:column>

@@ -9,41 +9,43 @@
             <b:button value="&lt;" outcome="index"/>
             <ul class="nav nav-tabs">
                 <li class="active">
-                    <h:link value="Login" outcome="login" />
+                    <h:link value="#{messages.Login}" outcome="login" />
                 </li>
                 <li>
-                    <h:link value="Register" outcome="register" />
+                    <h:link value="#{messages.Register}" outcome="register" />
                 </li>
             </ul>
             <ui:fragment rendered="#{empty username}">
                 <h:form styleClass="form-signin" prependId="false">
-                    <h4>Please Signin</h4>
+                    <h4>#{messages.LoginTitle}</h4>
                     <div class="form-group">
-                        <label for="email">Username:</label>
+                        <label for="loginUsername">#{messages.Username}:</label>
                         <h:inputText class="form-control" id="loginUsername"
                                      value="#{loginBean.username}" 
                                      required="true" 
                                      requiredMessage="Please enter a username">
-                        </h:inputText>                            
+                        </h:inputText>
+                        <h:message for="loginUsername" style="color:red"/>
                     </div>
                     <div class="form-group">
-                        <label for="pwd">Password:</label>
+                        <label for="pwd">#{messages.Password}:</label>
                         <h:inputSecret class="form-control" id="loginPassword" 
                                        value="#{loginBean.password}" 
                                        required="true" 
                                        requiredMessage="Please enter a password">
-                        </h:inputSecret>     
+                        </h:inputSecret> 
+                        <h:message for="loginPassword" style="color:red"/>
                     </div>
-                    <b:commandButton value="Login" action="#{loginBean.login()}">
-                        Login
+                    <b:commandButton value="" action="#{loginBean.login()}">
+                        #{messages.Login}
                     </b:commandButton>
                 </h:form>
             </ui:fragment>
             <ui:fragment rendered="#{not empty username}">
-                <h4 class="margin-top">You are logged in as: <span class="username"> #{username} </span></h4>
+                <h4 class="margin-top">#{messages.LoggedIn}: <span class="username"> #{username} </span></h4>
                 <h:form>
-                    <b:commandButton styleClass="logOutButton" value="LogOut" action="#{loginBean.logout()}">
-                        Logout
+                    <b:commandButton styleClass="logOutButton" value="" action="#{loginBean.logout()}">
+                        #{messages.Logout}
                     </b:commandButton>
                 </h:form>
             </ui:fragment>
