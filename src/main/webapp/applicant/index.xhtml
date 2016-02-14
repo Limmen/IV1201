@@ -5,15 +5,16 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:b="http://bootsfaces.net/ui">
     
+    <!-- INDEX-page for applicants -->
     <ui:composition template="/templates/default/main.xhtml">
         <ui:define name="content">            
             <b:button value="&lt;" outcome="/index"/>
-      <!--      <b:well><p class="it"><span class="bold">User: </span>#{userinfoBean.username} 
-                    <span class="bold">Role: </span>#{userinfoBean.role}</p></b:well>          -->
+                <b:well><p class="it"><span class="bold">#{messages.User}:  </span>#{username} 
+                        <span class="bold">#{messages.Role}:  </span>#{role}</p></b:well>
             <b:panel>
                 <b:listLinks>
-                    <b:navLink href="#" value="Apply" icon="link"></b:navLink> 
-                    <b:navLink href="#" value="My applications" icon="link"></b:navLink>
+                    <b:navLink href="apply.xhtml" value="Apply" icon="link"></b:navLink> 
+                    <b:navLink href="applications.xhtml" value="My applications" icon="link"></b:navLink>
                 </b:listLinks>
             </b:panel>
             <h:form>

@@ -4,6 +4,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:b="http://bootsfaces.net/ui">
+    
+    <!-- LOGIN-page -->
     <ui:composition template="/templates/default/main.xhtml">
          <ui:define name="content">
             <b:button value="&lt;" outcome="index"/>
@@ -42,7 +44,9 @@
                 </h:form>
             </ui:fragment>
             <ui:fragment rendered="#{not empty username}">
-                <h4 class="margin-top">#{messages.LoggedIn}: <span class="username"> #{username} </span></h4>
+                <h4>#{messages.LoggedIn}</h4>
+                <b:well><p class="it"><span class="bold">#{messages.User}:  </span>#{username} 
+                        <span class="bold">#{messages.Role}:  </span>#{role}</p></b:well>
                 <h:form>
                     <b:commandButton styleClass="logOutButton" value="" action="#{loginBean.logout()}">
                         #{messages.Logout}

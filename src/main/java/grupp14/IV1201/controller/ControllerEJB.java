@@ -9,6 +9,9 @@ import grupp14.IV1201.DTO.PersonDTO;
 import grupp14.IV1201.model.HttpSessionBean;
 import grupp14.IV1201.model.LoginEJB;
 import grupp14.IV1201.model.RegisterEJB;
+import java.security.NoSuchAlgorithmException;
+import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -32,14 +35,17 @@ public class ControllerEJB {
  
     private final HttpSessionBean session = new HttpSessionBean();
     
-    public void registerUser(PersonDTO person){
+    public void registerUser(PersonDTO person) throws NoSuchAlgorithmException{
         register.register(entityManager, person);
     }
     public void unRegisterUser(String username){
         
     }
-    public boolean validateLogin(String username, String password){
+    public boolean validateLogin(String username, String password) throws NoSuchAlgorithmException{
        return login.validateLogin(entityManager, username, password);
+    }
+    public String getRole(String username){
+        return login.getRole(entityManager, username);
     }
     public boolean validateRegistration(String username){
         return register.validateRegistration(entityManager, username);
@@ -49,6 +55,12 @@ public class ControllerEJB {
     }
     public String getUsername(){
         return session.getUserName();
+    }
+    public List<String> getExpertiseList(){
+        return null;
+    }
+    public void apply(String expertise, float years, Date from, Date to, String username){
+        
     }
 
 }

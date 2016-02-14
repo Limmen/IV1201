@@ -9,6 +9,7 @@ import grupp14.IV1201.DTO.PersonDTO;
 import grupp14.IV1201.model.SHA512;
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.security.NoSuchAlgorithmException;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,7 +43,7 @@ public class Person implements Serializable {
     
     public Person(){}
     
-    public Person(PersonDTO personInfo){
+    public Person(PersonDTO personInfo) throws NoSuchAlgorithmException{
         
         this.mail = personInfo.getMail();
         this.name = personInfo.getName();

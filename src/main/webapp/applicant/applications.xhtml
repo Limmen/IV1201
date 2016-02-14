@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui">  
+ 
+    <!-- Page for applicants to view their applications -->
+    
+    <ui:composition template="/templates/default/main.xhtml">
+        <ui:define name="content">
+            <b:button value="&lt;" outcome="index"/>
+            <ui:fragment rendered="#{empty username}">
+                <h4 class="margin-top">You need to be logged in to view this page</h4>
+                <h:link value="Log in here" outcome="login"/>
+            </ui:fragment>
+            <ui:fragment rendered="#{not empty username}">
+                <h4>Your competence profiles: </h4>
+                <ul class="applications">
+                    <ui:repeat value="#{applicationsBean.competencies}" var="c">
+                        <li>
+                            <b:panel>
+                                <p><span class="bold">#{c.competence}. </span>
+                                Years of experience: #{c.years}</p>
+                            </b:panel>
+                        </li>
+                    </ui:repeat>
+                </ul>
+                <h4>Your availability periods:</h4>
+                <ul class="applications">
+                    <ui:repeat value="#{applicationsBean.availabilities}" var="a">
+                        <li>
+                            <b:panel><p>#{a.from} - #{a.to}</p></b:panel>                            
+                        </li>
+                    </ui:repeat>
+                </ul>
+            </ui:fragment>
+        </ui:define>
+    </ui:composition>        
+ 
+</html>  

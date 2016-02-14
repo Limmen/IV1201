@@ -7,9 +7,11 @@ package grupp14.IV1201.view;
 
 import grupp14.IV1201.DTO.PersonDTO;
 import grupp14.IV1201.controller.ControllerEJB;
+import grupp14.IV1201.util.GenericLogger;
 import grupp14.IV1201.util.ValidEmail;
 import java.io.IOException;
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
@@ -21,6 +23,7 @@ import javax.validation.constraints.Size;
  * RegisterBean that handles requests for creation of users
  * @author marcelmattsson
  */
+@GenericLogger
 @Named(value = "registerBean")
 @RequestScoped
 public class RegisterBean implements Serializable {
@@ -95,13 +98,12 @@ public class RegisterBean implements Serializable {
     
     public String getRoll_id() {
         return roll_id;
-    }
-    
+    }    
     public void setRoll_id(String roll_id) {
         this.roll_id = roll_id;
     }
     
-    public void register() throws IOException{
+    public void register() throws IOException, NoSuchAlgorithmException{
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         PersonDTO person = new PersonDTO(name,surname,ssn,email,username,password, "applicant");
         boolean valid = contr.validateRegistration(username);

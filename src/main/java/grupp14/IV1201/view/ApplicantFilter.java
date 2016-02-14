@@ -5,6 +5,7 @@
 */
 package grupp14.IV1201.view;
 
+import grupp14.IV1201.util.GenericLogger;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -19,7 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author kim
  */
-public class LoginFilter implements Filter {
+@GenericLogger
+public class ApplicantFilter implements Filter {
     
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {

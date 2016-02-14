@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    
+    <!-- Change to Production when deploying -->
+    <!-- Development stage will prioritize error-messages over performance -->
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
@@ -9,6 +12,7 @@
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <!-- Allows for mapping multiple servlets to different paths -->
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
@@ -18,22 +22,54 @@
             30
         </session-timeout>
     </session-config>
+    <!-- File that is shown on URL "/" -->
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
-    </welcome-file-list>  
-        <filter>
-        <filter-name>LoginFilter</filter-name>
+    </welcome-file-list> 
+    
+    <!-- Error-page shown when unexpected server-exceptions are thrown -->
+    <!-- HTTP-code 500 means "Internal Error" -->
+    <error-page>
+        <error-code>500</error-code>
+        <location>/servererror.xhtml</location>
+    </error-page>
+    
+    <!-- Filter to prohibit non logged-in users or applicants to view recruit
+         pages    -->     
+    <filter>
+        <filter-name>RecruitFilter</filter-name>
         <filter-class>
-            grupp14.IV1201.view.LoginFilter
+            grupp14.IV1201.view.RecruitFilter
         </filter-class>
     </filter>
-
+    
+    <!-- Filter to prohibit non logged-in users to view applicant-pages -->
+    <filter>
+        <filter-name>ApplicantFilter</filter-name>
+        <filter-class>
+            grupp14.IV1201.view.ApplicantFilter
+        </filter-class>
+    </filter>
+    <!-- Maps filters to their URL -->
     <filter-mapping>
-        <filter-name>LoginFilter</filter-name>
+        <filter-name>ApplicantFilter</filter-name>
         <url-pattern>/applicant/*</url-pattern>
     </filter-mapping>   
-        <filter-mapping>
-        <filter-name>LoginFilter</filter-name>
+    <filter-mapping>
+        <filter-name>RecruitFilter</filter-name>
         <url-pattern>/recruit/*</url-pattern>
-    </filter-mapping>   
+    </filter-mapping>      
+    <!-- All requests with confidential information should be HTTPS -->     
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>confidential</web-resource-name>
+            <url-pattern>/login.xhtml</url-pattern>
+            <url-pattern>/register.xhtml</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>   
 </web-app>
