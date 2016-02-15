@@ -12,7 +12,9 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -21,9 +23,14 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class LoginEJB
 {
-
+    @PersistenceContext(unitName = "grupp14_IV1201_war_1.0-SNAPSHOTPU")
+    private EntityManager em;
     private final SHA512 sha = new SHA512();
 
+    void setEm(EntityManager em) 
+    {
+        this.em = em;
+    }        
     /**
      *
      * @param em
@@ -32,7 +39,8 @@ public class LoginEJB
      * @return
      * @throws NoSuchAlgorithmException
      */
-    public boolean validateLogin(EntityManager em, String username, String password)
+    public boolean validateLogin(@Size(min=3, max=16) String username,
+            @Size(min=6, max=30) String password)
             throws NoSuchAlgorithmException
     {
         TypedQuery<Person> query = em.createNamedQuery("Person.findByUserName", Person.class);
@@ -51,7 +59,7 @@ public class LoginEJB
      * @param username
      * @return
      */
-    public String getRole(EntityManager em, String username)
+    public String getRole(@Size(min=3, max=16) String username)
     {
         TypedQuery<Person> query = em.createNamedQuery("Person.findByUserName", Person.class);
         query.setParameter("username", username);

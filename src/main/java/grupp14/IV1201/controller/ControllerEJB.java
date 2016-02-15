@@ -16,8 +16,6 @@ import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -26,9 +24,7 @@ import javax.servlet.http.HttpSession;
  */
 @Stateless
 public class ControllerEJB 
-{
-    @PersistenceContext(unitName = "grupp14_IV1201_war_1.0-SNAPSHOTPU")
-    private EntityManager entityManager;
+{    
     
     @EJB
     LoginEJB login;
@@ -44,7 +40,7 @@ public class ControllerEJB
      */
     public void registerUser(PersonDTO person) throws NoSuchAlgorithmException
     {
-        register.register(entityManager, person);
+        register.register(person);
     }
 
     /**
@@ -65,7 +61,7 @@ public class ControllerEJB
      */
     public boolean validateLogin(String username, String password) throws NoSuchAlgorithmException 
     {
-       return login.validateLogin(entityManager, username, password);
+       return login.validateLogin(username, password);
     }
 
     /**
@@ -75,7 +71,7 @@ public class ControllerEJB
      */
     public String getRole(String username)
     {
-        return login.getRole(entityManager, username);
+        return login.getRole(username);
     }
 
     /**
@@ -85,7 +81,7 @@ public class ControllerEJB
      */
     public boolean validateRegistration(String username)
     {
-        return register.validateRegistration(entityManager, username);
+        return register.validateRegistration(username);
     }
 
     /**

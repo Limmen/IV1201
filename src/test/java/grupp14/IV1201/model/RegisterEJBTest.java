@@ -47,10 +47,10 @@ public class RegisterEJBTest {
         when((mockManager.createNamedQuery("Person.findByUserName", Person.class))).thenReturn((mockQuery));
         when((mockQuery.getResultList())).thenReturn((mockList));
         when((mockQuery.setParameter("username", "test"))).thenReturn(mockQuery);
-        
-        assertTrue(instance.validateRegistration(mockManager, "test"));
+        instance.setEm(mockManager);
+        assertTrue(instance.validateRegistration("test"));
         when((mockList.isEmpty())).thenReturn((false));
-        assertFalse(instance.validateRegistration(mockManager, "test"));
+        assertFalse(instance.validateRegistration("test"));
     }
     
 }

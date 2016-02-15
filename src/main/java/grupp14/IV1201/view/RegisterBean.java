@@ -39,10 +39,10 @@ public class RegisterBean implements Serializable
     private String ssn;
     @ValidEmail
     private String email;
-    @Size(min=2, max=16, message="username needs to be between"
+    @Size(min=3, max=16, message="username needs to be between"
             + " 2 and 16 characters long")
     private String username;
-    @Size(min=6, max=16, message="Password needs to be between"
+    @Size(min=6, max=30, message="Password needs to be between"
             + " 6 and 16 characters long")
     private String password;
     private String roll_id;
