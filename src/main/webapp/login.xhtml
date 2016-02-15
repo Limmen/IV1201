@@ -4,38 +4,54 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:b="http://bootsfaces.net/ui">
+    
+    <!-- LOGIN-page -->
     <ui:composition template="/templates/default/main.xhtml">
-        <ui:define name="content">
+         <ui:define name="content">
             <b:button value="&lt;" outcome="index"/>
             <ul class="nav nav-tabs">
                 <li class="active">
-                    <h:link value="Login" outcome="login" />
+                    <h:link value="#{messages.Login}" outcome="login" />
                 </li>
                 <li>
-                    <h:link value="Register" outcome="register" />
+                    <h:link value="#{messages.Register}" outcome="register" />
                 </li>
             </ul>
-            <ui:fragment>
-                <form class="form-signing" method="POST" 
-                      action="j_security_check" prependId="false">
-                    <h4>Please Signin</h4>
+            <ui:fragment rendered="#{empty username}">
+                <h:form styleClass="form-signin" prependId="false">
+                    <h4>#{messages.LoginTitle}</h4>
                     <div class="form-group">
-                        <label for="j_username" value="Username">Username:</label>
-                        <input class="form-control" type="text" name="j_username"
-                               required = "true"/>
+                        <label for="loginUsername">#{messages.Username}:</label>
+                        <h:inputText class="form-control" id="loginUsername"
+                                     value="#{loginBean.username}" 
+                                     required="true" 
+                                     requiredMessage="Please enter a username">
+                        </h:inputText>
+                        <h:message for="loginUsername" style="color:red"/>
                     </div>
                     <div class="form-group">
-                        <label for="j_password" value="Password">Password:</label>
-                        <input class="form-control" type="password" name="j_password"
-                               required = "true"/>
+                        <label for="pwd">#{messages.Password}:</label>
+                        <h:inputSecret class="form-control" id="loginPassword" 
+                                       value="#{loginBean.password}" 
+                                       required="true" 
+                                       requiredMessage="Please enter a password">
+                        </h:inputSecret> 
+                        <h:message for="loginPassword" style="color:red"/>
                     </div>
-                    <h:form>
-                        <b:commandButton value="submit" type="submit" 
-                                         action="j_security_check">
-                            Login
-                        </b:commandButton>
-                    </h:form>
-                </form>
+                    <b:commandButton value="" action="#{loginBean.login()}">
+                        #{messages.Login}
+                    </b:commandButton>
+                </h:form>
+            </ui:fragment>
+            <ui:fragment rendered="#{not empty username}">
+                <h4>#{messages.LoggedIn}</h4>
+                <b:well><p class="it"><span class="bold">#{messages.User}:  </span>#{username} 
+                        <span class="bold">#{messages.Role}:  </span>#{role}</p></b:well>
+                <h:form>
+                    <b:commandButton styleClass="logOutButton" value="" action="#{loginBean.logout()}">
+                        #{messages.Logout}
+                    </b:commandButton>
+                </h:form>
             </ui:fragment>
         </ui:define>
     </ui:composition>          

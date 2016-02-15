@@ -4,13 +4,15 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
-       
-    <!-- FAILED LOGIN -page : when password/username was wrong -->
+    
+    <!-- REGISTER Error page. When user tries to register a taken username -->
     <ui:composition template="/templates/default/main.xhtml">
         <ui:define name="content">            
-            <b:alert severity="danger"><strong>Login failed!</strong> 
-                Your credentials could not be verified.</b:alert>
-            <p><h:link outcome="/login" value="Back to login page"/></p>
+            <b:alert severity="danger"><strong>Registration failed!</strong> 
+                The username you entered is already taken
+                 </b:alert>
+            <p><h:link outcome="/register" value="Back to register-page"/></p>
         </ui:define>
-    </ui:composition>             
+    </ui:composition>         
+    
 </html>

@@ -4,9 +4,12 @@
   <jdbc-resource enabled="true" jndi-name="jdbc/iv1201" object-type="user" pool-name="derby_net_IV1201_rootPool">
     <description/>
   </jdbc-resource>
+<<<<<<< HEAD
   <jdbc-resource enabled="true" jndi-name="jdbc/IV1201" object-type="user" pool-name="derby_net_IV1201_rootPool">
     <description/>
   </jdbc-resource>
+=======
+>>>>>>> b3a6f277fbb0afb35f55e644eba0549016e4c3aa
   <jdbc-resource enabled="true" jndi-name="jdbc/iv1201" object-type="user" pool-name="derby_net_IV1201_rootPool">
     <description/>
   </jdbc-resource>

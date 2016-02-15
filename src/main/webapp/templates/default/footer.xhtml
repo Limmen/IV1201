@@ -1,9 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
- 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <!-- FOOTER -->
     <ui:composition>
-        <div>
-            <p class="footer">Company name@Copyright 2016</p>
+        <div class="center_horizontal">
+            <p class="footer">Company name@Copyright 2016 <span>
+                    <h:form>
+                        <h:commandLink action="#{localeManager.changeLocale}">
+                            <f:param name="languageCode" value="sv"/>
+                            <h:graphicImage value="/resources/images/sv.gif"/>
+                        </h:commandLink>
+                        <h:commandLink action="#{localeManager.changeLocale}">
+                            <f:param name="languageCode" value="en"/>
+                            <h:graphicImage value="/resources/images/en.gif"/>
+                        </h:commandLink>
+                    </h:form>                    
+                </span></p>
         </div>
     </ui:composition>
 </html>

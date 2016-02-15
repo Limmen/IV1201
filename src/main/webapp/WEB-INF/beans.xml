@@ -3,4 +3,11 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
        bean-discovery-mode="annotated">
+    
+    <interceptors>
+         <!-- GenericLogger-->
+        <class>grupp14.IV1201.util.GenericLoggerInterceptor</class>
+         <!-- LoginLogger-->
+        <class>grupp14.IV1201.util.LoginLoggerInterceptor</class>
+    </interceptors>    
 </beans>

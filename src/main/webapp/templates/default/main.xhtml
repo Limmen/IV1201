@@ -3,10 +3,10 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    
+
+    <!-- MAIN file that glues the template together -->
     <h:head>        
         <h:outputStylesheet library="css" name="style.css"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -23,7 +23,7 @@
             <b:row>
                 <b:column span="4">
                 </b:column>
-                <b:column span="4">                    
+                <b:column span="4">          
                     <!-- Place-holder for page-specific content -->
                     <ui:insert name="content" />
                 </b:column>
