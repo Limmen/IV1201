@@ -1,8 +1,10 @@
 /*
-* Course project - IV1201 Design of Global Applications
-* Royal Institute of Technology
-* 2015 (c) Kim Hammar Alexander Lundh Marcel Mattsson
-*/
+ * Classname: ApplicantFilter
+ * Version: 0.1
+ * Date: 15-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+ */
+
 package grupp14.IV1201.view;
 
 import grupp14.IV1201.util.GenericLogger;
@@ -21,10 +23,21 @@ import javax.servlet.http.HttpServletResponse;
  * @author kim
  */
 @GenericLogger
-public class ApplicantFilter implements Filter {
+public class ApplicantFilter implements Filter 
+{
     
+    /**
+     *
+     * @param servletRequest
+     * @param servletResponse
+     * @param chain
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse
+            , FilterChain chain) throws IOException, ServletException 
+    {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         if (request.getSession().getAttribute("username") == null) {
@@ -32,11 +45,23 @@ public class ApplicantFilter implements Filter {
         }
         chain.doFilter(request, response);
     }
+
+    /**
+     *
+     * @param config
+     * @throws ServletException
+     */
     @Override
-    public void init(FilterConfig config) throws ServletException {
+    public void init(FilterConfig config) throws ServletException 
+    {
     }
+
+    /**
+     *
+     */
     @Override
-    public void destroy() {
+    public void destroy() 
+    {
     }
     
 }

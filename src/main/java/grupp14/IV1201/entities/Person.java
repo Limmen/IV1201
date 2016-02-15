@@ -1,8 +1,10 @@
-/*
-* Course project - IV1201 Design of Global Applications
-* Royal Institute of Technology
-* 2015 (c) Kim Hammar Alexander Lundh Marcel Mattsson
-*/
+/* 
+ * Classname: Person
+ * Version: 0.1
+ * Date: 15-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+ */
+
 package grupp14.IV1201.entities;
 
 import grupp14.IV1201.DTO.PersonDTO;
@@ -27,7 +29,8 @@ import javax.persistence.NamedQuery;
     @NamedQuery(name="Person.findByUserName",
             query="SELECT p FROM Person p WHERE p.username = :username"),
 })
-public class Person implements Serializable {
+public class Person implements Serializable
+{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,10 +44,18 @@ public class Person implements Serializable {
     private String password;
     private String roll_id;
     
+    /**
+     *
+     */
     public Person(){}
     
-    public Person(PersonDTO personInfo) throws NoSuchAlgorithmException{
-        
+    /**
+     *
+     * @param personInfo
+     * @throws NoSuchAlgorithmException
+     */
+    public Person(PersonDTO personInfo) throws NoSuchAlgorithmException
+    {
         this.mail = personInfo.getMail();
         this.name = personInfo.getName();
         this.password = new SHA512().encrypt(personInfo.getPassword());
@@ -54,92 +65,176 @@ public class Person implements Serializable {
         this.username = personInfo.getUsername();
     }
     
-    public BigInteger getId() {
+    /**
+     *
+     * @return
+     */
+    public BigInteger getId() 
+    {
         return id;
     }
     
-    public void setId(BigInteger id) {
+    /**
+     *
+     * @param id
+     */
+    public void setId(BigInteger id)
+    {
         this.id = id;
     }
     
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
     
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(Object object)
+    {
         // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Person)) {
             return false;
         }
         Person other = (Person) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
+        {
             return false;
         }
         return true;
     }
     
     @Override
-    public String toString() {
+    public String toString() 
+    {
         return "grupp14.IV1201.model.User[ id=" + id + " ]";
     }
     
-    public String getName() {
+    /**
+     *
+     * @return
+     */
+    public String getName() 
+    {
         return name;
     }
     
-    public void setName(String name) {
+    /**
+     *
+     * @param name
+     */
+    public void setName(String name) 
+    {
         this.name = name;
     }
     
-    public String getSurname() {
+    /**
+     *
+     * @return
+     */
+    public String getSurname() 
+    {
         return surname;
     }
     
-    public void setSurname(String surname) {
+    /**
+     *
+     * @param surname
+     */
+    public void setSurname(String surname) 
+    {
         this.surname = surname;
     }
     
-    public String getSsn() {
+    /**
+     *
+     * @return
+     */
+    public String getSsn() 
+    {
         return ssn;
     }
     
-    public void setSsn(String ssn) {
+    /**
+     *
+     * @param ssn
+     */
+    public void setSsn(String ssn) 
+    {
         this.ssn = ssn;
     }
     
-    public String getMail() {
+    /**
+     *
+     * @return
+     */
+    public String getMail() 
+    {
         return mail;
     }
     
-    public void setMail(String mail) {
+    /**
+     *
+     * @param mail
+     */
+    public void setMail(String mail) 
+    {
         this.mail = mail;
     }
     
-    public String getUsername() {
+    /**
+     *
+     * @return
+     */
+    public String getUsername() 
+    {
         return username;
     }
     
-    public void setUsername(String username) {
+    /**
+     *
+     * @param username
+     */
+    public void setUsername(String username) 
+    {
         this.username = username;
     }
     
-    public String getPassword() {
+    /**
+     *
+     * @return
+     */
+    public String getPassword() 
+    {
         return password;
     }
     
-    public void setPassword(String password) {
+    /**
+     *
+     * @param password
+     */
+    public void setPassword(String password) 
+    {
         this.password = password;
     }
     
-    public String getRoll_id() {
+    /**
+     *
+     * @return
+     */
+    public String getRoll_id() 
+    {
         return roll_id;
     }
     
-    public void setRoll_id(String roll_id) {
+    /**
+     *
+     * @param roll_id
+     */
+    public void setRoll_id(String roll_id) 
+    {
         this.roll_id = roll_id;
     }
     

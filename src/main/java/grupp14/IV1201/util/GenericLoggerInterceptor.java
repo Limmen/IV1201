@@ -1,8 +1,10 @@
 /*
- * Course project - IV1201 Design of Global Applications
- * Royal Institute of Technology
- * 2015 (c) Kim Hammar Alexander Lundh Marcel Mattsson
+ * Classname: GenericLoggerInterceptor
+ * Version: 0.1
+ * Date: 15-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
  */
+
 package grupp14.IV1201.util;
 
 import java.lang.reflect.Method;
@@ -19,13 +21,22 @@ import javax.interceptor.InvocationContext;
 
 @GenericLogger 
 @Interceptor
-public class GenericLoggerInterceptor{
-    private static final java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger("grupp14.IV1201");
+public class GenericLoggerInterceptor
+{
+    private static final java.util.logging.Logger 
+            LOGGER = java.util.logging.Logger.getLogger("grupp14.IV1201");
     private static final Level FINEST = Level.FINEST;
     private static final Level SEVERE = Level.SEVERE;
 
+    /**
+     *
+     * @param ctx
+     * @return
+     * @throws Exception
+     */
     @AroundInvoke
-    public Object logInvocation(InvocationContext ctx) throws Exception {
+    public Object logInvocation(InvocationContext ctx) throws Exception
+    {
         Method targetMethod = logEntry(ctx); //Log entry
         Object returnValue = null;
         try {
@@ -37,7 +48,8 @@ public class GenericLoggerInterceptor{
         return returnValue;
     }
 
-    private void logExit(Method targetMethod, Object returnValue) {
+    private void logExit(Method targetMethod, Object returnValue)
+    {
         Object[] args = {targetMethod.getDeclaringClass().getCanonicalName(),
             targetMethod.getName()};
         LOGGER.log(FINEST, "Call to {0}.{1} completed", args);
@@ -46,14 +58,16 @@ public class GenericLoggerInterceptor{
         }
     }
 
-    private void logException(Method targetMethod, Exception e)throws Exception{
+    private void logException(Method targetMethod, Exception e) throws Exception
+    {
         Object[] args = {targetMethod.getDeclaringClass().getCanonicalName(),
             targetMethod.getName(), e.getClass().getCanonicalName()};
         LOGGER.log(SEVERE, "{0}.{1} threw {2}", args);
         throw (e);
     }
 
-    private Method logEntry(InvocationContext ctx) {
+    private Method logEntry(InvocationContext ctx) 
+    {
         Method targetMethod = ctx.getMethod();
         Object[] params = ctx.getParameters();
         LOGGER.log(FINEST, "Entering: {0}", targetMethod.toGenericString());
@@ -61,7 +75,8 @@ public class GenericLoggerInterceptor{
         return targetMethod;
     }
 
-    private boolean isVoid(Method targetMethod) {
+    private boolean isVoid(Method targetMethod)
+    {
         return targetMethod.getReturnType().isAssignableFrom(Void.TYPE);
     }
 }

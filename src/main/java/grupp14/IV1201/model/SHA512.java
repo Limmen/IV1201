@@ -1,8 +1,10 @@
-/*
-* Course project - IV1201 Design of Global Applications
-* Royal Institute of Technology
-* 2015 (c) Kim Hammar Alexander Lundh Marcel Mattsson
-*/
+/* 
+ * Classname: SHA512
+ * Version: 0.1
+ * Date: 15-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+ */
+
 package grupp14.IV1201.model;
 
 import java.security.MessageDigest;
@@ -12,8 +14,18 @@ import java.security.NoSuchAlgorithmException;
  *
  * @author kim
  */
-public class SHA512 {
-    public String encrypt(String pw) throws NoSuchAlgorithmException{
+public class SHA512
+{
+
+    /**
+     * 
+     *
+     * @param pw
+     * @return
+     * @throws NoSuchAlgorithmException
+     */
+    public String encrypt(String pw) throws NoSuchAlgorithmException
+    {
         String encryptedPassword = null;
         MessageDigest md = MessageDigest.getInstance("SHA-512");
         byte[] bytes = md.digest(pw.getBytes());

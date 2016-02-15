@@ -1,8 +1,10 @@
 /*
-* Course project - IV1201 Design of Global Applications
-* Royal Institute of Technology
-* 2015 (c) Kim Hammar Alexander Lundh Marcel Mattsson
-*/
+ * Classname: LoginBean
+ * Version: 0.1
+ * Date: 15-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+ */
+
 package grupp14.IV1201.view;
 
 import grupp14.IV1201.controller.ControllerEJB;
@@ -23,28 +25,57 @@ import javax.servlet.http.HttpSession;
  */
 @Named(value = "loginBean")
 @RequestScoped
-public class LoginBean {
+public class LoginBean
+{
     @EJB
     private ControllerEJB contr;
     private String username;
     private String password;
-    public String getUsername() {
+
+    /**
+     *
+     * @return
+     */
+    public String getUsername() 
+    {
         return username;
     }
     
-    public void setUsername(String loginUsername) {
+    /**
+     *
+     * @param loginUsername
+     */
+    public void setUsername(String loginUsername) 
+    {
         this.username = loginUsername;
     }
     
-    public String getPassword() {
+    /**
+     *
+     * @return
+     */
+    public String getPassword() 
+    {
         return password;
     }
     
-    public void setPassword(String loginPassword) {
+    /**
+     *
+     * @param loginPassword
+     */
+    public void setPassword(String loginPassword) 
+    {
         this.password = loginPassword;
     }
+
+    /**
+     *
+     * @throws NoSuchAlgorithmException
+     * @throws IOException
+     */
     @GenericLogger
-    public void login() throws NoSuchAlgorithmException, IOException{
+    public void login() throws NoSuchAlgorithmException, IOException
+    {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         boolean valid = contr.validateLogin(username, password);
         String role = contr.getRole(username);
@@ -53,22 +84,30 @@ public class LoginBean {
             session.setAttribute("username", username);
             session.setAttribute("role", role);
             if(role.equals("applicant"))
-            externalContext.redirect(externalContext.getRequestContextPath() + "/applicant/index.xhtml");
+                externalContext.redirect(externalContext.getRequestContextPath() 
+                    + "/applicant/index.xhtml");
             else if(role.equals("recruit"))
-                externalContext.redirect(externalContext.getRequestContextPath() + "/recruit/index.xhtml");
+                externalContext.redirect(externalContext.getRequestContextPath() 
+                        + "/recruit/index.xhtml");
         } else {
             failedLogin(externalContext);
         }
     } 
     
     //logout event, invalidate session
+
+    /**
+     *
+     */
     @GenericLogger
-    public void logout() {
+    public void logout() 
+    {
         HttpSession session = contr.getSession();
         session.invalidate();
     }
     @LoginLogger
-    private void failedLogin(ExternalContext externalContext)throws IOException{
+    private void failedLogin(ExternalContext externalContext)throws IOException
+    {
         externalContext.redirect
         (externalContext.getRequestContextPath() + "/loginerror.xhtml");        
     }    

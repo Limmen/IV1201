@@ -1,8 +1,10 @@
 /*
- * Course project - IV1201 Design of Global Applications
- * Royal Institute of Technology
- * 2015 (c) Kim Hammar Alexander Lundh Marcel Mattsson
+ * Classname: LocaleManager
+ * Version: 0.1
+ * Date: 15-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
  */
+
 package grupp14.IV1201.util;
 
 import java.util.Locale;
@@ -19,16 +21,27 @@ public class LocaleManager {
     
     private String locale;
     
-    public void changeLocale() {
+    /**
+     *
+     */
+    public void changeLocale() 
+    {
         locale = getLanguageCode();
         FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale(getLanguageCode()));
     }
     
-    public String getLocale() {
+    /**
+     *
+     * @return
+     */
+    public String getLocale()
+    {
         return locale;
     }
     
-    private String getLanguageCode() {
-        return FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("languageCode");
+    private String getLanguageCode() 
+    {
+        return FacesContext.getCurrentInstance().getExternalContext()
+                .getRequestParameterMap().get("languageCode");
     }
 }

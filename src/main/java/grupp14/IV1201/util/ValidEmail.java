@@ -1,8 +1,10 @@
 /*
- * Course project - IV1201 Design of Global Applications
- * Royal Institute of Technology
- * 2015 (c) Kim Hammar Alexander Lundh Marcel Mattsson
+ * Classname: ValidEmail
+ * Version: 0.1
+ * Date: 15-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
  */
+
 package grupp14.IV1201.util;
 
 import java.lang.annotation.Documented;
@@ -30,16 +32,32 @@ import javax.validation.Payload;
 //annotation.
 @Constraint(validatedBy = ValidEmailImplementation.class)
 //@Interface to declare a annotation type
-public @interface ValidEmail {
+public @interface ValidEmail 
+{
     
     //attribute that returns the default key for creating error messages if
     //constraint is violated
+
+    /**
+     *
+     * @return
+     */
     String message() default "The email you entered is not valid";
     
     //Allows specifikation of validation groups to which this constraint belongs
+
+    /**
+     *
+     * @return
+     */
     Class<?>[] groups() default {};
     
     //Can be used by clients of the API to asign custom payload objects to a 
     //constraint
+
+    /**
+     *
+     * @return
+     */
     Class<? extends Payload>[] payload() default {};    
 }

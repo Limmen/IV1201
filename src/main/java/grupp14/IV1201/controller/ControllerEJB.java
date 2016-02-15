@@ -1,8 +1,10 @@
-/*
- * Course project - IV1201 Design of Global Applications
- * Royal Institute of Technology
- * 2015 (c) Kim Hammar Alexander Lundh Marcel Mattsson
+/* 
+ * Classname: ControllerEJB
+ * Version: 0.1
+ * Date: 15-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
  */
+
 package grupp14.IV1201.controller;
 
 import grupp14.IV1201.DTO.PersonDTO;
@@ -23,8 +25,8 @@ import javax.servlet.http.HttpSession;
  * @author kim
  */
 @Stateless
-public class ControllerEJB {
-
+public class ControllerEJB 
+{
     @PersistenceContext(unitName = "grupp14_IV1201_war_1.0-SNAPSHOTPU")
     private EntityManager entityManager;
     
@@ -35,31 +37,94 @@ public class ControllerEJB {
  
     private final HttpSessionBean session = new HttpSessionBean();
     
-    public void registerUser(PersonDTO person) throws NoSuchAlgorithmException{
+    /**
+     *
+     * @param person
+     * @throws NoSuchAlgorithmException
+     */
+    public void registerUser(PersonDTO person) throws NoSuchAlgorithmException
+    {
         register.register(entityManager, person);
     }
-    public void unRegisterUser(String username){
+
+    /**
+     *
+     * @param username
+     */
+    public void unRegisterUser(String username)
+    {
         
     }
-    public boolean validateLogin(String username, String password) throws NoSuchAlgorithmException{
+
+    /**
+     *
+     * @param username
+     * @param password
+     * @return
+     * @throws NoSuchAlgorithmException
+     */
+    public boolean validateLogin(String username, String password) throws NoSuchAlgorithmException 
+    {
        return login.validateLogin(entityManager, username, password);
     }
-    public String getRole(String username){
+
+    /**
+     *
+     * @param username
+     * @return
+     */
+    public String getRole(String username)
+    {
         return login.getRole(entityManager, username);
     }
-    public boolean validateRegistration(String username){
+
+    /**
+     *
+     * @param username
+     * @return
+     */
+    public boolean validateRegistration(String username)
+    {
         return register.validateRegistration(entityManager, username);
     }
-    public HttpSession getSession(){
+
+    /**
+     *
+     * @return
+     */
+    public HttpSession getSession()
+    {
         return session.getSession();
     }
-    public String getUsername(){
+
+    /**
+     *
+     * @return
+     */
+    public String getUsername()
+    {
         return session.getUserName();
     }
-    public List<String> getExpertiseList(){
+
+    /**
+     *
+     * @return
+     */
+    public List<String> getExpertiseList()
+    {
         return null;
     }
-    public void apply(String expertise, float years, Date from, Date to, String username){
+
+    /**
+     *
+     * @param expertise
+     * @param years
+     * @param from
+     * @param to
+     * @param username
+     */
+    public void apply(String expertise, float years, Date from, Date to, String username)
+    {
         
     }
 

@@ -1,8 +1,10 @@
-/*
- * Course project - IV1201 Design of Global Applications
- * Royal Institute of Technology
- * 2015 (c) Kim Hammar Alexander Lundh Marcel Mattsson
+/* 
+ * Classname: RegisterEJB
+ * Version: 0.1
+ * Date: 15-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
  */
+
 package grupp14.IV1201.model;
 
 import grupp14.IV1201.DTO.PersonDTO;
@@ -12,17 +14,31 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-/**
- *
- * @author kim
- */
+
 @Stateless
-public class RegisterEJB {
+public class RegisterEJB
+{
     
-    public void register(EntityManager em, PersonDTO p) throws NoSuchAlgorithmException{
+    /**
+     *
+     * @param em
+     * @param p
+     * @throws NoSuchAlgorithmException
+     */
+    
+    public void register(EntityManager em, PersonDTO p) throws NoSuchAlgorithmException
+    {
         em.persist(new Person(p));
     }
-    public boolean validateRegistration(EntityManager em, String username){
+
+    /**
+     *
+     * @param em
+     * @param username
+     * @return
+     */
+    public boolean validateRegistration(EntityManager em, String username)
+    {
         TypedQuery<Person> query = em.createNamedQuery("Person.findByUserName", Person.class);
         query.setParameter("username", username);
         return query.getResultList().isEmpty();

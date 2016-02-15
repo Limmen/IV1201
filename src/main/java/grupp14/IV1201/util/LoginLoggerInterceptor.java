@@ -1,8 +1,10 @@
 /*
- * Course project - IV1201 Design of Global Applications
- * Royal Institute of Technology
- * 2015 (c) Kim Hammar Alexander Lundh Marcel Mattsson
+ * Classname: LoginLoggerInterceptor
+ * Version: 0.1
+ * Date: 15-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
  */
+
 package grupp14.IV1201.util;
 
 import java.lang.reflect.Method;
@@ -18,13 +20,22 @@ import javax.interceptor.InvocationContext;
  */
 @LoginLogger 
 @Interceptor
-public class LoginLoggerInterceptor {
-    private static final java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger("grupp14.IV1201");
+public class LoginLoggerInterceptor
+{
+    private static final java.util.logging.Logger 
+            LOGGER = java.util.logging.Logger.getLogger("grupp14.IV1201");
     private static final Level INFO = Level.INFO;
     private static final Level SEVERE = Level.SEVERE;
 
+    /**
+     *
+     * @param ctx
+     * @return
+     * @throws Exception
+     */
     @AroundInvoke
-    public Object logInvocation(InvocationContext ctx) throws Exception {
+    public Object logInvocation(InvocationContext ctx) throws Exception
+    {
         Method targetMethod = logEntry(ctx); //Log entry
         Object returnValue = null;
         try {
@@ -36,23 +47,26 @@ public class LoginLoggerInterceptor {
         return returnValue;
     }
 
-    private void logExit(Method targetMethod, Object returnValue) {
-        Object[] args = {targetMethod.getDeclaringClass().getCanonicalName(),
-            targetMethod.getName()};
+    private void logExit(Method targetMethod, Object returnValue)
+    {
+        Object[] args = {targetMethod.getDeclaringClass().getCanonicalName()
+            , targetMethod.getName()};
         LOGGER.log(INFO, "Call to {0}.{1} completed", args);
         if (!isVoid(targetMethod)) {
             LOGGER.log(INFO, "    Return value: {0}", returnValue);
         }
     }
 
-    private void logException(Method targetMethod, Exception e) throws Exception {
+    private void logException(Method targetMethod, Exception e) throws Exception 
+    {
         Object[] args = {targetMethod.getDeclaringClass().getCanonicalName(),
             targetMethod.getName(), e.getClass().getCanonicalName()};
         LOGGER.log(SEVERE, "{0}.{1} threw {2}", args);
         throw (e);
     }
 
-    private Method logEntry(InvocationContext ctx) {
+    private Method logEntry(InvocationContext ctx) 
+    {
         Method targetMethod = ctx.getMethod();
         Object[] params = ctx.getParameters();
         LOGGER.log(INFO, "FAILED LOGIN ATTEMPT");
@@ -61,7 +75,8 @@ public class LoginLoggerInterceptor {
         return targetMethod;
     }
 
-    private boolean isVoid(Method targetMethod) {
+    private boolean isVoid(Method targetMethod) 
+    {
         return targetMethod.getReturnType().isAssignableFrom(Void.TYPE);
     }
 }

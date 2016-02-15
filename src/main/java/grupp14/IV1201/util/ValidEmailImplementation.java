@@ -1,8 +1,10 @@
 /*
- * Course project - IV1201 Design of Global Applications
- * Royal Institute of Technology
- * 2015 (c) Kim Hammar Alexander Lundh Marcel Mattsson
+ * Classname: ValidEmailImplementation
+ * Version: 0.1
+ * Date: 15-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
  */
+
 package grupp14.IV1201.util;
 
 import javax.mail.internet.AddressException;
@@ -14,14 +16,15 @@ import javax.validation.ConstraintValidatorContext;
  *
  * @author kim
  */
-    class ValidEmailImplementation implements ConstraintValidator<ValidEmail, String>{
-        
+class ValidEmailImplementation implements ConstraintValidator <ValidEmail, String>
+{
         @Override
         public void initialize(ValidEmail constraintAnnotation) {
         }
         
         @Override
-        public boolean isValid(String value, ConstraintValidatorContext context) {
+        public boolean isValid(String value, 
+                ConstraintValidatorContext context) {
             boolean result = true;
             try {
                 InternetAddress emailAddr = new InternetAddress(value);
