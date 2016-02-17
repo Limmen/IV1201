@@ -100,10 +100,14 @@ public class LoginBean
      *
      */
     @GenericLogger
-    public void logout() 
+    public void logout() throws IOException
     {
         HttpSession session = contr.getSession();
         session.invalidate();
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        externalContext.redirect
+        (externalContext.getRequestContextPath() + "/index.xhtml");
+        
     }
     @LoginLogger
     private void failedLogin(ExternalContext externalContext)throws IOException

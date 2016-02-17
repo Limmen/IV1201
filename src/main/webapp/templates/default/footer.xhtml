@@ -13,11 +13,11 @@
                     <h:form>
                         <h:commandLink action="#{localeManager.changeLocale}">
                             <f:param name="languageCode" value="sv"/>
-                            <h:graphicImage value="/resources/images/sv.gif"/>
+                            <h:graphicImage id="changeLocaleSv" value="/resources/images/sv.gif"/>
                         </h:commandLink>
                         <h:commandLink action="#{localeManager.changeLocale}">
                             <f:param name="languageCode" value="en"/>
-                            <h:graphicImage value="/resources/images/en.gif"/>
+                            <h:graphicImage id="changeLocaleEn" value="/resources/images/en.gif"/>
                         </h:commandLink>
                     </h:form>                    
                 </span></p>

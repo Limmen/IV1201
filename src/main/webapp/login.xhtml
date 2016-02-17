@@ -10,10 +10,10 @@
          <ui:define name="content">
             <b:button value="&lt;" outcome="index"/>
             <ul class="nav nav-tabs">
-                <li class="active">
+                <li id="loginLink" class="active">
                     <h:link value="#{messages.Login}" outcome="login" />
                 </li>
-                <li>
+                <li id="registerLink">
                     <h:link value="#{messages.Register}" outcome="register" />
                 </li>
             </ul>

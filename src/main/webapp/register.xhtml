@@ -10,15 +10,15 @@
         <ui:define name="content">
             <b:button value="&lt;" outcome="index"/>
             <ul class="nav nav-tabs">
-                <li>
+                <li id="loginLink">
                     <h:link value="#{messages.Login}" outcome="login" />
                 </li>
-                <li class="active">
+                <li id="registerLink" class="active">
                     <h:link value="#{messages.Register}" outcome="register" />
                 </li>                
             </ul>          
             <h:form styleClass="form" prependId="false">
-                <h4>#{messages.RegisterTitle}</h4>
+                <h4 id="registerTitle">#{messages.RegisterTitle}</h4>
                 <div class="form-group">
                     <label for="regName">#{messages.Name}</label>
                     <h:inputText class="form-control" id="regName" 

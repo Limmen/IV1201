@@ -51,6 +51,6 @@ public class RegisterEJB
     {
         TypedQuery<Person> query = em.createNamedQuery("Person.findByUserName", Person.class);
         query.setParameter("username", username);
-        return query.getResultList().isEmpty();
+        return query.getResultList().isEmpty(); //check if username is taken.
     }
 }
