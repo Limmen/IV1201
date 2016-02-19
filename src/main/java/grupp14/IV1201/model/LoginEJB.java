@@ -16,10 +16,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.validation.constraints.Size;
 
-/**
- *
- * @author kim
- */
+
 @Stateless
 public class LoginEJB
 {
@@ -32,12 +29,18 @@ public class LoginEJB
         this.em = em;
     }        
     /**
-     *
-     * @param em
+     * Validates login from user.
+     * 
+     * Uses the entity manager to call the .createNamedQuery method to find a person by username.
+     * Fetches the password if the user is found in the DB and decrypts the encrypted
+     * password in order to check if the @param password is the same. If the user is found and the
+     * password matches it will return true. If it catches an exception it will return false.
+     * 
      * @param username
      * @param password
      * @return
-     * @throws NoSuchAlgorithmException
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public boolean validateLogin(@Size(min=3, max=16) String username,
             @Size(min=6, max=30) String password)
@@ -54,10 +57,15 @@ public class LoginEJB
     }
 
     /**
-     *
-     * @param em
+     * Finds the role of a given person.
+     * 
+     * Uses the entity manager to call the .createNamedQuery method to find a person by username. 
+     * If the user is found it returns its role. If an exception is caught it will return false.
+     * 
      * @param username
      * @return
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public String getRole(@Size(min=3, max=16) String username)
     {

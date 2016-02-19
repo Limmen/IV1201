@@ -30,10 +30,13 @@ public class RegisterEJB
     }
         
     /**
-     *
-     * @param em
+     * Adds a new user(Person) to the DB.
+     * 
+     * Uses entity manager to call the .persist method to add a new user to the DB with the help of
+     * a PersonDTO.
+     * 
      * @param p
-     * @throws NoSuchAlgorithmException
+     * 
      */
     
     public void register(@NotNull PersonDTO p) throws NoSuchAlgorithmException
@@ -42,8 +45,12 @@ public class RegisterEJB
     }
 
     /**
-     *
-     * @param em
+     * Validates a registration.
+     * 
+     * Uses the entity manager to call the .createNamedQuery to find a person by username in the 
+     * DB. If the username does not exist in the DB it will return true. Otherwise it will return
+     * false
+     * 
      * @param username
      * @return
      */

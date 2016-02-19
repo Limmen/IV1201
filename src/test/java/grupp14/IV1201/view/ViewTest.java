@@ -27,6 +27,8 @@ public class ViewTest {
         driver  = new FirefoxDriver();
     }
     //This test need to be run after deployment to application server
+    // utöka misslyckad inloggning
+    // tomma strängar, konstiga värden,
     //@Ignore
     @Test
     public void testView(){
