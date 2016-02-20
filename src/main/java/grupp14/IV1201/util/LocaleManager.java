@@ -13,7 +13,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
- * Sets the correct locale for the entire application.
+ * This class contains state that decides the correct locale for the entire application.
  */
 @Named(value="localeManager")
 @ApplicationScoped
@@ -22,7 +22,7 @@ public class LocaleManager {
     private String locale;
     
     /**
-     *
+     * Changes the locale of the application.
      */
     public void changeLocale() 
     {

@@ -22,9 +22,8 @@ import javax.inject.Named;
 import javax.validation.constraints.Size;
 
 /**
- * RegisterBean that handles requests for creation of users
+ * Managed bean representing the interface between the model and the register-page.
  */
-
 @GenericLogger
 @Named(value = "registerBean")
 @RequestScoped
@@ -48,7 +47,7 @@ public class RegisterBean implements Serializable
     private String roll_id;
 
     /**
-     *
+     * Class constructor
      */
     public RegisterBean()
     {
@@ -56,7 +55,10 @@ public class RegisterBean implements Serializable
     }
     
     /**
-     *
+     * Called when user clicks "register" button.
+     * 
+     * This method will try to register the user if the input-data is sufficient.
+     * 
      * @throws IOException
      * @throws NoSuchAlgorithmException
      */

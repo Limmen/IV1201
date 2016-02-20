@@ -1,8 +1,10 @@
 /*
- * Course project - IV1201 Design of Global Applications
- * Royal Institute of Technology
- * 2015 (c) Kim Hammar Alexander Lundh Marcel Mattsson
+ * Classname: LoginEJBTest
+ * Version: 0.1
+ * Date: 20-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
  */
+
 package grupp14.IV1201.model;
 
 import grupp14.IV1201.entities.Person;
@@ -10,25 +12,36 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import org.junit.After;
 import org.junit.Assert;
-import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- *
+ * This class contains test cases for the LoginEJB class.
  * @author kim
  */
-public class LoginEJBTest {
-    LoginEJB instance;
+public class LoginEJBTest 
+{
+    private LoginEJB instance;
+    
+    /**
+     * Class constructor
+     */
     public LoginEJBTest() {
     }       
+
+    /**
+     * This method is called before the tests are executed
+     */
     @Before
     public void setUp() {
         instance = new LoginEJB();
     }
     
+    /**
+     * This methods is called after the tests have finished
+     */
     @After
     public void tearDown() {
         instance = null;
@@ -36,6 +49,7 @@ public class LoginEJBTest {
 
     /**
      * Test of validateLogin method, of class LoginEJB.
+     * @throws java.lang.Exception
      */
     @Test
     public void testValidateLogin() throws Exception {
@@ -52,6 +66,7 @@ public class LoginEJBTest {
 
     /**
      * Test of getRole method, of class LoginEJB.
+     * @throws java.lang.Exception
      */
     @Test
     public void testGetRole() throws Exception {

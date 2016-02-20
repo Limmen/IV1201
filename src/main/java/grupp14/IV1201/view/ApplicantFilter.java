@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * This is a servletfilter that is used for authorization of user requests to /applicant/*.
  * @author kim
  */
 @GenericLogger
@@ -27,7 +27,12 @@ public class ApplicantFilter implements Filter
 {
     
     /**
-     *
+     * This method is called by the container each time a request is issued to 
+     * /applicant/* resources.
+     * 
+     * The method will check the http-session-parameters and then redirect the user
+     * depending on it's permissions.
+     * 
      * @param servletRequest
      * @param servletResponse
      * @param chain
@@ -47,7 +52,9 @@ public class ApplicantFilter implements Filter
     }
 
     /**
-     *
+     * This method is called by the web container to indicate to the filter that
+     * is it being placed into service.
+     * 
      * @param config
      * @throws ServletException
      */
@@ -57,7 +64,8 @@ public class ApplicantFilter implements Filter
     }
 
     /**
-     *
+     * This method is called by the web container to indicate to a filter that it is being
+     * taken out of service.
      */
     @Override
     public void destroy() 

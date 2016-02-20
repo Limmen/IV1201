@@ -1,8 +1,10 @@
 /*
- * Course project - IV1201 Design of Global Applications
- * Royal Institute of Technology
- * 2015 (c) Kim Hammar Alexander Lundh Marcel Mattsson
+ * Classname: RegisterEJBTest
+ * Version: 0.1
+ * Date: 20-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
  */
+
 package grupp14.IV1201.model;
 
 import grupp14.IV1201.entities.Person;
@@ -18,28 +20,45 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- *
+ * This class contains tests for the RegisterEJB class.
  * @author kim
  */
-public class RegisterEJBTest {
-    RegisterEJB instance;
-    public RegisterEJBTest() {
-    }       
+public class RegisterEJBTest 
+{
+    private RegisterEJB instance;
+        
+    /**
+     * Class constructor
+     */
+    public RegisterEJBTest() 
+    {
+    } 
+    
+    /**
+     * This method is called before the tests are executed
+     */
     @Before
-    public void setUp() {
+    public void setUp() 
+    {
         instance = new RegisterEJB();
     }
     
+    /**
+     * This methods is called after the tests have finished
+     */
     @After
-    public void tearDown() {
+    public void tearDown() 
+    {
         instance = null;
     }
 
     /**
      * Test of validateRegistration method, of class RegisterEJB.
+     * @throws java.lang.Exception
      */
     @Test
-    public void testValidateRegistration() throws Exception {
+    public void testValidateRegistration() throws Exception 
+    {
         EntityManager mockManager = mock(EntityManager.class);
         TypedQuery<Person> mockQuery = mock(TypedQuery.class);
         List mockList = mock(List.class);

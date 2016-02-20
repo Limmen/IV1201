@@ -19,16 +19,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * This is a servletfilter that is used for authorization of user requests to /recruit/*.
  * @author kim
  */
-
 @GenericLogger
 public class RecruitFilter implements Filter
 {
     
     /**
-     *
+     * This method is called by the container each time a request is issued to 
+     * /recruit/* resources.
+     * 
+     * The method will check the http-session-parameters and then redirect the user
+     * depending on it's permissions.
+     * 
      * @param servletRequest
      * @param servletResponse
      * @param chain
@@ -45,7 +49,8 @@ public class RecruitFilter implements Filter
             response.sendRedirect(request.getContextPath() + "/login.xhtml");
         }
         else if(request.getSession().getAttribute("username") != null && 
-                request.getSession().getAttribute("role") != "recruit"){
+                !request.getSession().getAttribute("role").equals("recruit")){
+            System.out.println("!!!!!ROLE:" + request.getSession().getAttribute("role"));
             response.sendRedirect(request.getContextPath()
                     + "/notallowed.xhtml");
         }
@@ -53,7 +58,9 @@ public class RecruitFilter implements Filter
     }
 
     /**
-     *
+     * This method is called by the web container to indicate to the filter that
+     * is it being placed into service.
+     * 
      * @param config
      * @throws ServletException
      */
@@ -63,7 +70,8 @@ public class RecruitFilter implements Filter
     }
 
     /**
-     *
+     * This method is called by the web container to indicate to a filter that it is being
+     * taken out of service.
      */
     @Override
     public void destroy()
