@@ -49,8 +49,7 @@ public class RecruitFilter implements Filter
             response.sendRedirect(request.getContextPath() + "/login.xhtml");
         }
         else if(request.getSession().getAttribute("username") != null && 
-                !request.getSession().getAttribute("role").equals("recruit")){
-            System.out.println("!!!!!ROLE:" + request.getSession().getAttribute("role"));
+                !request.getSession().getAttribute("role").equals("recruit")){            
             response.sendRedirect(request.getContextPath()
                     + "/notallowed.xhtml");
         }

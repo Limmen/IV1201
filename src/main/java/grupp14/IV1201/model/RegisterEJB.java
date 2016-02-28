@@ -17,7 +17,10 @@ import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-
+/**
+ *
+ * @author kim
+ */
 @Stateless
 public class RegisterEJB
 {
@@ -31,7 +34,6 @@ public class RegisterEJB
         
     /**
      *
-     * @param em
      * @param p
      * @throws NoSuchAlgorithmException
      */
@@ -43,7 +45,6 @@ public class RegisterEJB
 
     /**
      *
-     * @param em
      * @param username
      * @return
      */

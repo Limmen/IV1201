@@ -7,6 +7,7 @@
 
 package grupp14.IV1201.model;
 
+import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,16 +16,20 @@ import javax.servlet.http.HttpSession;
  *
  * @author kim
  */
+@Stateless
 public class HttpSessionBean
 {
 
+    FacesContext getFacesContext() {
+        return FacesContext.getCurrentInstance();
+    }
     /**
      *
      * @return
      */
-    public static HttpSession getSession() 
+    public HttpSession getSession() 
     {
-        return (HttpSession) FacesContext.getCurrentInstance()
+        return (HttpSession) getFacesContext()
                 .getExternalContext().getSession(false);
     }
     
@@ -32,9 +37,9 @@ public class HttpSessionBean
      *
      * @return
      */
-    public static HttpServletRequest getRequest()
+    public HttpServletRequest getRequest()
     {
-        return (HttpServletRequest) FacesContext.getCurrentInstance()
+        return (HttpServletRequest) getFacesContext()
                 .getExternalContext().getRequest();
     }
     
@@ -42,23 +47,11 @@ public class HttpSessionBean
      *
      * @return
      */
-    public static String getUserName()
+    public String getUserName()
     {
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+        HttpSession session = (HttpSession) getFacesContext()
                 .getExternalContext().getSession(false);
         return session.getAttribute("username").toString();
     }
     
-    /**
-     *
-     * @return
-     */
-    public static String getUserId() 
-    {
-        HttpSession session = getSession();
-        if (session != null)
-            return (String) session.getAttribute("userid");
-        else
-            return null;
-    }
 }

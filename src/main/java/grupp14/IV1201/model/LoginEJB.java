@@ -33,7 +33,6 @@ public class LoginEJB
     }        
     /**
      *
-     * @param em
      * @param username
      * @param password
      * @return
@@ -55,7 +54,6 @@ public class LoginEJB
 
     /**
      *
-     * @param em
      * @param username
      * @return
      */
