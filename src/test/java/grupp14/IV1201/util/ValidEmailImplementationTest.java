@@ -62,8 +62,7 @@ public class ValidEmailImplementationTest
         Assert.assertEquals(false, validator.isValid("#@%^%#$@#$@#.com", mockContext));
         Assert.assertEquals(false, validator.isValid("email@domain@domain.com", mockContext));
         Assert.assertEquals(true, validator.isValid(".email@domain.com", mockContext));
-        //@¤%"&!"&.com
-        
+        Assert.assertEquals(true, validator.isValid(".@¤%\"&!\"&.com", mockContext));     
     }
     
 }
