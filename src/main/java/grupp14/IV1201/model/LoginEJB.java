@@ -29,6 +29,7 @@ public class LoginEJB
         this.em = em;
     }        
     /**
+
      * Validates login from user.
      * 
      * Uses the entity manager to call the .createNamedQuery method to find a person by username.
@@ -36,6 +37,8 @@ public class LoginEJB
      * password in order to check if the @param password is the same. If the user is found and the
      * password matches it will return true. If it catches an exception it will return false.
      * 
+     *
+
      * @param username
      * @param password
      * @return

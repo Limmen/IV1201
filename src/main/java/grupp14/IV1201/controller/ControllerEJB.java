@@ -27,11 +27,11 @@ public class ControllerEJB
 {    
     
     @EJB
-    LoginEJB login;
+    private LoginEJB login;
     @EJB
-    RegisterEJB register;
- 
-    private final HttpSessionBean session = new HttpSessionBean();
+    private RegisterEJB register;
+    @EJB
+    private HttpSessionBean session;
     
     /**
      *

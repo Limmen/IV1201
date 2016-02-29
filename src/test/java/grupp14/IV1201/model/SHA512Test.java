@@ -1,32 +1,56 @@
 /*
-* Course project - IV1201 Design of Global Applications
-* Royal Institute of Technology
-* 2015 (c) Kim Hammar Alexander Lundh Marcel Mattsson
-*/
+ * Classname: SHA512Test
+ * Version: 0.1
+ * Date: 20-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+ */
+
 package grupp14.IV1201.model;
 
+import org.junit.After;
 import org.junit.Assert;
 import static org.junit.Assert.assertFalse;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
- *
+ * This class contains test-cases for the SHA512 class.
  * @author kim
  */
-public class SHA512Test {
-    SHA512 sha;
-    public SHA512Test() {
+public class SHA512Test 
+{
+    private SHA512 sha;
+    
+    /**
+     * Class constructor
+     */
+    public SHA512Test() 
+    {
     }
+    
+    /**
+     * This method is called before the tests are executed
+     */
     @Before
-    public void setUp() {
+    public void setUp() 
+    {
         sha = new SHA512();
     }
+    
+    /**
+     * This methods is called after the tests have finished
+     */
+    @After
+    public void tearDown() {
+        sha = null;
+    }
+    
     /**
      * Test of encrypt method, of class SHA512.
      */
     @Test
-    public void testEncrypt(){
+    public void testEncrypt()
+    {
         boolean exception = false;
         try{
             Assert.assertEquals("ee26b0dd4af7e749aa1a8ee3c10ae9923f618980772e473f8819a5d4940e0db27ac185f8a0e1d5f84f88bc887fd67b143732c304cc5fa9ad8e6f57f50028a8ff",sha.encrypt("test"));

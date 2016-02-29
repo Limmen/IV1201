@@ -1,9 +1,9 @@
 /*
- * Classname: GenericLoggerInterceptor
- * Version: 0.1
- * Date: 15-2-2016
- * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
- */
+* Classname: GenericLoggerInterceptor
+* Version: 0.1
+* Date: 15-2-2016
+* Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+*/
 
 package grupp14.IV1201.util;
 
@@ -15,20 +15,24 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 /**
+ * Interceptor for Generic logging.
  *
+ * Will cause the following methods to be called in conjunction with the annotated methods in
+ * managed beans.
  * @author kim
  */
 
-@GenericLogger 
+@GenericLogger
 @Interceptor
 public class GenericLoggerInterceptor
 {
-    private static final java.util.logging.Logger 
+    private static final java.util.logging.Logger
             LOGGER = java.util.logging.Logger.getLogger("grupp14.IV1201");
     private static final Level FINEST = Level.FINEST;
     private static final Level SEVERE = Level.SEVERE;
-
+    
     /**
+     * This method is called when the annotated method is invoked.
      *
      * @param ctx
      * @return
@@ -36,18 +40,22 @@ public class GenericLoggerInterceptor
      */
     @AroundInvoke
     public Object logInvocation(InvocationContext ctx) throws Exception
-    {
-        Method targetMethod = logEntry(ctx); //Log entry
+    {   
+        /* Log entry */
+        Method targetMethod = logEntry(ctx);
         Object returnValue = null;
         try {
-            returnValue = ctx.proceed(); //execute method
+            /* Execute method */
+            returnValue = ctx.proceed();
         } catch (Exception e) {
-            logException(targetMethod, e); //Log exception
+            /* Log exception */
+            logException(targetMethod, e);
         }
-        logExit(targetMethod, returnValue); //Log exit
+        /* Log exit */
+        logExit(targetMethod, returnValue);
         return returnValue;
     }
-
+    
     private void logExit(Method targetMethod, Object returnValue)
     {
         Object[] args = {targetMethod.getDeclaringClass().getCanonicalName(),
@@ -57,7 +65,7 @@ public class GenericLoggerInterceptor
             LOGGER.log(FINEST, "    Return value: {0}", returnValue);
         }
     }
-
+    
     private void logException(Method targetMethod, Exception e) throws Exception
     {
         Object[] args = {targetMethod.getDeclaringClass().getCanonicalName(),
@@ -65,8 +73,8 @@ public class GenericLoggerInterceptor
         LOGGER.log(SEVERE, "{0}.{1} threw {2}", args);
         throw (e);
     }
-
-    private Method logEntry(InvocationContext ctx) 
+    
+    private Method logEntry(InvocationContext ctx)
     {
         Method targetMethod = ctx.getMethod();
         Object[] params = ctx.getParameters();
@@ -74,7 +82,7 @@ public class GenericLoggerInterceptor
         LOGGER.log(FINEST, "    Parameters: {0}", Arrays.toString(params));
         return targetMethod;
     }
-
+    
     private boolean isVoid(Method targetMethod)
     {
         return targetMethod.getReturnType().isAssignableFrom(Void.TYPE);

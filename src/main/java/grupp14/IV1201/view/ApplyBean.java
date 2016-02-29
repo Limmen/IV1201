@@ -19,7 +19,8 @@ import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.Future;
 
 /**
- *
+ * ManagedBean representing the interface between the model and the 
+ * apply-page.
  * @author kim
  */
 
@@ -39,7 +40,8 @@ public class ApplyBean implements Serializable
     private float years;
 
     /**
-     *
+     * This method is called by the cdi-container after dependency-injection
+     * but before the class is put into service.
      */
     @PostConstruct
     public void init()
@@ -53,7 +55,32 @@ public class ApplyBean implements Serializable
     }
     
     /**
-     *
+     * This method is called when the user clicks the "apply" button
+     * on the apply-page.
+     * 
+     * The method will call the controller to place an application.
+     */
+    public void apply()
+    {
+        String username = contr.getUsername();
+        if(username != null)
+            contr.apply(expertise, years, availableFrom, availableTo, username);
+        clear();
+    }
+
+    /**
+     * This method clears the filled in fields.
+     */
+    public void clear()
+    {
+        expertise = "";
+        availableFrom = null;
+        availableTo = null;
+        years = 0;
+    }
+    
+    /**
+     * 
      * @return
      */
     public List<String> getExpertiseList()
@@ -140,28 +167,5 @@ public class ApplyBean implements Serializable
     public void setYears(float years) 
     {
         this.years = years;
-    }
-
-    /**
-     *
-     */
-    public void apply()
-    {
-        String username = contr.getUsername();
-        if(username != null)
-            contr.apply(expertise, years, availableFrom, availableTo, username);
-        clear();
-    }
-
-    /**
-     *
-     */
-    public void clear()
-    {
-        expertise = "";
-        availableFrom = null;
-        availableTo = null;
-        years = 0;
-    }
-    
+    }    
 }

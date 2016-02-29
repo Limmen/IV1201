@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
 import javax.interceptor.InterceptorBinding;
 
 /**
- *
+ * Logger interface for generic logging.
  * @author kim
  */
 

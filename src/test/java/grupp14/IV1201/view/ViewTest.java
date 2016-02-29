@@ -1,8 +1,10 @@
 /*
-* Course project - IV1201 Design of Global Applications
-* Royal Institute of Technology
-* 2015 (c) Kim Hammar Alexander Lundh Marcel Mattsson
-*/
+ * Classname: ViewTest
+ * Version: 0.1
+ * Date: 20-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+ */
+
 package grupp14.IV1201.view;
 
 import java.util.Random;
@@ -14,181 +16,247 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
- *
+ * This class contains acceptance-tests for the application.
+ * It will run a firefox instance to tests usual use-cases and
+ * edge-cases.
  * @author kim
  */
-public class ViewTest {
+public class ViewTest 
+{
     private WebDriver driver;
-    public ViewTest() {
+    
+    /**
+     * Class constructor
+     */
+    public ViewTest() 
+    {
     }
     
+    /**
+     * This method is called before the tests are executed
+     */
     @Before
-    public void setUp() {
+    public void setUp() 
+    {
         driver  = new FirefoxDriver();
     }
+
     //This test need to be run after deployment to application server
     // utöka misslyckad inloggning
     // tomma strängar, konstiga värden,
     //@Ignore
+
+
+    /**
+     * This test need to be run after deployment to application server (@Ignore)
+     */    
+
     @Test
-    public void testView(){
+    public void testView()
+    {
         testIndex();
-        testLogin("root", "rootroot");
-        testLogOut();
+        testApplicantLogin("root", "rootroot");
+        testApplicantLogOut();
+        testRecruitLogin("recruiter", "recruiter");
+        testRecruitLogOut();
+        testFailedLogin("root", "rootrootroot");
         testFailedLogin("wrongUsername10", "wrongPassword21511215");
+        testFailedLogin("root", "wrongPassword21511215");
+        testFailedLogin("wrongUsername10", "rootroot");
         testNavigationFilters();
         testLocale();
-        testFailedRegistration();
+        testFailedRegistration("root", "wrongPassword21511215");
         testRegistration();
     }
-    //Tests that home-page is rendered properly
-    private void testIndex(){
+    
+    /* Tests that home-page is rendered properly */
+    private void testIndex()
+    {
         driver.navigate().to("http://localhost:8080/IV1201/");
         Assert.assertEquals("IV1201 - Recruitment System", driver.getTitle());
-        //Check if jumbotron is visible
+        /* Check if jumbotron is visible */
         Assert.assertTrue(driver.findElements(By.id("j_idt7")).size() > 0);
-        //Check that main container is visible
+        /* Check that main container is visible */
         Assert.assertTrue(driver.findElements(By.id("j_idt12")).size() > 0);
-        //Check that footer is visible
+        /* Check that footer is visible */
         Assert.assertTrue(driver.findElements(By.className("footer")).size() > 0);
-        //Check that the url is correct
+        /* Check that the url is correct */
         Assert.assertEquals("http://localhost:8080/IV1201/", driver.getCurrentUrl());
     }
-    //Test login with username and password.
-    private void testLogin(String username, String password){
+    
+    /* Test login with username and password. */
+    private void testApplicantLogin(String username, String password)
+    {
         driver.navigate().to("http://localhost:8080/IV1201/");
-        //Click "Ansökande" page
+        /* Click "Ansökande" page */
         driver.findElement(By.id("j_idt19")).click();
-        //Make sure user is directed to login-page.
+        /* Make sure user is directed to login-page. */
         Assert.assertEquals("https://localhost:8181/IV1201/login.xhtml", 
                 driver.getCurrentUrl());
-        //Insert username
+        /* Insert username */
         driver.findElement(By.id("loginUsername")).sendKeys(username);
-        //Insert password
+        /* Insert password */
         driver.findElement(By.id("loginPassword")).sendKeys(password);
-        //Click login-button
+        /* Click login-button */
         driver.findElement(By.id("j_idt30")).click();
-        //Check that user-profile well is visible
+        /* Check that user-profile well is visible */
         Assert.assertTrue(driver.findElements(By.id("j_idt18")).size() > 0);
-        //Check that url is correct and that https is used
+        /* Check that url is correct and that https is used */
         Assert.assertEquals("https://localhost:8181/IV1201/applicant/index.xhtml", 
                 driver.getCurrentUrl());
     }
-    private void testLogOut(){
+    
+    /* Test login with username and password. */
+    private void testRecruitLogin(String username, String password)
+    {
+        driver.navigate().to("http://localhost:8080/IV1201/");
+        /* Click "Ansökande" page */
+        driver.findElement(By.id("j_idt19")).click();
+        /* Make sure user is directed to login-page. */
+        Assert.assertEquals("https://localhost:8181/IV1201/login.xhtml", 
+                driver.getCurrentUrl());
+        /* Insert username */
+        driver.findElement(By.id("loginUsername")).sendKeys(username);
+        /* Insert password */
+        driver.findElement(By.id("loginPassword")).sendKeys(password);
+        /* Click login-button */
+        driver.findElement(By.id("j_idt30")).click();
+        /* Check that user-profile well is visible */
+        Assert.assertTrue(driver.findElements(By.id("j_idt18")).size() > 0);
+        /* Check that url is correct and that https is used */
+        Assert.assertEquals("https://localhost:8181/IV1201/recruit/index.xhtml", 
+                driver.getCurrentUrl());
+    }
+    
+    private void testApplicantLogOut()
+    {
         driver.findElement(By.id("j_idt24:j_idt25")).click();
         Assert.assertEquals("https://localhost:8181/IV1201/index.xhtml", driver.getCurrentUrl());
     }
-    private void testFailedLogin(String username, String password){
+    
+    private void testRecruitLogOut()
+    {
+        driver.findElement(By.id("j_idt23:j_idt24")).click();
+        Assert.assertEquals("https://localhost:8181/IV1201/index.xhtml", driver.getCurrentUrl());
+    }
+    
+    private void testFailedLogin(String username, String password)
+    {
         driver.navigate().to("http://localhost:8080/IV1201/");
-        //Click "Rekryterare" page
+        /* Click "Rekryterare" page */
         driver.findElement(By.id("j_idt20")).click();
-        //Make sure user is directed to login-page.
+        /* Make sure user is directed to login-page. */
         Assert.assertEquals("https://localhost:8181/IV1201/login.xhtml", 
                 driver.getCurrentUrl());
-        //Insert username
+        /* Insert username */
         driver.findElement(By.id("loginUsername")).sendKeys(username);
-        //Insert password
+        /* Insert password */
         driver.findElement(By.id("loginPassword")).sendKeys(password);
-        //click login button
+        /* click login button */
         driver.findElement(By.id("j_idt30")).click();
-        //Check that login-failed-well is visible
+        /* Check that login-failed-well is visible */
         Assert.assertTrue(driver.findElements(By.id("j_idt17")).size() > 0);
-        //Check that url is correct and that https is used
+        /* Check that url is correct and that https is used */
         Assert.assertEquals("https://localhost:8181/IV1201/loginerror.xhtml", 
                 driver.getCurrentUrl());
     }
-    private void testNavigationFilters(){
+    
+    private void testNavigationFilters()
+    {
         driver.navigate().to("https://localhost:8181/IV1201/applicant/index.xhtml");
-        //Make sure user is directed to login-page.
+        /* Make sure user is directed to login-page. */
         Assert.assertEquals("https://localhost:8181/IV1201/login.xhtml", 
                 driver.getCurrentUrl());
         driver.navigate().to("https://localhost:8181/IV1201/recruit/index.xhtml");
-        //Make sure user is directed to login-page.
+        /* Make sure user is directed to login-page. */
         Assert.assertEquals("https://localhost:8181/IV1201/login.xhtml", 
                 driver.getCurrentUrl());
     }
-    private void testRegistration(){
+    
+    private void testRegistration()
+    {
         driver.navigate().to("http://localhost:8080/IV1201/");
-        //Click Login/Register page
+        /* Click Login/Register page */
         driver.findElement(By.id("j_idt21")).click();
-        //Make sure user is directed to login-page.
+        /* Make sure user is directed to login-page. */
         Assert.assertEquals("https://localhost:8181/IV1201/login.xhtml", 
                 driver.getCurrentUrl());
-        //Click Register link
+        /* Click Register link */
         driver.findElement(By.id("registerLink")).click();
-        //Check that registerTitle is visible
+        /* Check that registerTitle is visible */
         Assert.assertTrue(driver.findElements(By.id("registerTitle")).size() > 0);
-        //Check that URL is correct
+        /* Check that URL is correct */
         Assert.assertEquals("https://localhost:8181/IV1201/register.xhtml", 
                 driver.getCurrentUrl());
         String username = randomString();
         String password = randomString();
-        //Insert name
+        /* Insert name */
         driver.findElement(By.id("regName")).sendKeys("test");
-        //Insert surnamep
+        /* Insert surnamep */
         driver.findElement(By.id("regSurname")).sendKeys("test");
-        //Insert email
+        /* Insert email */
         driver.findElement(By.id("regEmail")).sendKeys("test@test.com");
-        //insert username
+        /* insert username */
         driver.findElement(By.id("regUsername")).sendKeys(username);
-        //Insert password
-        driver.findElement(By.id("regPassword")).sendKeys(password);
-        
-        //click register-button
-        driver.findElement(By.id("j_idt37")).click();
-        
-        //Check that registration was successful
+        /* Insert password */
+        driver.findElement(By.id("regPassword")).sendKeys(password);        
+        /* click register-button */
+        driver.findElement(By.id("j_idt37")).click();        
+        /* Check that registration was successful */
         Assert.assertEquals("https://localhost:8181/IV1201/index.xhtml", 
                 driver.getCurrentUrl());
-        //Test login with new user
-        testLogin(username, password);
+        /* Test login with new user */
+        testApplicantLogin(username, password);
         
     }
-    private void testFailedRegistration(){
+    
+    private void testFailedRegistration(String username, String password)
+    {
         driver.navigate().to("http://localhost:8080/IV1201/");
-        //Click Login/Register page
+        /* Click Login/Register page */
         driver.findElement(By.id("j_idt21")).click();
-        //Make sure user is directed to login-page.
+        /* Make sure user is directed to login-page. */
         Assert.assertEquals("https://localhost:8181/IV1201/login.xhtml",
                 driver.getCurrentUrl());
-        //Click Register link
+        /* Click Register link */
         driver.findElement(By.id("registerLink")).click();
-        //Check that registerTitle is visible
+        /* Check that registerTitle is visible */
         Assert.assertTrue(driver.findElements(By.id("registerTitle")).size() > 0);
-        //Check that URL is correct
+        /* Check that URL is correct */
         Assert.assertEquals("https://localhost:8181/IV1201/register.xhtml",
                 driver.getCurrentUrl());
-        String password = randomString();
-        //Insert name
+        /* Insert name */
         driver.findElement(By.id("regName")).sendKeys("test");
-        //Insert surnamep
+        /* Insert surnamep */
         driver.findElement(By.id("regSurname")).sendKeys("test");
-        //Insert email
+        /* Insert email */
         driver.findElement(By.id("regEmail")).sendKeys("test@test.com");
-        //insert username
-        driver.findElement(By.id("regUsername")).sendKeys("root");
-        //Insert password
-        driver.findElement(By.id("regPassword")).sendKeys(password);
-        
-        //click register-button
-        driver.findElement(By.id("j_idt37")).click();
-        
-        //Check that registration failed (username already taken).
+        /* insert username */
+        driver.findElement(By.id("regUsername")).sendKeys(username);
+        /* Insert password */
+        driver.findElement(By.id("regPassword")).sendKeys(password);        
+        /* click register-button */
+        driver.findElement(By.id("j_idt37")).click();        
+        /* Check that registration failed (username already taken). */
         Assert.assertEquals("https://localhost:8181/IV1201/registererror.xhtml",
                 driver.getCurrentUrl());        
     }
-    private void testLocale(){
+    
+    private void testLocale()
+    {
         driver.navigate().to("http://localhost:8080/IV1201/");
-        //Click swedish flag
+        /* Click swedish flag */
         driver.findElement(By.id("j_idt28:changeLocaleSv")).click();
-        //Check that the page is translated
+        /* Check that the page is translated */
         Assert.assertEquals("Rekryteringssystem",driver.findElement(By.className("link_deco")).getText());
-        //Click english flag
+        /* Click english flag */
         driver.findElement(By.id("j_idt28:changeLocaleEn")).click();
-        //Check that the page is translated
+        /* Check that the page is translated */
         Assert.assertEquals("Recruitment System",driver.findElement(By.className("link_deco")).getText());
-    }    
-    private String randomString(){
+    } 
+    
+    private String randomString()
+    {
         char[] chars = "abcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
         StringBuilder sb = new StringBuilder();
         Random random = new Random();

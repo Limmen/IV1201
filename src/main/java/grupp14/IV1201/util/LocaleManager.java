@@ -7,34 +7,40 @@
 
 package grupp14.IV1201.util;
 
+import java.io.Serializable;
 import java.util.Locale;
-import javax.enterprise.context.ApplicationScoped;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
- * Sets the correct locale for the entire application.
+ * This class contains state that decides the correct locale for the entire application.
  */
 @Named(value="localeManager")
-@ApplicationScoped
-public class LocaleManager {
+@SessionScoped
+public class LocaleManager implements Serializable {
     
-    private String locale;
+    private Locale locale;
     
+    @PostConstruct
+    public void init(){
+        locale = FacesContext.getCurrentInstance().getExternalContext().getRequestLocale();
+    }
     /**
-     *
+     * Changes the locale of the application.
      */
     public void changeLocale() 
     {
-        locale = getLanguageCode();
-        FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale(getLanguageCode()));
+        locale = new Locale(getLanguageCode());
+        FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
     }
     
     /**
      *
      * @return
      */
-    public String getLocale()
+    public Locale getLocale()
     {
         return locale;
     }
