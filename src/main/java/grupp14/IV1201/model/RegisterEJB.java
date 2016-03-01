@@ -37,8 +37,7 @@ public class RegisterEJB
      * 
      * @param p
      * 
-     */
-    
+     */    
     public void register(@NotNull PersonDTO p) throws NoSuchAlgorithmException
     {
         em.persist(new Person(p));

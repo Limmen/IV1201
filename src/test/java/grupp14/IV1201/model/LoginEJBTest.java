@@ -9,6 +9,8 @@ package grupp14.IV1201.model;
 
 import grupp14.IV1201.entities.Person;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.TypedQuery;
 import org.junit.After;
 import org.junit.Assert;
@@ -60,8 +62,10 @@ public class LoginEJBTest
         when((mockManager.createNamedQuery("Person.findByUserName", Person.class))).thenReturn((mockQuery));
         when((mockQuery.getSingleResult())).thenReturn((mockPerson));
         when((mockQuery.setParameter("username", "test"))).thenReturn(mockQuery);
-        
-        //assertTrue(instance.validateLogin(mockManager, "test", "testtest"));
+        instance.setEm(mockManager);        
+        Assert.assertTrue(instance.validateLogin("test", "testtest"));
+        when((mockQuery.getSingleResult())).thenThrow(new NoResultException());
+        Assert.assertFalse(instance.validateLogin("test", "testtest"));
     }
 
     /**
@@ -81,6 +85,8 @@ public class LoginEJBTest
         Assert.assertEquals("applicant", instance.getRole("test"));
         when((mockPerson.getRoll_id())).thenReturn(("recruit"));
         Assert.assertEquals("recruit", instance.getRole("test"));
+        when((mockQuery.getSingleResult())).thenThrow(new NoResultException());
+        Assert.assertEquals("", instance.getRole("test"));
     }
     
 }

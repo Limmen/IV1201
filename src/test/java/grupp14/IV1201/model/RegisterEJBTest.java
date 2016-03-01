@@ -7,6 +7,7 @@
 
 package grupp14.IV1201.model;
 
+import grupp14.IV1201.DTO.PersonDTO;
 import grupp14.IV1201.entities.Person;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -16,6 +17,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -72,4 +74,12 @@ public class RegisterEJBTest
         assertFalse(instance.validateRegistration("test"));
     }
     
+    @Test
+    public void testRegister() throws Exception{
+        EntityManager mockManager = mock(EntityManager.class);
+        PersonDTO person = mock(PersonDTO.class);
+        when((person.getPassword())).thenReturn("test");
+        instance.setEm(mockManager);
+        instance.register(person);
+    }
 }

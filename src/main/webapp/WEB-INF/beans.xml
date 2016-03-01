@@ -7,7 +7,5 @@
     <interceptors>
          <!-- GenericLogger-->
         <class>grupp14.IV1201.util.GenericLoggerInterceptor</class>
-         <!-- LoginLogger-->
-        <class>grupp14.IV1201.util.LoginLoggerInterceptor</class>
     </interceptors>    
 </beans>

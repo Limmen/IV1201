@@ -10,6 +10,7 @@ package grupp14.IV1201.view;
 import java.util.Random;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -50,7 +51,7 @@ public class ViewTest
     /**
      * This test need to be run after deployment to application server (@Ignore)
      */    
-
+    @Ignore
     @Test
     public void testView()
     {
