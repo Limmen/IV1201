@@ -7,10 +7,13 @@
 
 package grupp14.IV1201.controller;
 
+import com.lowagie.text.DocumentException;
 import grupp14.IV1201.DTO.PersonDTO;
 import grupp14.IV1201.model.HttpSessionBean;
 import grupp14.IV1201.model.LoginEJB;
+import grupp14.IV1201.model.PDFEJB;
 import grupp14.IV1201.model.RegisterEJB;
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +35,8 @@ public class ControllerEJB
     private RegisterEJB register;
     @EJB
     private HttpSessionBean session;
+    @EJB
+    private PDFEJB pdf;
     
     /**
      *
@@ -122,6 +127,10 @@ public class ControllerEJB
     public void apply(String expertise, float years, Date from, Date to, String username)
     {
         
+    }
+    
+    public void createPDF(String application) throws IOException, DocumentException{
+        pdf.createPDF(application);
     }
 
 }

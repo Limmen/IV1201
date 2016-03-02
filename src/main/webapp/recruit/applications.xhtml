@@ -16,7 +16,7 @@
                 <h:link value="Log in here" outcome="login"/>
             </ui:fragment>
             <ui:fragment rendered="#{not empty username}">
-                <h3>Your Applications </h3>
+                <h3>Applications</h3>
                 <h:form id="form">
                     <p:dataGrid var="app" value="#{applicationBean.applications}" columns="1"
                                 rows="10" paginator="true" id="applications"
