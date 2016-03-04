@@ -83,6 +83,10 @@ public class Person implements Serializable
         this.id = id;
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode()
     {
@@ -91,6 +95,11 @@ public class Person implements Serializable
         return hash;
     }
     
+    /**
+     *
+     * @param object
+     * @return
+     */
     @Override
     public boolean equals(Object object)
     {
@@ -106,6 +115,10 @@ public class Person implements Serializable
         return true;
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() 
     {

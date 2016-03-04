@@ -16,12 +16,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author marcelmattsson
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name="Application.findByUserId",
+            query="SELECT p FROM Application p WHERE p.personID = :id"),
+})
 public class Application implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -33,6 +39,9 @@ public class Application implements Serializable {
     private java.sql.Date dateFrom;
     private java.sql.Date dateTo;
 
+    /**
+     *
+     */
     public Application(){}
     /**
      *
@@ -73,7 +82,7 @@ public class Application implements Serializable {
 
     /**
      *
-     * @param erfarenhet
+     * @param years
      */
     public void set(float years) {
         this.yearsOfExperience = years;
@@ -143,6 +152,10 @@ public class Application implements Serializable {
         this.dateTo = dateTo;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -150,6 +163,11 @@ public class Application implements Serializable {
         return hash;
     }
 
+    /**
+     *
+     * @param object
+     * @return
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -163,6 +181,10 @@ public class Application implements Serializable {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "grupp14.IV1201.entities.Erfarenhet[ id=" + id + " ]";

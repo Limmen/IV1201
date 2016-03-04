@@ -41,7 +41,7 @@ public class ApplyBean implements Serializable
     @Future(message="We're only interested in applications from possible"
             + " future employees")
     private Date availableTo;
-    @DecimalMax(value="100")
+    @DecimalMax(value="200")
     private float years;
 
     /**
@@ -63,6 +63,7 @@ public class ApplyBean implements Serializable
      * on the apply-page.
      * 
      * The method will call the controller to place an application.
+     * @throws java.security.NoSuchAlgorithmException
      */
     public void apply() throws NoSuchAlgorithmException
     {

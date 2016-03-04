@@ -33,10 +33,20 @@ public class ApplicationEJB {
         this.em = em;
     }
     
+    /**
+     *
+     * @param app
+     * @throws NoSuchAlgorithmException
+     */
     public void placeApplication(ApplicationDTO app) throws NoSuchAlgorithmException{
         em.persist(new Application(app));
     }
     
+    /**
+     *
+     * @param username
+     * @return
+     */
     public BigInteger getUserId(String username){
         TypedQuery<Person> query = em.createNamedQuery("Person.findByUserName", Person.class);
         query.setParameter("username", username);        
@@ -44,6 +54,40 @@ public class ApplicationEJB {
         return p.getId();        
     }
     
+    /**
+     *
+     * @param username
+     * @return
+     */
+    public Person getPerson(String username){
+        TypedQuery<Person> query = em.createNamedQuery("Person.findByUserName", Person.class);
+        query.setParameter("username", username);        
+        return query.getSingleResult(); 
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public Person getPerson(BigInteger id){        
+        return em.find(Person.class, id);
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public Expertise getExpertise(BigInteger id){
+        return em.find(Expertise.class, id);
+    }
+    
+    /**
+     *
+     * @param expertise
+     * @return
+     */
     public BigInteger getExpertiseId(String expertise){
         TypedQuery<Expertise> query = em.createNamedQuery("Expertise.findByName", Expertise.class);
         query.setParameter("expertise", expertise);        
@@ -51,13 +95,34 @@ public class ApplicationEJB {
         return exp.getId(); 
     }
     
+    /**
+     *
+     * @return
+     */
     public List<Expertise> getExpertiseList()
     {
         Query query = em.createQuery("SELECT e from Expertise e");
         return (List<Expertise>) query.getResultList();
     }
+
+    /**
+     *
+     * @return
+     */
     public List<Application> getApplicationList(){
         Query query = em.createQuery("SELECT e from Application e");
+        return (List<Application>) query.getResultList();
+    }
+
+    /**
+     *
+     * @param username
+     * @return
+     */
+    public List<Application> getApplicationList(String username){
+        TypedQuery<Application> query = em.createNamedQuery("Application.findByUserId", Application.class);
+        Person person = getPerson(username);       
+        query.setParameter("id", person.getId());        
         return (List<Application>) query.getResultList();
     }
 }

@@ -17,11 +17,11 @@ public class ApplicationDTO {
     private final BigInteger personID;
     private final BigInteger expertisID;
     private final java.sql.Date dateFrom;
-    private final java.sql.Date dateTo;
+    private final java.sql.Date dateTo;    
     
     /**
      *
-     * @param erfarenhet
+     * @param yearsOfExperience
      * @param personID
      * @param expertisID
      * @param dateFrom

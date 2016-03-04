@@ -9,9 +9,11 @@ package grupp14.IV1201.controller;
 
 import com.lowagie.text.DocumentException;
 import grupp14.IV1201.DTO.ApplicationDTO;
+import grupp14.IV1201.DTO.ApplicationViewDTO;
 import grupp14.IV1201.DTO.PersonDTO;
 import grupp14.IV1201.entities.Application;
 import grupp14.IV1201.entities.Expertise;
+import grupp14.IV1201.entities.Person;
 import grupp14.IV1201.model.ApplicationEJB;
 import grupp14.IV1201.model.HttpSessionBean;
 import grupp14.IV1201.model.LoginEJB;
@@ -130,13 +132,20 @@ public class ControllerEJB
     {
         return app.getApplicationList();
     }
+
     /**
      *
-     * @param expertise
-     * @param years
-     * @param from
-     * @param to
      * @param username
+     * @return
+     */
+    public List<Application> getApplicationList(String username)
+    {
+        return app.getApplicationList(username);
+    }
+    /**
+     *
+     * @param application
+     * @throws java.security.NoSuchAlgorithmException
      */
     public void apply(ApplicationDTO application) throws NoSuchAlgorithmException
     {
@@ -145,20 +154,56 @@ public class ControllerEJB
     
     /**
      *
-     * @param application
+     * @param dto
      * @throws IOException
      * @throws DocumentException
      */
-    public void createPDF(String application) throws IOException, DocumentException{
-        pdf.createPDF(application);
+    public void createPDF(ApplicationViewDTO dto) throws IOException, DocumentException{
+        pdf.createPDF(dto);
     }
     
+    /**
+     *
+     * @param username
+     * @return
+     */
     public BigInteger getUserId(String username){
         return app.getUserId(username);
     }
     
+    /**
+     *
+     * @param expertise
+     * @return
+     */
     public BigInteger getExpertiseId(String expertise){
         return app.getExpertiseId(expertise);
     }
 
+    /**
+     *
+     * @param username
+     * @return
+     */
+    public Person getPerson(String username){
+        return app.getPerson(username);
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public Person getPerson(BigInteger id){
+        return app.getPerson(id);
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public Expertise getExpertise(BigInteger id){
+        return app.getExpertise(id);
+    }
 }

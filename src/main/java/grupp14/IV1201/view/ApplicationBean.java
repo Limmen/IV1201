@@ -6,8 +6,11 @@
 package grupp14.IV1201.view;
 
 import com.lowagie.text.DocumentException;
+import grupp14.IV1201.DTO.ApplicationViewDTO;
 import grupp14.IV1201.controller.ControllerEJB;
 import grupp14.IV1201.entities.Application;
+import grupp14.IV1201.entities.Expertise;
+import grupp14.IV1201.entities.Person;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,15 +30,15 @@ import javax.faces.view.ViewScoped;
 public class ApplicationBean implements Serializable {
     @EJB
     private ControllerEJB contr;
-    private List<Application> applications;
-    private Application selectedApplication;
+    private List<ApplicationViewDTO> applications;
+    private ApplicationViewDTO selectedApplication;
     
     /**
      * 
      */
     @PostConstruct
     public void init(){
-        applications = contr.getApplicationList();
+        fetchApplications();        
         if(applications == null)
             applications = new ArrayList();        
     }
@@ -44,12 +47,21 @@ public class ApplicationBean implements Serializable {
      * 
      */
     public void fetchApplications(){
+        applications = new ArrayList();
         String username = contr.getUsername();
-        if(contr.getRole(username).equals("applicant")){
-            //Fetch applications for username
+        if(contr.getRole(username).equals("applicant")){            
+            for(Application app : contr.getApplicationList(username)){
+                Person p = contr.getPerson(username);
+                Expertise e = contr.getExpertise(app.getExpertisID());
+                applications.add(new ApplicationViewDTO(app,p,e));
+            }
         }
         else{
-            //Fetch ALL applications
+            for(Application app : contr.getApplicationList()){
+                Person p = contr.getPerson(app.getPersonID());
+                Expertise e = contr.getExpertise(app.getExpertisID());
+                applications.add(new ApplicationViewDTO(app,p,e));
+            }
         }
     }
 
@@ -59,14 +71,14 @@ public class ApplicationBean implements Serializable {
      * @throws DocumentException
      */
     public void createPDF() throws IOException, DocumentException{
-        //contr.createPDF(selectedApplication);
+        contr.createPDF(selectedApplication);
     }
 
     /**
      *
      * @return
      */
-    public List<Application> getApplications() {
+    public List<ApplicationViewDTO> getApplications() {
         return applications;
     }
 
@@ -74,7 +86,7 @@ public class ApplicationBean implements Serializable {
      *
      * @return
      */
-    public Application getSelectedApplication() {
+    public ApplicationViewDTO getSelectedApplication() {
         return selectedApplication;
     }
 
@@ -82,7 +94,7 @@ public class ApplicationBean implements Serializable {
      *
      * @param selectedApplication
      */
-    public void setSelectedApplication(Application selectedApplication) {
+    public void setSelectedApplication(ApplicationViewDTO selectedApplication) {
         this.selectedApplication = selectedApplication;
     }
         
