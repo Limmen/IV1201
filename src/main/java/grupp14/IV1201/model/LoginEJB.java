@@ -16,7 +16,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.validation.constraints.Size;
 
-
+/**
+ *
+ * @author marcelmattsson
+ */
 @Stateless
 public class LoginEJB
 {
@@ -42,6 +45,7 @@ public class LoginEJB
      * @param username
      * @param password
      * @return
+     * @throws java.security.NoSuchAlgorithmException
      * @throws NoResultException
      * @throws NonUniqueResultException
      */

@@ -17,7 +17,10 @@ import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-
+/**
+ *
+ * @author marcelmattsson
+ */
 @Stateless
 public class RegisterEJB
 {
@@ -36,6 +39,7 @@ public class RegisterEJB
      * a PersonDTO.
      * 
      * @param p
+     * @throws java.security.NoSuchAlgorithmException
      * 
      */    
     public void register(@NotNull PersonDTO p) throws NoSuchAlgorithmException

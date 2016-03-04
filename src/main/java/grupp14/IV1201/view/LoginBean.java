@@ -71,6 +71,7 @@ public class LoginBean
     
     /**
      * This method will invalidate the user's session.
+     * @throws java.io.IOException
      */
 
     public void logout() throws IOException
