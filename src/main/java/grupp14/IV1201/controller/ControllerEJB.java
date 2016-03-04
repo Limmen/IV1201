@@ -129,6 +129,12 @@ public class ControllerEJB
         
     }
     
+    /**
+     *
+     * @param application
+     * @throws IOException
+     * @throws DocumentException
+     */
     public void createPDF(String application) throws IOException, DocumentException{
         pdf.createPDF(application);
     }

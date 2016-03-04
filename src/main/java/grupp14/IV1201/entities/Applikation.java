@@ -11,6 +11,7 @@ import grupp14.IV1201.DTO.ApplikationDTO;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -46,13 +47,99 @@ public class Applikation implements Serializable {
             this.dateTo = applikationInfo.getDateTo();
         }
     
-    
+    /**
+     *
+     * @return
+     */
     public BigInteger getId() {
         return id;
     }
-
+    /**
+     *
+     * @param id
+     */
     public void setId(BigInteger id) {
         this.id = id;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getErfarenhet() {
+        return erfarenhet;
+    }
+
+    /**
+     *
+     * @param erfarenhet
+     */
+    public void setErfarenhet(String erfarenhet) {
+        this.erfarenhet = erfarenhet;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public BigInteger getPersonID() {
+        return personID;
+    }
+
+    /**
+     *
+     * @param personID
+     */
+    public void setPersonID(BigInteger personID) {
+        this.personID = personID;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public BigInteger getExpertisID() {
+        return expertisID;
+    }
+
+    /**
+     *
+     * @param expertisID
+     */
+    public void setExpertisID(BigInteger expertisID) {
+        this.expertisID = expertisID;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Date getDateFrom() {
+        return dateFrom;
+    }
+
+    /**
+     *
+     * @param dateFrom
+     */
+    public void setDateFrom(Date dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Date getDateTo() {
+        return dateTo;
+    }
+
+    /**
+     *
+     * @param dateTo
+     */
+    public void setDateTo(Date dateTo) {
+        this.dateTo = dateTo;
     }
 
     @Override
