@@ -12,14 +12,14 @@ import java.sql.Date;
  *
  * @author marcelmattsson
  */
-public class ApplikationDTO {
-    private final String erfarenhet;
+public class ApplicationDTO {
+    private final float yearsOfExperience;
     private final BigInteger personID;
     private final BigInteger expertisID;
     private final java.sql.Date dateFrom;
     private final java.sql.Date dateTo;
     
-        /**
+    /**
      *
      * @param erfarenhet
      * @param personID
@@ -27,10 +27,10 @@ public class ApplikationDTO {
      * @param dateFrom
      * @param dateTo
      */
-    public ApplikationDTO(String erfarenhet, BigInteger personID, BigInteger expertisID, 
+    public ApplicationDTO(float yearsOfExperience, BigInteger personID, BigInteger expertisID, 
             java.sql.Date dateFrom, java.sql.Date dateTo)
     {
-        this.erfarenhet = erfarenhet;
+        this.yearsOfExperience = yearsOfExperience;
         this.personID = personID;
         this.expertisID = expertisID;
         this.dateFrom = dateFrom;
@@ -41,8 +41,8 @@ public class ApplikationDTO {
      *
      * @return
      */
-    public String getErfarenhet() {
-        return erfarenhet;
+    public float getYearsOfExperience() {
+        return yearsOfExperience;
     }
 
     /**

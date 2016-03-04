@@ -8,14 +8,18 @@
 package grupp14.IV1201.controller;
 
 import com.lowagie.text.DocumentException;
+import grupp14.IV1201.DTO.ApplicationDTO;
 import grupp14.IV1201.DTO.PersonDTO;
+import grupp14.IV1201.entities.Application;
+import grupp14.IV1201.entities.Expertise;
+import grupp14.IV1201.model.ApplicationEJB;
 import grupp14.IV1201.model.HttpSessionBean;
 import grupp14.IV1201.model.LoginEJB;
 import grupp14.IV1201.model.PDFEJB;
 import grupp14.IV1201.model.RegisterEJB;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -37,6 +41,8 @@ public class ControllerEJB
     private HttpSessionBean session;
     @EJB
     private PDFEJB pdf;
+    @EJB
+    private ApplicationEJB app;
     
     /**
      *
@@ -111,11 +117,19 @@ public class ControllerEJB
      *
      * @return
      */
-    public List<String> getExpertiseList()
+    public List<Expertise> getExpertiseList()
     {
-        return null;
+        return app.getExpertiseList();
     }
 
+    /**
+     *
+     * @return
+     */
+    public List<Application> getApplicationList()
+    {
+        return app.getApplicationList();
+    }
     /**
      *
      * @param expertise
@@ -124,9 +138,9 @@ public class ControllerEJB
      * @param to
      * @param username
      */
-    public void apply(String expertise, float years, Date from, Date to, String username)
+    public void apply(ApplicationDTO application) throws NoSuchAlgorithmException
     {
-        
+        app.placeApplication(application);
     }
     
     /**
@@ -137,6 +151,14 @@ public class ControllerEJB
      */
     public void createPDF(String application) throws IOException, DocumentException{
         pdf.createPDF(application);
+    }
+    
+    public BigInteger getUserId(String username){
+        return app.getUserId(username);
+    }
+    
+    public BigInteger getExpertiseId(String expertise){
+        return app.getExpertiseId(expertise);
     }
 
 }

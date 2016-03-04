@@ -7,8 +7,13 @@
 
 package grupp14.IV1201.view;
 
+import grupp14.IV1201.DTO.ApplicationDTO;
 import grupp14.IV1201.controller.ControllerEJB;
+import grupp14.IV1201.entities.Expertise;
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -45,13 +50,12 @@ public class ApplyBean implements Serializable
      */
     @PostConstruct
     public void init()
-    {
-        /*
+    {        
         expertiseList = new ArrayList();
         expertiseList.add("Please select");
-        for(String s : contr.getExpertiseList()){
-        expertiseList.add(s);
-        }*/
+        for(Expertise s : contr.getExpertiseList()){
+        expertiseList.add(s.getExpertise());
+        }
     }
     
     /**
@@ -60,11 +64,17 @@ public class ApplyBean implements Serializable
      * 
      * The method will call the controller to place an application.
      */
-    public void apply()
+    public void apply() throws NoSuchAlgorithmException
     {
-        String username = contr.getUsername();
-        if(username != null)
-            contr.apply(expertise, years, availableFrom, availableTo, username);
+        String username = contr.getUsername();        
+        if(username != null){
+            BigInteger personId = contr.getUserId(username);
+            BigInteger expertiseId = contr.getExpertiseId(expertise);
+            ApplicationDTO app = new ApplicationDTO(years,personId, expertiseId,
+                    new java.sql.Date(availableFrom.getTime()),
+                    new java.sql.Date(availableTo.getTime()));
+            contr.apply(app);
+        }        
         clear();
     }
 

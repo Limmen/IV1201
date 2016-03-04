@@ -7,7 +7,7 @@
 
 package grupp14.IV1201.entities;
 
-import grupp14.IV1201.DTO.ApplikationDTO;
+import grupp14.IV1201.DTO.ApplicationDTO;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
@@ -22,25 +22,26 @@ import javax.persistence.Id;
  * @author marcelmattsson
  */
 @Entity
-public class Applikation implements Serializable {
+public class Application implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private BigInteger id;
-    private String erfarenhet;
+    private float yearsOfExperience;
     private BigInteger personID;
     private BigInteger expertisID;
     private java.sql.Date dateFrom;
     private java.sql.Date dateTo;
 
+    public Application(){}
     /**
      *
      * @param applikationInfo
      * @throws NoSuchAlgorithmException
      */
-        public Applikation(ApplikationDTO applikationInfo) throws NoSuchAlgorithmException
+        public Application(ApplicationDTO applikationInfo) throws NoSuchAlgorithmException
         {
-            this.erfarenhet = applikationInfo.getErfarenhet();
+            this.yearsOfExperience = applikationInfo.getYearsOfExperience();
             this.personID = applikationInfo.getPersonID();
             this.expertisID = applikationInfo.getExpertisID();
             this.dateFrom = applikationInfo.getDateFrom();
@@ -66,16 +67,16 @@ public class Applikation implements Serializable {
      *
      * @return
      */
-    public String getErfarenhet() {
-        return erfarenhet;
+    public float getYearsOfExperience() {
+        return yearsOfExperience;
     }
 
     /**
      *
      * @param erfarenhet
      */
-    public void setErfarenhet(String erfarenhet) {
-        this.erfarenhet = erfarenhet;
+    public void set(float years) {
+        this.yearsOfExperience = years;
     }
 
     /**
@@ -152,10 +153,10 @@ public class Applikation implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Applikation)) {
+        if (!(object instanceof Application)) {
             return false;
         }
-        Applikation other = (Applikation) object;
+        Application other = (Application) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

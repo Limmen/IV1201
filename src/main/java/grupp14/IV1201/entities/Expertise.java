@@ -11,19 +11,39 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author marcelmattsson
  */
 @Entity
-public class Expertis implements Serializable {
+@NamedQueries({
+    @NamedQuery(name="Expertise.findByName",
+            query="SELECT p FROM Expertise p WHERE p.expertise = :expertise"),
+})
+public class Expertise implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private BigInteger id;
-    private String expertis;
+    private String expertise;
 
+    public Expertise() {}
+    
+    public Expertise(String expertis){
+        this.expertise = expertis;
+    }
+
+    public String getExpertise() {
+        return expertise;
+    }
+
+    public void setExpertise(String expertise) {
+        this.expertise = expertise;
+    }
+    
     public BigInteger getId() {
         return id;
     }
@@ -42,10 +62,10 @@ public class Expertis implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Expertis)) {
+        if (!(object instanceof Expertise)) {
             return false;
         }
-        Expertis other = (Expertis) object;
+        Expertise other = (Expertise) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

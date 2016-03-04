@@ -29,7 +29,7 @@
                         
                         <p:panel header="#{app}" style="text-align:center">
                             <h:panelGrid columns="1" style="width:100%">                    
-                                <h:outputText value="#{app}" />   
+                                <h:outputText value="#{app.personID}" />   
                                 <p:commandLink update=":form:applicationDetail" oncomplete="PF('applicationDialog').show()" title="View Detail">
                                     <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
                                     <f:setPropertyActionListener value="#{app}" target="#{applicationBean.selectedApplication}" />
@@ -41,8 +41,16 @@
                     <p:dialog header="Application Info" widgetVar="applicationDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                         <p:outputPanel id="applicationDetail" style="text-align:center;">
                             <p:panelGrid  columns="2" rendered="#{not empty applicationBean.selectedApplication}" columnClasses="label,value">
-                                <h:outputText value="Name" />
-                                <h:outputText styleClass="bold" value="#{applicationBean.selectedApplication}" />                                
+                                <h:outputText value="Person id: " />
+                                <h:outputText styleClass="bold" value="#{applicationBean.selectedApplication.personID}" />
+                                <h:outputText value="Expetise id: " />
+                                <h:outputText styleClass="bold" value="#{applicationBean.selectedApplication.expertisID}" /> 
+                                <h:outputText value="Years of experience: " />
+                                <h:outputText styleClass="bold" value="#{applicationBean.selectedApplication.yearsOfExperience}" /> 
+                                <h:outputText value="Date from: " />
+                                <h:outputText styleClass="bold" value="#{applicationBean.selectedApplication.dateFrom}" /> 
+                                <h:outputText value="Date to: " />
+                                <h:outputText styleClass="bold" value="#{applicationBean.selectedApplication.dateTo}" /> 
                             </p:panelGrid>
                             <h:commandLink styleClass="pdf" value="export to PDF" action="#{applicationBean.createPDF()}" />
                         </p:outputPanel>

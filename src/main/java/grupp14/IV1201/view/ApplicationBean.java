@@ -7,6 +7,7 @@ package grupp14.IV1201.view;
 
 import com.lowagie.text.DocumentException;
 import grupp14.IV1201.controller.ControllerEJB;
+import grupp14.IV1201.entities.Application;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,18 +27,17 @@ import javax.faces.view.ViewScoped;
 public class ApplicationBean implements Serializable {
     @EJB
     private ControllerEJB contr;
-    private List<String> applications;
-    private String selectedApplication;
+    private List<Application> applications;
+    private Application selectedApplication;
     
     /**
      * 
      */
     @PostConstruct
     public void init(){
-        applications = new ArrayList();
-        applications.add("Application 1");
-        applications.add("Application 2");
-        applications.add("Application 3");
+        applications = contr.getApplicationList();
+        if(applications == null)
+            applications = new ArrayList();        
     }
     
     /**
@@ -59,14 +59,14 @@ public class ApplicationBean implements Serializable {
      * @throws DocumentException
      */
     public void createPDF() throws IOException, DocumentException{
-        contr.createPDF(selectedApplication);
+        //contr.createPDF(selectedApplication);
     }
 
     /**
      *
      * @return
      */
-    public List<String> getApplications() {
+    public List<Application> getApplications() {
         return applications;
     }
 
@@ -74,7 +74,7 @@ public class ApplicationBean implements Serializable {
      *
      * @return
      */
-    public String getSelectedApplication() {
+    public Application getSelectedApplication() {
         return selectedApplication;
     }
 
@@ -82,7 +82,7 @@ public class ApplicationBean implements Serializable {
      *
      * @param selectedApplication
      */
-    public void setSelectedApplication(String selectedApplication) {
+    public void setSelectedApplication(Application selectedApplication) {
         this.selectedApplication = selectedApplication;
     }
         
