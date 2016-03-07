@@ -9,11 +9,12 @@ import grupp14.IV1201.DTO.ApplicationDTO;
 import grupp14.IV1201.entities.Application;
 import grupp14.IV1201.entities.Expertise;
 import grupp14.IV1201.entities.Person;
-import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -47,52 +48,28 @@ public class ApplicationEJB {
      * @param username
      * @return
      */
-    public BigInteger getUserId(String username){
-        TypedQuery<Person> query = em.createNamedQuery("Person.findByUserName", Person.class);
-        query.setParameter("username", username);        
-        Person p = query.getSingleResult();
-        return p.getId();        
-    }
-    
-    /**
-     *
-     * @param username
-     * @return
-     */
     public Person getPerson(String username){
         TypedQuery<Person> query = em.createNamedQuery("Person.findByUserName", Person.class);
-        query.setParameter("username", username);        
-        return query.getSingleResult(); 
+        query.setParameter("username", username);
+        try{
+            return query.getSingleResult();
+        }catch (NoResultException | NonUniqueResultException e) {
+            return null;
+        }
     }
-
-    /**
-     *
-     * @param id
-     * @return
-     */
-    public Person getPerson(BigInteger id){        
-        return em.find(Person.class, id);
-    }
-
-    /**
-     *
-     * @param id
-     * @return
-     */
-    public Expertise getExpertise(BigInteger id){
-        return em.find(Expertise.class, id);
-    }
-    
     /**
      *
      * @param expertise
      * @return
      */
-    public BigInteger getExpertiseId(String expertise){
+    public Expertise getExpertise(String expertise){
         TypedQuery<Expertise> query = em.createNamedQuery("Expertise.findByName", Expertise.class);
-        query.setParameter("expertise", expertise);        
-        Expertise exp = query.getSingleResult();
-        return exp.getId(); 
+        query.setParameter("expertise", expertise);
+        try{
+            return query.getSingleResult();
+        }catch (NoResultException | NonUniqueResultException e) {
+            return null;
+        }
     }
     
     /**
@@ -120,9 +97,8 @@ public class ApplicationEJB {
      * @return
      */
     public List<Application> getApplicationList(String username){
-        TypedQuery<Application> query = em.createNamedQuery("Application.findByUserId", Application.class);
-        Person person = getPerson(username);       
-        query.setParameter("id", person.getId());        
+        TypedQuery<Application> query = em.createNamedQuery("Application.findByUser", Application.class);        
+        query.setParameter("person", getPerson(username));        
         return (List<Application>) query.getResultList();
     }
 }

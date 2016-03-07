@@ -6,11 +6,8 @@
 package grupp14.IV1201.view;
 
 import com.lowagie.text.DocumentException;
-import grupp14.IV1201.DTO.ApplicationViewDTO;
 import grupp14.IV1201.controller.ControllerEJB;
 import grupp14.IV1201.entities.Application;
-import grupp14.IV1201.entities.Expertise;
-import grupp14.IV1201.entities.Person;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,8 +27,8 @@ import javax.faces.view.ViewScoped;
 public class ApplicationBean implements Serializable {
     @EJB
     private ControllerEJB contr;
-    private List<ApplicationViewDTO> applications;
-    private ApplicationViewDTO selectedApplication;
+    private List<Application> applications;
+    private Application selectedApplication;
     
     /**
      * 
@@ -50,18 +47,10 @@ public class ApplicationBean implements Serializable {
         applications = new ArrayList();
         String username = contr.getUsername();
         if(contr.getRole(username).equals("applicant")){            
-            for(Application app : contr.getApplicationList(username)){
-                Person p = contr.getPerson(username);
-                Expertise e = contr.getExpertise(app.getExpertisID());
-                applications.add(new ApplicationViewDTO(app,p,e));
-            }
+            applications = contr.getApplicationList(username);
         }
         else{
-            for(Application app : contr.getApplicationList()){
-                Person p = contr.getPerson(app.getPersonID());
-                Expertise e = contr.getExpertise(app.getExpertisID());
-                applications.add(new ApplicationViewDTO(app,p,e));
-            }
+            applications = contr.getApplicationList();
         }
     }
 
@@ -78,7 +67,7 @@ public class ApplicationBean implements Serializable {
      *
      * @return
      */
-    public List<ApplicationViewDTO> getApplications() {
+    public List<Application> getApplications() {
         return applications;
     }
 
@@ -86,7 +75,7 @@ public class ApplicationBean implements Serializable {
      *
      * @return
      */
-    public ApplicationViewDTO getSelectedApplication() {
+    public Application getSelectedApplication() {
         return selectedApplication;
     }
 
@@ -94,7 +83,7 @@ public class ApplicationBean implements Serializable {
      *
      * @param selectedApplication
      */
-    public void setSelectedApplication(ApplicationViewDTO selectedApplication) {
+    public void setSelectedApplication(Application selectedApplication) {
         this.selectedApplication = selectedApplication;
     }
         

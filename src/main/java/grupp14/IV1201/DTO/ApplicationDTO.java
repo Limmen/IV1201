@@ -5,6 +5,8 @@
  */
 package grupp14.IV1201.DTO;
 
+import grupp14.IV1201.entities.Expertise;
+import grupp14.IV1201.entities.Person;
 import java.math.BigInteger;
 import java.sql.Date;
 
@@ -14,29 +16,29 @@ import java.sql.Date;
  */
 public class ApplicationDTO {
     private final float yearsOfExperience;
-    private final BigInteger personID;
-    private final BigInteger expertisID;
+    private final Person person;
+    private final Expertise expertise;
     private final java.sql.Date dateFrom;
     private final java.sql.Date dateTo;    
     
     /**
      *
      * @param yearsOfExperience
-     * @param personID
-     * @param expertisID
+     * @param person
      * @param dateFrom
+     * @param expertise
      * @param dateTo
      */
-    public ApplicationDTO(float yearsOfExperience, BigInteger personID, BigInteger expertisID, 
+    public ApplicationDTO(float yearsOfExperience, Person person, Expertise expertise, 
             java.sql.Date dateFrom, java.sql.Date dateTo)
     {
         this.yearsOfExperience = yearsOfExperience;
-        this.personID = personID;
-        this.expertisID = expertisID;
+        this.person = person;
+        this.expertise = expertise;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
     }
-    
+
     /**
      *
      * @return
@@ -49,16 +51,16 @@ public class ApplicationDTO {
      *
      * @return
      */
-    public BigInteger getPersonID() {
-        return personID;
+    public Person getPerson() {
+        return person;
     }
 
     /**
      *
      * @return
      */
-    public BigInteger getExpertisID() {
-        return expertisID;
+    public Expertise getExpertise() {
+        return expertise;
     }
 
     /**
@@ -76,5 +78,5 @@ public class ApplicationDTO {
     public Date getDateTo() {
         return dateTo;
     }
-    
+
 }

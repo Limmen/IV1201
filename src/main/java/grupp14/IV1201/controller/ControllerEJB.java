@@ -9,7 +9,6 @@ package grupp14.IV1201.controller;
 
 import com.lowagie.text.DocumentException;
 import grupp14.IV1201.DTO.ApplicationDTO;
-import grupp14.IV1201.DTO.ApplicationViewDTO;
 import grupp14.IV1201.DTO.PersonDTO;
 import grupp14.IV1201.entities.Application;
 import grupp14.IV1201.entities.Expertise;
@@ -17,10 +16,9 @@ import grupp14.IV1201.entities.Person;
 import grupp14.IV1201.model.ApplicationEJB;
 import grupp14.IV1201.model.HttpSessionBean;
 import grupp14.IV1201.model.LoginEJB;
-import grupp14.IV1201.model.PDFEJB;
+import grupp14.IV1201.util.PDFManager;
 import grupp14.IV1201.model.RegisterEJB;
 import java.io.IOException;
-import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import javax.ejb.EJB;
@@ -41,8 +39,6 @@ public class ControllerEJB
     private RegisterEJB register;
     @EJB
     private HttpSessionBean session;
-    @EJB
-    private PDFEJB pdf;
     @EJB
     private ApplicationEJB app;
     
@@ -154,32 +150,14 @@ public class ControllerEJB
     
     /**
      *
-     * @param dto
+     * @param application
      * @throws IOException
      * @throws DocumentException
      */
-    public void createPDF(ApplicationViewDTO dto) throws IOException, DocumentException{
-        pdf.createPDF(dto);
+    public void createPDF(Application application) throws IOException, DocumentException{
+        PDFManager.createPDF(application);
     }
-    
-    /**
-     *
-     * @param username
-     * @return
-     */
-    public BigInteger getUserId(String username){
-        return app.getUserId(username);
-    }
-    
-    /**
-     *
-     * @param expertise
-     * @return
-     */
-    public BigInteger getExpertiseId(String expertise){
-        return app.getExpertiseId(expertise);
-    }
-
+       
     /**
      *
      * @param username
@@ -191,19 +169,10 @@ public class ControllerEJB
 
     /**
      *
-     * @param id
+     * @param expertise
      * @return
      */
-    public Person getPerson(BigInteger id){
-        return app.getPerson(id);
-    }
-
-    /**
-     *
-     * @param id
-     * @return
-     */
-    public Expertise getExpertise(BigInteger id){
-        return app.getExpertise(id);
-    }
+    public Expertise getExpertise(String expertise){
+        return app.getExpertise(expertise);
+    }  
 }
