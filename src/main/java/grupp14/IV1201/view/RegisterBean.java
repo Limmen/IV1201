@@ -59,8 +59,8 @@ public class RegisterBean implements Serializable
      * 
      * This method will try to register the user if the input-data is sufficient.
      * 
-     * @throws IOException
-     * @throws NoSuchAlgorithmException
+     * @throws IOException thrown when the specified URL cannot be found for the redirection
+     * @throws NoSuchAlgorithmException thrown when the encryption phase in the model was invalid.
      */
     public void register() throws IOException, NoSuchAlgorithmException
     {

@@ -34,11 +34,12 @@ public class RecruitFilter implements Filter
      * The method will check the http-session-parameters and then redirect the user
      * depending on it's permissions.
      * 
-     * @param servletRequest
-     * @param servletResponse
-     * @param chain
-     * @throws IOException
-     * @throws ServletException
+     * @param servletRequest HTTP-request that the server have received
+     * @param servletResponse HTTP-response that the server will respond to the client.
+     * @param chain Can be used to invoke the next filter in the filter-chain.
+     * @throws IOException thrown when URL for redirection can not be found
+     * @throws ServletException A general exception that the servlet-container can throw in case of
+     * errors.
      */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse
@@ -61,8 +62,9 @@ public class RecruitFilter implements Filter
      * This method is called by the web container to indicate to the filter that
      * is it being placed into service.
      * 
-     * @param config
-     * @throws ServletException
+     * @param config optional initialization parameters
+     * @throws ServletException A general exception that the servlet-container can throw in case of
+     * errors.
      */
     @Override
     public void init(FilterConfig config) throws ServletException

@@ -31,7 +31,8 @@ public class ApplicationBean implements Serializable {
     private Application selectedApplication;
     
     /**
-     * 
+     * This method is called by the cdi-container after dependency-injection
+     * but before the class is put into service.
      */
     @PostConstruct
     public void init(){
@@ -41,7 +42,9 @@ public class ApplicationBean implements Serializable {
     }
     
     /**
-     * 
+     * This method will call the controller to fetch applications from the database.
+     * If it's a applicant requesting the application only the his/hers applications are retrieved.
+     * If it's a recruiter then all applications are retrieved.
      */
     public void fetchApplications(){
         applications = new ArrayList();
@@ -56,8 +59,9 @@ public class ApplicationBean implements Serializable {
 
     /**
      * Calls the controller to produce a PDF-file of the selected application
-     * @throws IOException
-     * @throws DocumentException
+     * @throws IOException IOException thrown when the specified URL cannot be found for the 
+     * redirection.
+     * @throws DocumentException Thrown when a error occurs in the creation of the pdf document.
      */
     public void createPDF() throws IOException, DocumentException{
         contr.createPDF(selectedApplication);

@@ -45,8 +45,8 @@ public class LoginBean
      * The method will validate the user's credentials and redirect to the
      * suitable page.
      *
-     * @throws NoSuchAlgorithmException
-     * @throws IOException
+     * @throws IOException thrown when the specified URL cannot be found for the redirection
+     * @throws NoSuchAlgorithmException thrown when the encryption phase in the model was invalid.
      */
     
     public void login() throws NoSuchAlgorithmException, IOException
@@ -71,7 +71,7 @@ public class LoginBean
     
     /**
      * This method will invalidate the user's session.
-     * @throws java.io.IOException
+     * @throws java.io.IOException thrown when the specified URL cannot be found for the redirection
      */
 
     public void logout() throws IOException

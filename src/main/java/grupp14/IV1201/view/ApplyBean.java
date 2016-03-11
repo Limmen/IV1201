@@ -66,8 +66,8 @@ public class ApplyBean implements Serializable
      * on the apply-page.
      *
      * The method will call the controller to place an application.
-     * @throws java.security.NoSuchAlgorithmException
-     * @throws java.io.IOException
+     * @throws IOException thrown when the specified URL cannot be found for the redirection
+     * @throws NoSuchAlgorithmException thrown when the encryption phase in the model was invalid.
      */
     public void apply() throws NoSuchAlgorithmException, IOException
     {

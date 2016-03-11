@@ -43,9 +43,10 @@ public class ControllerEJB
     private ApplicationEJB app;
     
     /**
-     *
-     * @param person
-     * @throws NoSuchAlgorithmException
+     * Registers a user.
+     * 
+     * @param person data-transfer-object containing specification of the person to register.
+     * @throws NoSuchAlgorithmException thrown when the encryption phase in the model was invalid.
      */
     public void registerUser(PersonDTO person) throws NoSuchAlgorithmException
     {
@@ -53,20 +54,12 @@ public class ControllerEJB
     }
 
     /**
-     *
-     * @param username
-     */
-    public void unRegisterUser(String username)
-    {
-        
-    }
-
-    /**
-     *
-     * @param username
-     * @param password
-     * @return
-     * @throws NoSuchAlgorithmException
+     * Validates a login.
+     * 
+     * @param username username to validate
+     * @param password password to validate
+     * @return true of login was successful otherwise false.
+     * @throws NoSuchAlgorithmException thrown when the encryption phase in the model was invalid.
      */
     public boolean validateLogin(String username, String password) throws NoSuchAlgorithmException 
     {
@@ -74,9 +67,10 @@ public class ControllerEJB
     }
 
     /**
-     *
-     * @param username
-     * @return
+     * Fetches the role by the username of a registered user.
+     * 
+     * @param username username of the user
+     * @return Role of the user. Null if the role cannot be found.
      */
     public String getRole(String username)
     {
@@ -84,9 +78,10 @@ public class ControllerEJB
     }
 
     /**
-     *
-     * @param username
-     * @return
+     * Validates a registration by checking if the username is available.
+     * 
+     * @param username username to check
+     * @return true if the username is free, otherwise false.
      */
     public boolean validateRegistration(String username)
     {
@@ -94,8 +89,8 @@ public class ControllerEJB
     }
 
     /**
-     *
-     * @return
+     * Returns the HTTP-session
+     * @return http-session
      */
     public HttpSession getSession()
     {
@@ -103,8 +98,9 @@ public class ControllerEJB
     }
 
     /**
-     *
-     * @return
+     * Returns the username of the current session.
+     * 
+     * @return Username
      */
     public String getUsername()
     {
@@ -112,8 +108,8 @@ public class ControllerEJB
     }
 
     /**
-     *
-     * @return
+     * Fetches the list of expertises
+     * @return list of expertises
      */
     public List<Expertise> getExpertiseList()
     {
@@ -121,8 +117,8 @@ public class ControllerEJB
     }
 
     /**
-     *
-     * @return
+     * Fetches the list of applications
+     * @return list of applications
      */
     public List<Application> getApplicationList()
     {
@@ -130,18 +126,21 @@ public class ControllerEJB
     }
 
     /**
-     *
-     * @param username
-     * @return
+     * Fethes a list of applications for a certain user.
+     * 
+     * @param username username of the user
+     * @return list of applications
      */
     public List<Application> getApplicationList(String username)
     {
         return app.getApplicationList(username);
     }
     /**
-     *
-     * @param application
-     * @throws java.security.NoSuchAlgorithmException
+     * Crreates an application.
+     * 
+     * @param application data-transfer-object of application details.
+     * @throws java.security.NoSuchAlgorithmException thrown when the encryption phase in the model 
+     * was invalid.
      */
     public void apply(ApplicationDTO application) throws NoSuchAlgorithmException
     {
@@ -149,28 +148,32 @@ public class ControllerEJB
     }
     
     /**
-     *
-     * @param application
-     * @throws IOException
-     * @throws DocumentException
+     * Creates a PDF-file of some application.
+     * 
+     * @param application application to create the pdf-file from.
+     * @throws IOException IOException thrown when the specified URL cannot be found for the 
+     * redirection.
+     * @throws DocumentException Thrown when a error occurs in the creation of the pdf document.
      */
     public void createPDF(Application application) throws IOException, DocumentException{
         PDFManager.createPDF(application);
     }
        
     /**
-     *
-     * @param username
-     * @return
+     * Fetches a person by username.
+     * 
+     * @param username username of the person
+     * @return person
      */
     public Person getPerson(String username){
         return app.getPerson(username);
     }
 
     /**
-     *
-     * @param expertise
-     * @return
+     * Fetches a expertise by the name.
+     * 
+     * @param expertise expertise name
+     * @return expertise
      */
     public Expertise getExpertise(String expertise){
         return app.getExpertise(expertise);
