@@ -8,14 +8,13 @@
 package grupp14.IV1201.view;
 
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
 
 /**
  * This class contains acceptance-tests for the application.
@@ -46,7 +45,7 @@ public class ViewTest
     /**
      * This test need to be run after deployment to application server (@Ignore)
      */    
-    //@Ignore
+    @Ignore
     @Test
     public void testView()
     {

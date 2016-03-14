@@ -17,7 +17,7 @@ import javax.persistence.TypedQuery;
 import javax.validation.constraints.Size;
 
 /**
- *
+ * EnterpriseBean that handles login-transactions.
  * @author marcelmattsson
  */
 @Stateless
@@ -32,7 +32,6 @@ public class LoginEJB
         this.em = em;
     }        
     /**
-
      * Validates login from user.
      * 
      * Uses the entity manager to call the .createNamedQuery method to find a person by username.
@@ -42,12 +41,12 @@ public class LoginEJB
      * 
      *
 
-     * @param username
-     * @param password
-     * @return
-     * @throws java.security.NoSuchAlgorithmException
-     * @throws NoResultException
-     * @throws NonUniqueResultException
+     * @param username username of the login-request
+     * @param password password of the login request
+     * @return true if successful login, otherwise false.
+     * @throws java.security.NoSuchAlgorithmException thrown when the encryption phase is invalid.
+     * @throws NoResultException thrown when no user was found with the specified username
+     * @throws NonUniqueResultException thrown when multiple users with the same username was found.
      */
     public boolean validateLogin(@Size(min=3, max=16) String username,
             @Size(min=6, max=30) String password)
@@ -69,10 +68,10 @@ public class LoginEJB
      * Uses the entity manager to call the .createNamedQuery method to find a person by username. 
      * If the user is found it returns its role. If an exception is caught it will return false.
      * 
-     * @param username
-     * @return
-     * @throws NoResultException
-     * @throws NonUniqueResultException
+     * @param username username of the person in question
+     * @return Role of the person
+     * @throws NoResultException thrown when no user was found with the specified username
+     * @throws NonUniqueResultException thrown when multiple users with the same username was found.
      */
     public String getRole(@Size(min=3, max=16) String username)
     {

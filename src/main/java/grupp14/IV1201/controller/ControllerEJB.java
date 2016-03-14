@@ -26,7 +26,7 @@ import javax.ejb.Stateless;
 import javax.servlet.http.HttpSession;
 
 /**
- *
+ * Application controller. Encapsulates system functionality into an API.
  * @author kim
  */
 @Stateless
@@ -136,7 +136,7 @@ public class ControllerEJB
         return app.getApplicationList(username);
     }
     /**
-     * Crreates an application.
+     * Creates an application.
      * 
      * @param application data-transfer-object of application details.
      * @throws java.security.NoSuchAlgorithmException thrown when the encryption phase in the model 

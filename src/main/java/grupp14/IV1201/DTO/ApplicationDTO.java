@@ -7,7 +7,6 @@ package grupp14.IV1201.DTO;
 
 import grupp14.IV1201.entities.Expertise;
 import grupp14.IV1201.entities.Person;
-import java.math.BigInteger;
 import java.sql.Date;
 
 /**

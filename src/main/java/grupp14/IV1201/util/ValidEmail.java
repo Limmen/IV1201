@@ -34,20 +34,20 @@ public @interface ValidEmail
     
     /**
      * Message shown when user enters invalid data.
-     * @return
+     * @return the error-message when the validation contract is broken
      */
     String message() default "The email you entered is not valid";
     
     /**
      * Allows specifikation of validation groups to which this constraint belongs.
-     * @return
+     * @return validation groups
      */
     Class<?>[] groups() default {};
     
     /**
      * Can be used by clients of the API to asign custom payload objects to a constraint.
      *
-     * @return
+     * @return custom payloads
      */
     Class<? extends Payload>[] payload() default {};
 }

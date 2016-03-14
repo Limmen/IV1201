@@ -91,8 +91,8 @@ public class LoginBean
     }
     
     /**
-     *
-     * @return
+     * getUsername
+     * @return username
      */
     public String getUsername()
     {
@@ -100,8 +100,8 @@ public class LoginBean
     }
     
     /**
-     *
-     * @param loginUsername
+     * Updates username
+     * @param loginUsername new username
      */
     public void setUsername(String loginUsername)
     {
@@ -109,8 +109,8 @@ public class LoginBean
     }
     
     /**
-     *
-     * @return
+     * getPassword
+     * @return password
      */
     public String getPassword()
     {
@@ -118,8 +118,8 @@ public class LoginBean
     }
     
     /**
-     *
-     * @param loginPassword
+     * Updates password
+     * @param loginPassword new password
      */
     public void setPassword(String loginPassword)
     {

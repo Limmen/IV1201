@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- *
+ * EnterpriseBean that handles registration transactions.
  * @author marcelmattsson
  */
 @Stateless
@@ -38,8 +38,8 @@ public class RegisterEJB
      * Uses entity manager to call the .persist method to add a new user to the DB with the help of
      * a PersonDTO.
      * 
-     * @param p
-     * @throws java.security.NoSuchAlgorithmException
+     * @param p data-transfer-object of Person details.
+     * @throws java.security.NoSuchAlgorithmException thrown when the encryption phase is invalid.
      * 
      */    
     public void register(@NotNull PersonDTO p) throws NoSuchAlgorithmException
@@ -54,8 +54,8 @@ public class RegisterEJB
      * DB. If the username does not exist in the DB it will return true. Otherwise it will return
      * false
      * 
-     * @param username
-     * @return
+     * @param username username of the person to lookup
+     * @return true if the username exists, otherwise false.
      */
     public boolean validateRegistration(@Size(min=3, max=16) String username)
     {

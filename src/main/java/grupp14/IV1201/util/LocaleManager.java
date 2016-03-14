@@ -24,7 +24,10 @@ public class LocaleManager implements Serializable {
     private Locale locale;
     
     /**
-     *
+     * This method is called by the cdi-container after dependency-injection
+     * but before the class is put into service.
+     * 
+     * Initializes the locale.
      */
     @PostConstruct
     public void init(){
@@ -40,8 +43,8 @@ public class LocaleManager implements Serializable {
     }
     
     /**
-     *
-     * @return
+     * getLocale
+     * @return the current locale
      */
     public Locale getLocale()
     {

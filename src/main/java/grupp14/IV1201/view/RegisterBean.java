@@ -86,9 +86,10 @@ public class RegisterBean implements Serializable
         password="";
         username ="";
     }
-        /**
-     *
-     * @return
+    
+    /**
+     * getName
+     * @return name of the person to register
      */
     public String getName() 
     {
@@ -96,8 +97,8 @@ public class RegisterBean implements Serializable
     }
     
     /**
-     *
-     * @param name
+     * Updates name
+     * @param name name of the person to register
      */
     public void setName(String name)
     {
@@ -105,8 +106,8 @@ public class RegisterBean implements Serializable
     }
     
     /**
-     *
-     * @return
+     * getSurname
+     * @return surname of the person to register
      */
     public String getSurname()
     {
@@ -114,7 +115,7 @@ public class RegisterBean implements Serializable
     }
     
     /**
-     *
+     * Updates the surname of the person to register
      * @param surname
      */
     public void setSurname(String surname)
@@ -123,8 +124,8 @@ public class RegisterBean implements Serializable
     }
     
     /**
-     *
-     * @return
+     * getSsn
+     * @return ssn of the person to register
      */
     public String getSsn()
     {
@@ -132,8 +133,8 @@ public class RegisterBean implements Serializable
     }
     
     /**
-     *
-     * @param ssn
+     * Updates the ssn of the person to register
+     * @param ssn of the person to register
      */
     public void setSsn(String ssn)
     {
@@ -141,8 +142,8 @@ public class RegisterBean implements Serializable
     }
     
     /**
-     *
-     * @return
+     * getEmail
+     * @return email of the person to register
      */
     public String getEmail()
     {
@@ -150,8 +151,8 @@ public class RegisterBean implements Serializable
     }
     
     /**
-     *
-     * @param mail
+     * Updates the email of the person to register
+     * @param mail of the person to register
      */
     public void setEmail(String mail)
     {
@@ -159,8 +160,8 @@ public class RegisterBean implements Serializable
     }
     
     /**
-     *
-     * @return
+     * getUsername
+     * @return username of the person to register
      */
     public String getUsername()
     {
@@ -168,7 +169,7 @@ public class RegisterBean implements Serializable
     }
     
     /**
-     *
+     * Updates the username of the person to register
      * @param username
      */
     public void setUsername(String username)
@@ -177,8 +178,8 @@ public class RegisterBean implements Serializable
     }
     
     /**
-     *
-     * @return
+     * getPassword
+     * @return password of the person to register
      */
     public String getPassword() 
     {
@@ -186,8 +187,8 @@ public class RegisterBean implements Serializable
     }
     
     /**
-     *
-     * @param password
+     * Updates the password of the person to register
+     * @param password of the person to register
      */
     public void setPassword(String password)
     {
@@ -195,8 +196,8 @@ public class RegisterBean implements Serializable
     }
     
     /**
-     *
-     * @return
+     * getRoll_id
+     * @return roll_id of the person to register
      */
     public String getRoll_id()
     {
@@ -204,8 +205,8 @@ public class RegisterBean implements Serializable
     }    
 
     /**
-     *
-     * @param roll_id
+     * Updates the roll_id of the person to register 
+     * @param roll_id of the person to register
      */
     public void setRoll_id(String roll_id)
     {

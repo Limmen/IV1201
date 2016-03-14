@@ -1,8 +1,10 @@
 /*
-* Course project - IV1201 Design of Global Applications
-* Royal Institute of Technology
-* 2015 (c) Kim Hammar Alexander Lundh Marcel Mattsson
-*/
+ * Classname: LocaleManager
+ * Version: 0.1
+ * Date: 14-3-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+ */
+
 package grupp14.IV1201.util;
 
 import com.lowagie.text.DocumentException;
@@ -14,16 +16,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
 /**
- *
+ * This class handles creation of PDF-files generated from specific applications.
  * @author kim
  */
 public class PDFManager {
     
     /**
      * Produces a PDF-file http response of a application.
-     * @param application
-     * @throws IOException
-     * @throws DocumentException
+     * @param application Application Entity that is the source of the pdf-file.
+     * @throws IOException thrown when the specified URL cannot be found for the 
+     * redirection.
+     * @throws DocumentException Thrown when a error occurs in the creation of the pdf document.
      */
     public static void createPDF(Application application) throws IOException, DocumentException
     {

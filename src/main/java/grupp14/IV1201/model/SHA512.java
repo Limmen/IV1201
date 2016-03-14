@@ -11,18 +11,19 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- *
+ * Class that handles hashing of passwords.
  * @author kim
  */
 public class SHA512
 {
 
     /**
-     * 
+     * Generates a hash of a specified password-string.
      *
-     * @param pw
-     * @return
-     * @throws NoSuchAlgorithmException
+     * @param pw password-string
+     * @return hash-value
+     * @throws NoSuchAlgorithmException This exception is thrown when a particular cryptographic
+     * algorithm is requested but is not available in the environment.
      */
     public String encrypt(String pw) throws NoSuchAlgorithmException
     {

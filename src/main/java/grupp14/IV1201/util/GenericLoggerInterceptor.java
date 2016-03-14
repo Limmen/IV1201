@@ -34,9 +34,9 @@ public class GenericLoggerInterceptor
     /**
      * This method is called when the annotated method is invoked.
      *
-     * @param ctx
-     * @return
-     * @throws Exception
+     * @param ctx context information about the intercepted invocation.
+     * @return the invocated method.
+     * @throws Exception if a exception is called from the intercepted method.
      */
     @AroundInvoke
     public Object logInvocation(InvocationContext ctx) throws Exception

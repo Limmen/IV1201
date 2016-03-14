@@ -37,7 +37,7 @@ import javax.validation.constraints.Future;
 public class ApplyBean implements Serializable
 {
     @EJB
-            ControllerEJB contr;
+    ControllerEJB contr;
     private List<String> expertiseList;
     private String expertise;
     private Date availableFrom = new Date();
@@ -108,8 +108,8 @@ public class ApplyBean implements Serializable
     }
     
     /**
-     *
-     * @return
+     * getExpertiseList
+     * @return list of expertises
      */
     public List<String> getExpertiseList()
     {
@@ -117,17 +117,8 @@ public class ApplyBean implements Serializable
     }
     
     /**
-     *
-     * @param expertiseList
-     */
-    public void setExpertiseList(List<String> expertiseList)
-    {
-        this.expertiseList = expertiseList;
-    }
-    
-    /**
-     *
-     * @return
+     * getExpertise
+     * @return the selected expertise
      */
     public String getExpertise()
     {
@@ -135,8 +126,8 @@ public class ApplyBean implements Serializable
     }
     
     /**
-     *
-     * @param expertise
+     * updates the selected expertise
+     * @param expertise  the new selected expertise
      */
     public void setExpertise(String expertise)
     {
@@ -144,8 +135,8 @@ public class ApplyBean implements Serializable
     }
     
     /**
-     *
-     * @return
+     * getAvailableFrom date
+     * @return date from when the applicant is available
      */
     public Date getAvailableFrom()
     {
@@ -153,8 +144,8 @@ public class ApplyBean implements Serializable
     }
     
     /**
-     *
-     * @param AvailableFrom
+     * Updates the avilable from date
+     * @param AvailableFrom date from when the applicant is available
      */
     public void setAvailableFrom(Date AvailableFrom)
     {
@@ -162,8 +153,8 @@ public class ApplyBean implements Serializable
     }
     
     /**
-     *
-     * @return
+     * getAvailableTo date
+     * @return date to when the applicant is available
      */
     public Date getAvailableTo()
     {
@@ -171,8 +162,8 @@ public class ApplyBean implements Serializable
     }
     
     /**
-     *
-     * @param availableTo
+     * Updates the available to date
+     * @param availableTo date to when the applicant is available
      */
     public void setAvailableTo(Date availableTo)
     {
@@ -180,8 +171,8 @@ public class ApplyBean implements Serializable
     }
     
     /**
-     *
-     * @return
+     * getyears
+     * @return years of experience
      */
     public float getYears()
     {
@@ -189,8 +180,8 @@ public class ApplyBean implements Serializable
     }
     
     /**
-     *
-     * @param years
+     * Updates years of experience
+     * @param years years of experience.
      */
     public void setYears(float years)
     {

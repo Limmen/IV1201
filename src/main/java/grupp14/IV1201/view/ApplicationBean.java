@@ -1,8 +1,10 @@
 /*
- * Course project - IV1201 Design of Global Applications
- * Royal Institute of Technology
- * 2015 (c) Kim Hammar Alexander Lundh Marcel Mattsson
- */
+* Classname: ApplicationBean
+* Version: 0.1
+* Date: 14-3-2016
+* Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+*/ 
+
 package grupp14.IV1201.view;
 
 import com.lowagie.text.DocumentException;
@@ -68,24 +70,24 @@ public class ApplicationBean implements Serializable {
     }
 
     /**
-     *
-     * @return
+     * getApplications
+     * @return list of applications
      */
     public List<Application> getApplications() {
         return applications;
     }
 
     /**
-     *
-     * @return
+     * getSelectedApplication
+     * @return the application that the user have selected currently
      */
     public Application getSelectedApplication() {
         return selectedApplication;
     }
 
     /**
-     *
-     * @param selectedApplication
+     * setSelectedApplication
+     * @param selectedApplication updates the selected application.
      */
     public void setSelectedApplication(Application selectedApplication) {
         this.selectedApplication = selectedApplication;
