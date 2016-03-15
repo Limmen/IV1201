@@ -18,9 +18,11 @@ import grupp14.IV1201.model.HttpSessionBean;
 import grupp14.IV1201.model.LoginEJB;
 import grupp14.IV1201.util.PDFManager;
 import grupp14.IV1201.model.RegisterEJB;
+import grupp14.IV1201.util.LogManager;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpSession;
@@ -41,6 +43,17 @@ public class ControllerEJB
     private HttpSessionBean session;
     @EJB
     private ApplicationEJB app;
+    private LogManager logManager;
+    
+    /**
+     * This method is called by the cdi-container after dependency-injection
+     * but before the class is put into service.
+     */
+    @PostConstruct
+    public void init()
+    {
+        logManager = new LogManager();
+    }
     
     /**
      * Registers a user.

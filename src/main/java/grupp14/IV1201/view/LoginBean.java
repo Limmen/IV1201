@@ -9,13 +9,10 @@ package grupp14.IV1201.view;
 
 import grupp14.IV1201.controller.ControllerEJB;
 import grupp14.IV1201.util.GenericLogger;
-import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.Size;
@@ -38,6 +35,10 @@ public class LoginBean
     @Size(min=6, max=30, message="Password needs to be between"
             + " 6 and 16 characters long")
     private String password;
+    private boolean applicant = false;
+    private boolean recruit = false;
+    private boolean failed = false;
+    private boolean logout = false;
     
     /**
      * This method is called when the user clicks the "login" button.
@@ -45,49 +46,59 @@ public class LoginBean
      * The method will validate the user's credentials and redirect to the
      * suitable page.
      *
-     * @throws IOException thrown when the specified URL cannot be found for the redirection
      * @throws NoSuchAlgorithmException thrown when the encryption phase in the model was invalid.
      */
     
-    public void login() throws NoSuchAlgorithmException, IOException
+    public void login() throws NoSuchAlgorithmException
     {
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         boolean valid = contr.validateLogin(username, password);
         String role = contr.getRole(username);
         if (valid) {
             HttpSession session = contr.getSession();
             session.setAttribute("username", username);
             session.setAttribute("role", role);
-            if(role.equals("applicant"))
-                externalContext.redirect(externalContext.getRequestContextPath()
-                        + "/applicant/index.xhtml");
-            else if(role.equals("recruit"))
-                externalContext.redirect(externalContext.getRequestContextPath()
-                        + "/recruit/index.xhtml");
+            navigation(role);
         } else {
-            failedLogin(externalContext);
+            failedLogin();
         }
     }
     
     /**
      * This method will invalidate the user's session.
-     * @throws java.io.IOException thrown when the specified URL cannot be found for the redirection
      */
-
-    public void logout() throws IOException
+    public void logout()
     {
         HttpSession session = contr.getSession();
         session.invalidate();
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        externalContext.redirect
-                (externalContext.getRequestContextPath() + "/index.xhtml");
-        
+        logout = true;
+        failed = false;
+        recruit = false;
+        applicant = false;
     }
-    private void failedLogin(ExternalContext externalContext)throws IOException
+    
+    private void failedLogin()
     {
         java.util.logging.Logger.getLogger("grupp14.IV1201").log(Level.INFO, "FAILED LOGIN ATTEMPT");
-        externalContext.redirect
-                (externalContext.getRequestContextPath() + "/loginerror.xhtml");
+        failed = true;
+        recruit = false;
+        applicant = false;
+        logout = false;
+    }
+    
+    private void navigation(String role)
+    {
+        if(role.equals("applicant")){
+            applicant = true;
+            recruit = false;
+            failed = false;
+            logout = false;
+        }
+        if(role.equals("recruit")){
+            recruit = true;
+            applicant = false;
+            failed = false;
+            logout = false;
+        }
     }
     
     /**
@@ -125,4 +136,42 @@ public class LoginBean
     {
         this.password = loginPassword;
     }
+
+    /**
+     * isApplicant 
+     * @return boolean wether the login was a applicant
+     */
+    public boolean isApplicant() 
+    {
+        return applicant;
+    }
+
+    /**
+     * isRecruit
+     * @return boolean wether the login was a recruit
+     */
+    public boolean isRecruit() 
+    {
+        return recruit;
+    }
+
+    /**
+     * isFailed
+     * @return boolean wether the login was failed
+     */
+    public boolean isFailed() 
+    {
+        return failed;
+    }
+
+    /**
+     * isLogout
+     * @return boolean if the user clicked logout
+     */
+    public boolean isLogout() 
+    {
+        return logout;
+    }
+    
+    
 }

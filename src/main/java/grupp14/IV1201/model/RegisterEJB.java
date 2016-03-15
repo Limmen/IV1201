@@ -9,6 +9,7 @@ package grupp14.IV1201.model;
 
 import grupp14.IV1201.DTO.PersonDTO;
 import grupp14.IV1201.entities.Person;
+import grupp14.IV1201.util.LogManager;
 import java.security.NoSuchAlgorithmException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -26,6 +27,7 @@ public class RegisterEJB
 {
     @PersistenceContext(unitName = "grupp14_IV1201_war_1.0-SNAPSHOTPU")
     private EntityManager em;
+    private LogManager logManager;
 
     void setEm(EntityManager em) 
     {
@@ -62,5 +64,14 @@ public class RegisterEJB
         TypedQuery<Person> query = em.createNamedQuery("Person.findByUserName", Person.class);
         query.setParameter("username", username);
         return query.getResultList().isEmpty(); //check if username is taken.
+    }
+    
+    /**
+     * Sets the logManager
+     * @param logManager logmanager that is used to log application exceptions
+     */
+    public void setLogManager(LogManager logManager)
+    {
+        this.logManager = logManager;
     }
 }

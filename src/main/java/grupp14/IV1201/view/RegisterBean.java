@@ -11,13 +11,10 @@ import grupp14.IV1201.DTO.PersonDTO;
 import grupp14.IV1201.controller.ControllerEJB;
 import grupp14.IV1201.util.GenericLogger;
 import grupp14.IV1201.util.ValidEmail;
-import java.io.IOException;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.validation.constraints.Size;
 
@@ -45,6 +42,8 @@ public class RegisterBean implements Serializable
             + " 6 and 16 characters long")
     private String password;
     private String roll_id;
+    private boolean registerSuccess = false;
+    private boolean registerError = false;
 
     /**
      * Class constructor
@@ -59,23 +58,19 @@ public class RegisterBean implements Serializable
      * 
      * This method will try to register the user if the input-data is sufficient.
      * 
-     * @throws IOException thrown when the specified URL cannot be found for the redirection
      * @throws NoSuchAlgorithmException thrown when the encryption phase in the model was invalid.
      */
-    public void register() throws IOException, NoSuchAlgorithmException
+    public void register() throws NoSuchAlgorithmException
     {
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         PersonDTO person = new PersonDTO(name,surname,ssn,email,username,
                 password, "applicant");
         boolean valid = contr.validateRegistration(username);
         if (valid) {
             contr.registerUser(person);
-            externalContext.redirect(externalContext.getRequestContextPath()
-                    + "/index.xhtml");
+            registerSuccess = true;
         }
         else
-            externalContext.redirect(externalContext.getRequestContextPath()
-                   + "/registererror.xhtml");
+            registerError = true;
     }
     
     private void clear(){
@@ -212,5 +207,22 @@ public class RegisterBean implements Serializable
     {
         this.roll_id = roll_id;
     }
+
+    /**
+     * isRegisterSuccess
+     * @return boolean wether the most recent registration was successful or not
+     */
+    public boolean isRegisterSuccess() {
+        return registerSuccess;
+    }
+
+    /**
+     * isRegisterError
+     * @return boolean wether the most recent registration was failed or not
+     */
+    public boolean isRegisterError() {
+        return registerError;
+    }
+    
     
 }

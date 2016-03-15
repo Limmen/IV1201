@@ -11,7 +11,6 @@ import grupp14.IV1201.DTO.ApplicationDTO;
 import grupp14.IV1201.controller.ControllerEJB;
 import grupp14.IV1201.entities.Expertise;
 import grupp14.IV1201.entities.Person;
-import java.io.IOException;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -21,8 +20,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.Future;
 
@@ -46,6 +43,9 @@ public class ApplyBean implements Serializable
     private Date availableTo = new Date();
     @DecimalMax(value="200")
     private float years = 0;
+    private boolean applicationSuccess = false;
+    private boolean applicationFailed = false;
+    
     
     /**
      * This method is called by the cdi-container after dependency-injection
@@ -66,30 +66,30 @@ public class ApplyBean implements Serializable
      * on the apply-page.
      *
      * The method will call the controller to place an application.
-     * @throws IOException thrown when the specified URL cannot be found for the redirection
      * @throws NoSuchAlgorithmException thrown when the encryption phase in the model was invalid.
      */
-    public void apply() throws NoSuchAlgorithmException, IOException
+    public void apply() throws NoSuchAlgorithmException
     {
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         String username = contr.getUsername();
         if(username != null){
             Person person = contr.getPerson(username);
             Expertise exp = contr.getExpertise(expertise);
-            if(person == null || exp == null)
-                externalContext.redirect(externalContext.getRequestContextPath()
-                        + "/applicant/applicationerror.xhtml");
+            if(person == null || exp == null){
+                applicationFailed = true;
+                applicationSuccess = false;
+            }
+            
             else{
                 ApplicationDTO app = new ApplicationDTO(years,person, exp,
                         new java.sql.Date(availableFrom.getTime()),
                         new java.sql.Date(availableTo.getTime()));
                 try{
                     contr.apply(app);
-                    externalContext.redirect(externalContext.getRequestContextPath()
-                            + "/applicant/applicationsuccess.xhtml");
+                    applicationSuccess = true;
+                    applicationFailed = false;
                 }catch(Exception e){
-                    externalContext.redirect(externalContext.getRequestContextPath()
-                            + "/applicant/applicationerror.xhtml");
+                    applicationFailed = true;
+                    applicationSuccess = false;
                 }
             }
         }
@@ -187,4 +187,22 @@ public class ApplyBean implements Serializable
     {
         this.years = years;
     }
+
+    /**
+     * isApplicationSuccess
+     * @return boolean wether the application was successful
+     */
+    public boolean isApplicationSuccess() {
+        return applicationSuccess;
+    }
+
+    /**
+     * isApplicationFailed
+     * @return boolean wether the application failed
+     */
+    public boolean isApplicationFailed() {
+        return applicationFailed;
+    }
+    
+    
 }

@@ -10,8 +10,10 @@ import grupp14.IV1201.DTO.ApplicationDTO;
 import grupp14.IV1201.entities.Application;
 import grupp14.IV1201.entities.Expertise;
 import grupp14.IV1201.entities.Person;
+import grupp14.IV1201.util.LogManager;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.logging.Level;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -29,6 +31,7 @@ public class ApplicationEJB {
     
     @PersistenceContext(unitName = "grupp14_IV1201_war_1.0-SNAPSHOTPU")
     private EntityManager em;
+    private LogManager logManager;
     
     void setEm(EntityManager em)
     {
@@ -55,6 +58,7 @@ public class ApplicationEJB {
         try{
             return query.getSingleResult();
         }catch (NoResultException | NonUniqueResultException e) {
+            logManager.log("GET PERSON REQUEST FOR NON-EXISTING USERNAME", Level.WARNING);
             return null;
         }
     }
@@ -69,6 +73,7 @@ public class ApplicationEJB {
         try{
             return query.getSingleResult();
         }catch (NoResultException | NonUniqueResultException e) {
+            logManager.log("GET EXPERTISE REQUEST FOR NON-EXISTING NAME", Level.WARNING);
             return null;
         }
     }
@@ -101,5 +106,14 @@ public class ApplicationEJB {
         TypedQuery<Application> query = em.createNamedQuery("Application.findByUser", Application.class);        
         query.setParameter("person", getPerson(username));        
         return (List<Application>) query.getResultList();
+    }
+
+    /**
+     * Sets the logManager
+     * @param logManager logmanager that is used to log application exceptions
+     */
+    public void setLogManager(LogManager logManager)
+    {
+        this.logManager = logManager;
     }
 }

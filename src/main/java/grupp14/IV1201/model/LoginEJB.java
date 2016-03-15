@@ -7,7 +7,9 @@
 package grupp14.IV1201.model;
 
 import grupp14.IV1201.entities.Person;
+import grupp14.IV1201.util.LogManager;
 import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -26,6 +28,7 @@ public class LoginEJB
     @PersistenceContext(unitName = "grupp14_IV1201_war_1.0-SNAPSHOTPU")
     private EntityManager em;
     private final SHA512 sha = new SHA512();
+    private LogManager logManager;
 
     void setEm(EntityManager em) 
     {
@@ -58,6 +61,7 @@ public class LoginEJB
             Person p = query.getSingleResult();
             return p.getPassword().equals(sha.encrypt(password));
         } catch (NoResultException | NonUniqueResultException e) {
+            logManager.log("LOGIN VALIDATION FAILED", Level.WARNING);
             return false;
         }
     }
@@ -81,7 +85,17 @@ public class LoginEJB
             Person p = query.getSingleResult();
             return p.getRoll_id();
         } catch (NoResultException | NonUniqueResultException e) {
+            logManager.log("GET ROLE REQUEST FOR NON-EXISTING USERNAME", Level.WARNING);
             return "";
         }
+    }
+    
+    /**
+     * Sets the logManager
+     * @param logManager logmanager that is used to log application exceptions
+     */
+    public void setLogManager(LogManager logManager)
+    {
+        this.logManager = logManager;
     }
 }
