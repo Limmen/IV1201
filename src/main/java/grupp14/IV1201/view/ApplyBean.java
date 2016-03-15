@@ -108,13 +108,8 @@ public class ApplyBean implements Serializable
     }
     
     /**
-<<<<<<< HEAD
-     * 
-     * @return a list of expertises from the given ApplyBean
-=======
      * getExpertiseList
      * @return list of expertises
->>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public List<String> getExpertiseList()
     {
@@ -122,8 +117,6 @@ public class ApplyBean implements Serializable
     }
     
     /**
-<<<<<<< HEAD
-     *
      * @param expertiseList a list of expertises
      */
     public void setExpertiseList(List<String> expertiseList)
@@ -132,12 +125,8 @@ public class ApplyBean implements Serializable
     }
     
     /**
-     *
-     * @return a expertise from the given ApplyBean
-=======
      * getExpertise
      * @return the selected expertise
->>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public String getExpertise()
     {
@@ -145,13 +134,8 @@ public class ApplyBean implements Serializable
     }
     
     /**
-<<<<<<< HEAD
-     *
-     * @param expertise a expertise
-=======
      * updates the selected expertise
      * @param expertise  the new selected expertise
->>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public void setExpertise(String expertise)
     {
@@ -159,13 +143,8 @@ public class ApplyBean implements Serializable
     }
     
     /**
-<<<<<<< HEAD
-     *
-     * @return a availabeFrom Date from the given ApplyBean
-=======
      * getAvailableFrom date
      * @return date from when the applicant is available
->>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public Date getAvailableFrom()
     {
@@ -173,13 +152,10 @@ public class ApplyBean implements Serializable
     }
     
     /**
-<<<<<<< HEAD
-     *
      * @param AvailableFrom a availableFrom Date 
-=======
+     *
      * Updates the avilable from date
      * @param AvailableFrom date from when the applicant is available
->>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public void setAvailableFrom(Date availableFrom)
     {
@@ -187,13 +163,9 @@ public class ApplyBean implements Serializable
     }
     
     /**
-<<<<<<< HEAD
-     *
      * @return availabeTo Date from the given ApplyBean
-=======
      * getAvailableTo date
      * @return date to when the applicant is available
->>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public Date getAvailableTo()
     {
@@ -201,13 +173,8 @@ public class ApplyBean implements Serializable
     }
     
     /**
-<<<<<<< HEAD
-     *
-     * @param availableTo a availableTo Date 
-=======
      * Updates the available to date
      * @param availableTo date to when the applicant is available
->>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public void setAvailableTo(Date availableTo)
     {
@@ -215,13 +182,8 @@ public class ApplyBean implements Serializable
     }
     
     /**
-<<<<<<< HEAD
-     *
-     * @return years from the given ApplyBean
-=======
-     * getyears
+     * getYears
      * @return years of experience
->>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public float getYears()
     {
@@ -229,13 +191,8 @@ public class ApplyBean implements Serializable
     }
     
     /**
-<<<<<<< HEAD
-     *
-     * @param years 
-=======
      * Updates years of experience
      * @param years years of experience.
->>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public void setYears(float years)
     {
