@@ -55,7 +55,8 @@ public class ApplicantFilter implements Filter
      * This method is called by the web container to indicate to the filter that
      * is it being placed into service.
      * 
-     * @param config
+     * @param config a filter configuration object used by a servlet container to pass information 
+     * to a filter during initialization.
      * @throws ServletException
      */
     @Override

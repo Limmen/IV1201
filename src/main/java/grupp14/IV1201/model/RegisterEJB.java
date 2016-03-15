@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author marcelmattsson
+ * @author marcelmattsson, alexander
  */
 @Stateless
 public class RegisterEJB

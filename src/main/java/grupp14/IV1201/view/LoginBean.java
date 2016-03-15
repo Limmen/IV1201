@@ -92,7 +92,7 @@ public class LoginBean
     
     /**
      *
-     * @return
+     * @return username from the given LoginBean
      */
     public String getUsername()
     {
@@ -101,7 +101,7 @@ public class LoginBean
     
     /**
      *
-     * @param loginUsername
+     * @param loginUsername a username that has been set by the user from login.xhtml
      */
     public void setUsername(String loginUsername)
     {
@@ -110,7 +110,7 @@ public class LoginBean
     
     /**
      *
-     * @return
+     * @return password from the given LoginBean
      */
     public String getPassword()
     {
@@ -119,7 +119,7 @@ public class LoginBean
     
     /**
      *
-     * @param loginPassword
+     * @param loginPassword a password that has been set by the user from login.xhtml
      */
     public void setPassword(String loginPassword)
     {

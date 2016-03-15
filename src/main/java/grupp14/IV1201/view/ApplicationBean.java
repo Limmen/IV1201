@@ -76,7 +76,7 @@ public class ApplicationBean implements Serializable {
 
     /**
      *
-     * @return
+     * @return a list of all applications from the given ApplicationBean
      */
     public List<ApplicationViewDTO> getApplications() {
         return applications;
@@ -84,7 +84,7 @@ public class ApplicationBean implements Serializable {
 
     /**
      *
-     * @return
+     * @return a selected application from the given ApplicationBean
      */
     public ApplicationViewDTO getSelectedApplication() {
         return selectedApplication;
@@ -92,7 +92,7 @@ public class ApplicationBean implements Serializable {
 
     /**
      *
-     * @param selectedApplication
+     * @param selectedApplication a selected application
      */
     public void setSelectedApplication(ApplicationViewDTO selectedApplication) {
         this.selectedApplication = selectedApplication;

@@ -86,9 +86,9 @@ public class RegisterBean implements Serializable
         password="";
         username ="";
     }
-        /**
+     /**
      *
-     * @return
+     * @return name of the given RegisterBean
      */
     public String getName() 
     {
@@ -97,7 +97,7 @@ public class RegisterBean implements Serializable
     
     /**
      *
-     * @param name
+     * @param name a name that has been set by the user from register.xhtml
      */
     public void setName(String name)
     {
@@ -106,7 +106,7 @@ public class RegisterBean implements Serializable
     
     /**
      *
-     * @return
+     * @return surname of the given RegisterBean
      */
     public String getSurname()
     {
@@ -115,7 +115,7 @@ public class RegisterBean implements Serializable
     
     /**
      *
-     * @param surname
+     * @param surname a surname that has been set by the user  from register.xhtml
      */
     public void setSurname(String surname)
     {
@@ -124,7 +124,7 @@ public class RegisterBean implements Serializable
     
     /**
      *
-     * @return
+     * @return ssn of the given RegisterBean
      */
     public String getSsn()
     {
@@ -133,7 +133,7 @@ public class RegisterBean implements Serializable
     
     /**
      *
-     * @param ssn
+     * @param ssn a ssn that has been set by the user from register.xhtml
      */
     public void setSsn(String ssn)
     {
@@ -142,7 +142,7 @@ public class RegisterBean implements Serializable
     
     /**
      *
-     * @return
+     * @return email of the given RegisterBean
      */
     public String getEmail()
     {
@@ -151,7 +151,7 @@ public class RegisterBean implements Serializable
     
     /**
      *
-     * @param mail
+     * @param mail a email that has been set by the user from register.xhtml
      */
     public void setEmail(String mail)
     {
@@ -160,7 +160,7 @@ public class RegisterBean implements Serializable
     
     /**
      *
-     * @return
+     * @return username of the given RegisterBean
      */
     public String getUsername()
     {
@@ -169,7 +169,7 @@ public class RegisterBean implements Serializable
     
     /**
      *
-     * @param username
+     * @param username a username that has been set by the user from register.xhtml
      */
     public void setUsername(String username)
     {
@@ -178,7 +178,7 @@ public class RegisterBean implements Serializable
     
     /**
      *
-     * @return
+     * @return password of the given RegisterBean
      */
     public String getPassword() 
     {
@@ -187,7 +187,7 @@ public class RegisterBean implements Serializable
     
     /**
      *
-     * @param password
+     * @param password a password that has been set by the user from register.xhtml
      */
     public void setPassword(String password)
     {
@@ -196,7 +196,7 @@ public class RegisterBean implements Serializable
     
     /**
      *
-     * @return
+     * @return roll of the given RegisterBean
      */
     public String getRoll_id()
     {
@@ -205,7 +205,7 @@ public class RegisterBean implements Serializable
 
     /**
      *
-     * @param roll_id
+     * @param roll_id a role that has been set by the user from register.xhtml
      */
     public void setRoll_id(String roll_id)
     {

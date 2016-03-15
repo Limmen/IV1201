@@ -36,7 +36,7 @@ public class RecruitFilter implements Filter
      * 
      * @param servletRequest
      * @param servletResponse
-     * @param chain
+     * @param chain 
      * @throws IOException
      * @throws ServletException
      */
@@ -61,7 +61,8 @@ public class RecruitFilter implements Filter
      * This method is called by the web container to indicate to the filter that
      * is it being placed into service.
      * 
-     * @param config
+     * @param config A filter configuration object used by a servlet container to pass information
+     * to a filter during initialization.
      * @throws ServletException
      */
     @Override

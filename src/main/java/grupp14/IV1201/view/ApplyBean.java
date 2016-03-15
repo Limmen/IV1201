@@ -92,7 +92,7 @@ public class ApplyBean implements Serializable
     
     /**
      * 
-     * @return
+     * @return a list of expertises from the given ApplyBean
      */
     public List<String> getExpertiseList()
     {
@@ -101,7 +101,7 @@ public class ApplyBean implements Serializable
     
     /**
      *
-     * @param expertiseList
+     * @param expertiseList a list of expertises
      */
     public void setExpertiseList(List<String> expertiseList)
     {
@@ -110,7 +110,7 @@ public class ApplyBean implements Serializable
     
     /**
      *
-     * @return
+     * @return a expertise from the given ApplyBean
      */
     public String getExpertise()
     {
@@ -119,7 +119,7 @@ public class ApplyBean implements Serializable
     
     /**
      *
-     * @param expertise
+     * @param expertise a expertise
      */
     public void setExpertise(String expertise)
     {
@@ -128,7 +128,7 @@ public class ApplyBean implements Serializable
     
     /**
      *
-     * @return
+     * @return a availabeFrom Date from the given ApplyBean
      */
     public Date getAvailableFrom()
     {
@@ -137,16 +137,16 @@ public class ApplyBean implements Serializable
     
     /**
      *
-     * @param AvailableFrom
+     * @param AvailableFrom a availableFrom Date 
      */
-    public void setAvailableFrom(Date AvailableFrom)
+    public void setAvailableFrom(Date availableFrom)
     {
-        this.availableFrom = AvailableFrom;
+        this.availableFrom = availableFrom;
     }
     
     /**
      *
-     * @return
+     * @return availabeTo Date from the given ApplyBean
      */
     public Date getAvailableTo()
     {
@@ -155,7 +155,7 @@ public class ApplyBean implements Serializable
     
     /**
      *
-     * @param availableTo
+     * @param availableTo a availableTo Date 
      */
     public void setAvailableTo(Date availableTo)
     {
@@ -164,7 +164,7 @@ public class ApplyBean implements Serializable
     
     /**
      *
-     * @return
+     * @return years from the given ApplyBean
      */
     public float getYears() 
     {
@@ -173,7 +173,7 @@ public class ApplyBean implements Serializable
     
     /**
      *
-     * @param years
+     * @param years 
      */
     public void setYears(float years) 
     {
