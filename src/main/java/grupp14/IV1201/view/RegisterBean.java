@@ -81,16 +81,10 @@ public class RegisterBean implements Serializable
         password="";
         username ="";
     }
-<<<<<<< HEAD
-     /**
-     *
-     * @return name of the given RegisterBean
-=======
-    
+   
     /**
      * getName
      * @return name of the person to register
->>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public String getName() 
     {
@@ -98,13 +92,8 @@ public class RegisterBean implements Serializable
     }
     
     /**
-<<<<<<< HEAD
-     *
-     * @param name a name that has been set by the user from register.xhtml
-=======
      * Updates name
      * @param name name of the person to register
->>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public void setName(String name)
     {
@@ -112,13 +101,8 @@ public class RegisterBean implements Serializable
     }
     
     /**
-<<<<<<< HEAD
-     *
-     * @return surname of the given RegisterBean
-=======
      * getSurname
      * @return surname of the person to register
->>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public String getSurname()
     {
@@ -126,13 +110,8 @@ public class RegisterBean implements Serializable
     }
     
     /**
-<<<<<<< HEAD
-     *
-     * @param surname a surname that has been set by the user  from register.xhtml
-=======
      * Updates the surname of the person to register
      * @param surname
->>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public void setSurname(String surname)
     {
@@ -140,13 +119,8 @@ public class RegisterBean implements Serializable
     }
     
     /**
-<<<<<<< HEAD
-     *
-     * @return ssn of the given RegisterBean
-=======
      * getSsn
      * @return ssn of the person to register
->>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public String getSsn()
     {
@@ -154,13 +128,8 @@ public class RegisterBean implements Serializable
     }
     
     /**
-<<<<<<< HEAD
-     *
-     * @param ssn a ssn that has been set by the user from register.xhtml
-=======
      * Updates the ssn of the person to register
      * @param ssn of the person to register
->>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public void setSsn(String ssn)
     {
@@ -168,13 +137,8 @@ public class RegisterBean implements Serializable
     }
     
     /**
-<<<<<<< HEAD
-     *
-     * @return email of the given RegisterBean
-=======
      * getEmail
      * @return email of the person to register
->>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public String getEmail()
     {
