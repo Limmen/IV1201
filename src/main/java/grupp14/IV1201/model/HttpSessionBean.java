@@ -11,8 +11,9 @@ import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 /**
- *
+ * This class handles HTTP sessions.
  * @author kim
  */
 @Stateless
@@ -22,9 +23,10 @@ public class HttpSessionBean
     FacesContext getFacesContext() {
         return FacesContext.getCurrentInstance();
     }
+    
     /**
-     *
-     * @return
+     * getSession
+     * @return the http session of the user making the request.
      */
     public HttpSession getSession() 
     {
@@ -33,8 +35,8 @@ public class HttpSessionBean
     }
     
     /**
-     *
-     * @return
+     * getRequest
+     * @return the current HTTP-request.
      */
     public HttpServletRequest getRequest()
     {
@@ -43,8 +45,8 @@ public class HttpSessionBean
     }
     
     /**
-     *
-     * @return
+     * getUsername
+     * @return username of the current HTTP-session.
      */
     public String getUserName()
     {

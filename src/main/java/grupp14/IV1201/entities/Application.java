@@ -16,6 +16,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -25,8 +26,8 @@ import javax.persistence.NamedQuery;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name="Application.findByUserId",
-            query="SELECT p FROM Application p WHERE p.personID = :id"),
+    @NamedQuery(name="Application.findByUser",
+            query="SELECT p FROM Application p WHERE p.person = :person"),
 })
 public class Application implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -34,8 +35,10 @@ public class Application implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private BigInteger id;
     private float yearsOfExperience;
-    private BigInteger personID;
-    private BigInteger expertisID;
+    @ManyToOne
+    private Person person;
+    @ManyToOne
+    private Expertise expertise;
     private java.sql.Date dateFrom;
     private java.sql.Date dateTo;
 
@@ -51,25 +54,26 @@ public class Application implements Serializable {
         public Application(ApplicationDTO applikationInfo) throws NoSuchAlgorithmException
         {
             this.yearsOfExperience = applikationInfo.getYearsOfExperience();
-            this.personID = applikationInfo.getPersonID();
-            this.expertisID = applikationInfo.getExpertisID();
+            this.person = applikationInfo.getPerson();
+            this.expertise = applikationInfo.getExpertise();
             this.dateFrom = applikationInfo.getDateFrom();
             this.dateTo = applikationInfo.getDateTo();
         }
-    
+
+    /**
+     *
+     * @return
+     */
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     /**
      *
      * @return
      */
     public BigInteger getId() {
         return id;
-    }
-    /**
-     *
-     * @param id
-     */
-    public void setId(BigInteger id) {
-        this.id = id;
     }
 
     /**
@@ -82,42 +86,18 @@ public class Application implements Serializable {
 
     /**
      *
-     * @param years
+     * @return
      */
-    public void set(float years) {
-        this.yearsOfExperience = years;
+    public Person getPerson() {
+        return person;
     }
 
     /**
      *
      * @return
      */
-    public BigInteger getPersonID() {
-        return personID;
-    }
-
-    /**
-     *
-     * @param personID
-     */
-    public void setPersonID(BigInteger personID) {
-        this.personID = personID;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public BigInteger getExpertisID() {
-        return expertisID;
-    }
-
-    /**
-     *
-     * @param expertisID
-     */
-    public void setExpertisID(BigInteger expertisID) {
-        this.expertisID = expertisID;
+    public Expertise getExpertise() {
+        return expertise;
     }
 
     /**
@@ -130,27 +110,12 @@ public class Application implements Serializable {
 
     /**
      *
-     * @param dateFrom
-     */
-    public void setDateFrom(Date dateFrom) {
-        this.dateFrom = dateFrom;
-    }
-
-    /**
-     *
      * @return
      */
     public Date getDateTo() {
         return dateTo;
     }
-
-    /**
-     *
-     * @param dateTo
-     */
-    public void setDateTo(Date dateTo) {
-        this.dateTo = dateTo;
-    }
+      
 
     /**
      *

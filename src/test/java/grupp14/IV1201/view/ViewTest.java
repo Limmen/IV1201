@@ -51,6 +51,8 @@ public class ViewTest
     {
         testIndex();
         testApplicantLogin("root", "rootroot");
+        testViewApplications();
+        testApply();        
         testApplicantLogOut();
         testRecruitLogin("recruiter", "recruiter");
         testRecruitLogOut();
@@ -222,7 +224,7 @@ public class ViewTest
                 driver.getCurrentUrl());
         /* Insert name */
         driver.findElement(By.id("regName")).sendKeys("test");
-        /* Insert surnamep */
+        /* Insert surname */
         driver.findElement(By.id("regSurname")).sendKeys("test");
         /* Insert email */
         driver.findElement(By.id("regEmail")).sendKeys("test@test.com");
@@ -248,7 +250,49 @@ public class ViewTest
         driver.findElement(By.id("j_idt28:changeLocaleEn")).click();
         /* Check that the page is translated */
         Assert.assertEquals("Recruitment System",driver.findElement(By.className("link_deco")).getText());
-    } 
+    }
+    
+    private void testViewApplications()
+    {
+        /* Click Apply link */
+        driver.findElement(By.id("j_idt23")).click();
+        /* Make sure user is directed to applications-page. */
+        Assert.assertEquals("https://localhost:8181/IV1201/applicant/applications.xhtml", 
+                driver.getCurrentUrl());
+        /* Check that the datagrid is visible */
+        Assert.assertTrue(driver.findElements(By.id("form")).size() > 0);
+
+        /* Click back button */
+        driver.findElement(By.id("j_idt17")).click();
+    }
+    
+    private void testApply()
+    {
+        /* Click Apply link */
+        driver.findElement(By.id("j_idt22")).click();
+        /* Make sure user is directed to apply-page. */
+        Assert.assertEquals("https://localhost:8181/IV1201/applicant/apply.xhtml",
+                driver.getCurrentUrl());
+        /* Check that applyform is visible */
+        Assert.assertTrue(driver.findElements(By.id("content")).size() > 0);
+        /*                
+        Select select = new Select(driver.findElement(By.id("j_idt23:expertise")));
+        select.selectByIndex(2);        
+        driver.findElement(By.id("j_idt27:years")).click();
+        driver.manage().timeouts().implicitlyWait(200, TimeUnit.MILLISECONDS);
+        driver.findElement(By.id("j_idt27:years")).sendKeys("2");
+        driver.findElement(By.className("yourApp")).click();
+        driver.manage().timeouts().implicitlyWait(200, TimeUnit.MILLISECONDS); */
+        
+        /* Click "Hand in Application" */
+        driver.findElement(By.id("j_idt36:j_idt42")).click();
+        /* Check that the application failed */
+        Assert.assertEquals("https://localhost:8181/IV1201/applicant/applicationerror.xhtml", 
+                driver.getCurrentUrl());
+         /* Check that success-paragraph is visible */
+        Assert.assertTrue(driver.findElements(By.id("j_idt18")).size() > 0);
+        driver.findElement(By.id("j_idt17")).click();
+    }
     
     private String randomString()
     {

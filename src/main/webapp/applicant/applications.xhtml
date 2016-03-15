@@ -55,11 +55,11 @@
                                 <h:outputText value="Expertise: " />
                                 <h:outputText styleClass="bold" value="#{applicationBean.selectedApplication.expertise.expertise}" /> 
                                 <h:outputText value="Years of experience: " />
-                                <h:outputText styleClass="bold" value="#{applicationBean.selectedApplication.app.yearsOfExperience}" /> 
+                                <h:outputText styleClass="bold" value="#{applicationBean.selectedApplication.yearsOfExperience}" /> 
                                 <h:outputText value="Date from: " />
-                                <h:outputText styleClass="bold" value="#{applicationBean.selectedApplication.app.dateFrom}" /> 
+                                <h:outputText styleClass="bold" value="#{applicationBean.selectedApplication.dateFrom}" /> 
                                 <h:outputText value="Date to: " />
-                                <h:outputText styleClass="bold" value="#{applicationBean.selectedApplication.app.dateTo}" /> 
+                                <h:outputText styleClass="bold" value="#{applicationBean.selectedApplication.dateTo}" /> 
                             </p:panelGrid>
                             <h:commandLink styleClass="pdf" value="export to PDF" action="#{applicationBean.createPDF()}" />
                         </p:outputPanel>

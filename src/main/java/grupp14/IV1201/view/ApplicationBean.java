@@ -1,16 +1,15 @@
 /*
- * Course project - IV1201 Design of Global Applications
- * Royal Institute of Technology
- * 2015 (c) Kim Hammar Alexander Lundh Marcel Mattsson
- */
+* Classname: ApplicationBean
+* Version: 0.1
+* Date: 14-3-2016
+* Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+*/ 
+
 package grupp14.IV1201.view;
 
 import com.lowagie.text.DocumentException;
-import grupp14.IV1201.DTO.ApplicationViewDTO;
 import grupp14.IV1201.controller.ControllerEJB;
 import grupp14.IV1201.entities.Application;
-import grupp14.IV1201.entities.Expertise;
-import grupp14.IV1201.entities.Person;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,11 +29,12 @@ import javax.faces.view.ViewScoped;
 public class ApplicationBean implements Serializable {
     @EJB
     private ControllerEJB contr;
-    private List<ApplicationViewDTO> applications;
-    private ApplicationViewDTO selectedApplication;
+    private List<Application> applications;
+    private Application selectedApplication;
     
     /**
-     * 
+     * This method is called by the cdi-container after dependency-injection
+     * but before the class is put into service.
      */
     @PostConstruct
     public void init(){
@@ -44,57 +44,52 @@ public class ApplicationBean implements Serializable {
     }
     
     /**
-     * 
+     * This method will call the controller to fetch applications from the database.
+     * If it's a applicant requesting the application only the his/hers applications are retrieved.
+     * If it's a recruiter then all applications are retrieved.
      */
     public void fetchApplications(){
         applications = new ArrayList();
         String username = contr.getUsername();
         if(contr.getRole(username).equals("applicant")){            
-            for(Application app : contr.getApplicationList(username)){
-                Person p = contr.getPerson(username);
-                Expertise e = contr.getExpertise(app.getExpertisID());
-                applications.add(new ApplicationViewDTO(app,p,e));
-            }
+            applications = contr.getApplicationList(username);
         }
         else{
-            for(Application app : contr.getApplicationList()){
-                Person p = contr.getPerson(app.getPersonID());
-                Expertise e = contr.getExpertise(app.getExpertisID());
-                applications.add(new ApplicationViewDTO(app,p,e));
-            }
+            applications = contr.getApplicationList();
         }
     }
 
     /**
      * Calls the controller to produce a PDF-file of the selected application
-     * @throws IOException
-     * @throws DocumentException
+     * @throws IOException IOException thrown when the specified URL cannot be found for the 
+     * redirection.
+     * @throws DocumentException Thrown when a error occurs in the creation of the pdf document.
      */
     public void createPDF() throws IOException, DocumentException{
         contr.createPDF(selectedApplication);
     }
 
     /**
-     *
-     * @return a list of all applications from the given ApplicationBean
+     * getApplications
+     * @return list of applications
      */
-    public List<ApplicationViewDTO> getApplications() {
+    public List<Application> getApplications() {
         return applications;
     }
 
     /**
-     *
-     * @return a selected application from the given ApplicationBean
+     * getSelectedApplication
+     * @return the application that the user have selected currently
      */
-    public ApplicationViewDTO getSelectedApplication() {
+    public Application getSelectedApplication() {
         return selectedApplication;
     }
 
     /**
-     *
-     * @param selectedApplication a selected application
+     * setSelectedApplication
+     * @param selectedApplication updates the selected application.
      */
-    public void setSelectedApplication(ApplicationViewDTO selectedApplication) {
+    public void setSelectedApplication(Application selectedApplication) {
         this.selectedApplication = selectedApplication;
     }
         

@@ -11,13 +11,10 @@ import grupp14.IV1201.DTO.PersonDTO;
 import grupp14.IV1201.controller.ControllerEJB;
 import grupp14.IV1201.util.GenericLogger;
 import grupp14.IV1201.util.ValidEmail;
-import java.io.IOException;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.validation.constraints.Size;
 
@@ -45,6 +42,8 @@ public class RegisterBean implements Serializable
             + " 6 and 16 characters long")
     private String password;
     private String roll_id;
+    private boolean registerSuccess = false;
+    private boolean registerError = false;
 
     /**
      * Class constructor
@@ -59,23 +58,19 @@ public class RegisterBean implements Serializable
      * 
      * This method will try to register the user if the input-data is sufficient.
      * 
-     * @throws IOException
-     * @throws NoSuchAlgorithmException
+     * @throws NoSuchAlgorithmException thrown when the encryption phase in the model was invalid.
      */
-    public void register() throws IOException, NoSuchAlgorithmException
+    public void register() throws NoSuchAlgorithmException
     {
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         PersonDTO person = new PersonDTO(name,surname,ssn,email,username,
                 password, "applicant");
         boolean valid = contr.validateRegistration(username);
         if (valid) {
             contr.registerUser(person);
-            externalContext.redirect(externalContext.getRequestContextPath()
-                    + "/index.xhtml");
+            registerSuccess = true;
         }
         else
-            externalContext.redirect(externalContext.getRequestContextPath()
-                   + "/registererror.xhtml");
+            registerError = true;
     }
     
     private void clear(){
@@ -86,9 +81,16 @@ public class RegisterBean implements Serializable
         password="";
         username ="";
     }
+<<<<<<< HEAD
      /**
      *
      * @return name of the given RegisterBean
+=======
+    
+    /**
+     * getName
+     * @return name of the person to register
+>>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public String getName() 
     {
@@ -96,8 +98,13 @@ public class RegisterBean implements Serializable
     }
     
     /**
+<<<<<<< HEAD
      *
      * @param name a name that has been set by the user from register.xhtml
+=======
+     * Updates name
+     * @param name name of the person to register
+>>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public void setName(String name)
     {
@@ -105,8 +112,13 @@ public class RegisterBean implements Serializable
     }
     
     /**
+<<<<<<< HEAD
      *
      * @return surname of the given RegisterBean
+=======
+     * getSurname
+     * @return surname of the person to register
+>>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public String getSurname()
     {
@@ -114,8 +126,13 @@ public class RegisterBean implements Serializable
     }
     
     /**
+<<<<<<< HEAD
      *
      * @param surname a surname that has been set by the user  from register.xhtml
+=======
+     * Updates the surname of the person to register
+     * @param surname
+>>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public void setSurname(String surname)
     {
@@ -123,8 +140,13 @@ public class RegisterBean implements Serializable
     }
     
     /**
+<<<<<<< HEAD
      *
      * @return ssn of the given RegisterBean
+=======
+     * getSsn
+     * @return ssn of the person to register
+>>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public String getSsn()
     {
@@ -132,8 +154,13 @@ public class RegisterBean implements Serializable
     }
     
     /**
+<<<<<<< HEAD
      *
      * @param ssn a ssn that has been set by the user from register.xhtml
+=======
+     * Updates the ssn of the person to register
+     * @param ssn of the person to register
+>>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public void setSsn(String ssn)
     {
@@ -141,8 +168,13 @@ public class RegisterBean implements Serializable
     }
     
     /**
+<<<<<<< HEAD
      *
      * @return email of the given RegisterBean
+=======
+     * getEmail
+     * @return email of the person to register
+>>>>>>> 34132b8421f587c1a511107cfb11d6721cb7462c
      */
     public String getEmail()
     {
@@ -150,8 +182,8 @@ public class RegisterBean implements Serializable
     }
     
     /**
-     *
-     * @param mail a email that has been set by the user from register.xhtml
+     * Updates the email of the person to register
+     * @param mail of the person to register
      */
     public void setEmail(String mail)
     {
@@ -159,8 +191,8 @@ public class RegisterBean implements Serializable
     }
     
     /**
-     *
-     * @return username of the given RegisterBean
+     * getUsername
+     * @return username of the person to register
      */
     public String getUsername()
     {
@@ -168,8 +200,8 @@ public class RegisterBean implements Serializable
     }
     
     /**
-     *
-     * @param username a username that has been set by the user from register.xhtml
+     * Updates the username of the person to register
+     * @param username
      */
     public void setUsername(String username)
     {
@@ -177,8 +209,8 @@ public class RegisterBean implements Serializable
     }
     
     /**
-     *
-     * @return password of the given RegisterBean
+     * getPassword
+     * @return password of the person to register
      */
     public String getPassword() 
     {
@@ -186,8 +218,8 @@ public class RegisterBean implements Serializable
     }
     
     /**
-     *
-     * @param password a password that has been set by the user from register.xhtml
+     * Updates the password of the person to register
+     * @param password of the person to register
      */
     public void setPassword(String password)
     {
@@ -195,8 +227,8 @@ public class RegisterBean implements Serializable
     }
     
     /**
-     *
-     * @return roll of the given RegisterBean
+     * getRoll_id
+     * @return roll_id of the person to register
      */
     public String getRoll_id()
     {
@@ -204,12 +236,29 @@ public class RegisterBean implements Serializable
     }    
 
     /**
-     *
-     * @param roll_id a role that has been set by the user from register.xhtml
+     * Updates the roll_id of the person to register 
+     * @param roll_id of the person to register
      */
     public void setRoll_id(String roll_id)
     {
         this.roll_id = roll_id;
     }
+
+    /**
+     * isRegisterSuccess
+     * @return boolean wether the most recent registration was successful or not
+     */
+    public boolean isRegisterSuccess() {
+        return registerSuccess;
+    }
+
+    /**
+     * isRegisterError
+     * @return boolean wether the most recent registration was failed or not
+     */
+    public boolean isRegisterError() {
+        return registerError;
+    }
+    
     
 }
