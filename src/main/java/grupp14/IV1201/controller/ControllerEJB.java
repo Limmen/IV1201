@@ -53,6 +53,9 @@ public class ControllerEJB
     public void init()
     {
         logManager = new LogManager();
+        login.setLogManager(logManager);
+        register.setLogManager(logManager);
+        app.setLogManager(logManager);
     }
     
     /**

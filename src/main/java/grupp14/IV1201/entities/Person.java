@@ -21,7 +21,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 /**
- *
+ * Entity that represents a Person.
  * @author marcelmattsson, alexander
  */
 @Entity
@@ -45,14 +45,14 @@ public class Person implements Serializable
     private String roll_id;
     
     /**
-     *
+     * Class constructor
      */
     public Person(){}
     
     /**
-     *
-     * @param personInfo
-     * @throws NoSuchAlgorithmException
+     * Class constructor
+     * @param personInfo DataTransferObject of person information
+     * @throws NoSuchAlgorithmException thrown when the encryption phase is invalid.
      */
     public Person(PersonDTO personInfo) throws NoSuchAlgorithmException
     {
@@ -66,8 +66,8 @@ public class Person implements Serializable
     }
     
     /**
-     *
-     * @return
+     * getId
+     * @return id of the person
      */
     public BigInteger getId() 
     {
@@ -75,17 +75,8 @@ public class Person implements Serializable
     }
     
     /**
-     *
-     * @param id
-     */
-    public void setId(BigInteger id)
-    {
-        this.id = id;
-    }
-    
-    /**
-     *
-     * @return
+     * Generates and returns a hashcode
+     * @return integer hashcode
      */
     @Override
     public int hashCode()
@@ -96,8 +87,8 @@ public class Person implements Serializable
     }
     
     /**
-     *
-     * @param object
+     * equals method, used to compare if two persons are equal
+     * @param object object to compare to
      * @return
      */
     @Override
@@ -116,8 +107,8 @@ public class Person implements Serializable
     }
     
     /**
-     *
-     * @return
+     * toString.
+     * @return  a string representation of the person
      */
     @Override
     public String toString() 
@@ -126,8 +117,8 @@ public class Person implements Serializable
     }
     
     /**
-     *
-     * @return
+     * getName
+     * @return name of the person
      */
     public String getName() 
     {
@@ -135,8 +126,8 @@ public class Person implements Serializable
     }
     
     /**
-     *
-     * @param name
+     * Updates the name of the person
+     * @param name string
      */
     public void setName(String name) 
     {
@@ -144,8 +135,8 @@ public class Person implements Serializable
     }
     
     /**
-     *
-     * @return
+     * getSurname
+     * @return surname of the person
      */
     public String getSurname() 
     {
@@ -153,8 +144,8 @@ public class Person implements Serializable
     }
     
     /**
-     *
-     * @param surname
+     * Updates the surname of the person
+     * @param surname string
      */
     public void setSurname(String surname) 
     {
@@ -162,8 +153,8 @@ public class Person implements Serializable
     }
     
     /**
-     *
-     * @return
+     * getSsn
+     * @return ssn of the person
      */
     public String getSsn() 
     {
@@ -171,8 +162,8 @@ public class Person implements Serializable
     }
     
     /**
-     *
-     * @param ssn
+     * Updates the ssn of the person
+     * @param ssn string
      */
     public void setSsn(String ssn) 
     {
@@ -180,8 +171,8 @@ public class Person implements Serializable
     }
     
     /**
-     *
-     * @return
+     * getMail
+     * @return mail of the person
      */
     public String getMail() 
     {
@@ -189,8 +180,8 @@ public class Person implements Serializable
     }
     
     /**
-     *
-     * @param mail
+     * Updates the mail of the person
+     * @param mail string
      */
     public void setMail(String mail) 
     {
@@ -198,8 +189,8 @@ public class Person implements Serializable
     }
     
     /**
-     *
-     * @return
+     * getUsername
+     * @return username of  the person
      */
     public String getUsername() 
     {
@@ -207,8 +198,8 @@ public class Person implements Serializable
     }
     
     /**
-     *
-     * @param username
+     * Updates the username of the person
+     * @param username string
      */
     public void setUsername(String username) 
     {
@@ -216,8 +207,8 @@ public class Person implements Serializable
     }
     
     /**
-     *
-     * @return
+     * getPassword
+     * @return password of the person
      */
     public String getPassword() 
     {
@@ -225,8 +216,8 @@ public class Person implements Serializable
     }
     
     /**
-     *
-     * @param password
+     * Updates the password of the person
+     * @param password string
      */
     public void setPassword(String password) 
     {
@@ -234,8 +225,8 @@ public class Person implements Serializable
     }
     
     /**
-     *
-     * @return
+     * getRoll_id
+     * @return roll_id of the perrson
      */
     public String getRoll_id() 
     {
@@ -243,8 +234,8 @@ public class Person implements Serializable
     }
     
     /**
-     *
-     * @param roll_id
+     * Updates the roll_id of the person
+     * @param roll_id string
      */
     public void setRoll_id(String roll_id) 
     {

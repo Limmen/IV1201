@@ -200,8 +200,10 @@ public class ViewTest
         /* click register-button */
         driver.findElement(By.id("j_idt37")).click();        
         /* Check that registration was successful */
-        Assert.assertEquals("https://localhost:8181/IV1201/index.xhtml", 
+        Assert.assertEquals("https://localhost:8181/IV1201/registersuccess.xhtml", 
                 driver.getCurrentUrl());
+        /* Click back-button to get to index page */
+        driver.findElement(By.id("j_idt17")).click();
         /* Test login with new user */
         testApplicantLogin(username, password);
         
@@ -289,7 +291,7 @@ public class ViewTest
         /* Check that the application failed */
         Assert.assertEquals("https://localhost:8181/IV1201/applicant/applicationerror.xhtml", 
                 driver.getCurrentUrl());
-         /* Check that success-paragraph is visible */
+         /* Check that error-paragraph is visible */
         Assert.assertTrue(driver.findElements(By.id("j_idt18")).size() > 0);
         driver.findElement(By.id("j_idt17")).click();
     }

@@ -1,5 +1,5 @@
 /*
- * Classname: LocaleManager
+ * Classname: PDFManager
  * Version: 0.1
  * Date: 14-3-2016
  * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016

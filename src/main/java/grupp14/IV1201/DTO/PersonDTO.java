@@ -8,7 +8,7 @@
 package grupp14.IV1201.DTO;
 
 /**
- *
+ * DataTransferObject for a Person
  * @author marcelmattsson
  */
 public class PersonDTO {
@@ -21,14 +21,14 @@ public class PersonDTO {
     private final String roll_id;
     
     /**
-     *
-     * @param name
-     * @param surname
-     * @param ssn
-     * @param mail
-     * @param username
-     * @param password
-     * @param roll_id
+     * Class constructor
+     * @param name name of the person
+     * @param surname surname of the person
+     * @param ssn ssn of the person
+     * @param mail mail of the person
+     * @param username username of the person
+     * @param password password of the person
+     * @param roll_id roll_id of the person
      */
     public PersonDTO(String name, String surname, String ssn, String mail, String username, 
             String password, String roll_id)
@@ -43,8 +43,8 @@ public class PersonDTO {
     }
 
     /**
-     *
-     * @return
+     * getName 
+     * @return name of the person
      */
     public String getName() 
     {
@@ -52,8 +52,8 @@ public class PersonDTO {
     }
 
     /**
-     *
-     * @return
+     * getSurname
+     * @return surname of the person
      */
     public String getSurname()
     {
@@ -61,8 +61,8 @@ public class PersonDTO {
     }
 
     /**
-     *
-     * @return
+     * getSsn
+     * @return ssn of the person
      */
     public String getSsn() 
     {
@@ -70,8 +70,8 @@ public class PersonDTO {
     }
 
     /**
-     *
-     * @return
+     * getMail
+     * @return mail of the person
      */
     public String getMail()
     {
@@ -79,8 +79,8 @@ public class PersonDTO {
     }
 
     /**
-     *
-     * @return
+     * getUsername
+     * @return username of the person
      */
     public String getUsername()
     {
@@ -88,8 +88,8 @@ public class PersonDTO {
     }
 
     /**
-     *
-     * @return
+     * getPassword
+     * @return password of the person
      */
     public String getPassword() 
     {
@@ -97,8 +97,8 @@ public class PersonDTO {
     }
 
     /**
-     *
-     * @return
+     * getRoll_id
+     * @return roll_id of the person
      */
     public String getRoll_id() 
     {

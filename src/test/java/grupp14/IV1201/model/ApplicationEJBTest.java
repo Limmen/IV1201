@@ -9,6 +9,7 @@ import grupp14.IV1201.DTO.ApplicationDTO;
 import grupp14.IV1201.entities.Application;
 import grupp14.IV1201.entities.Expertise;
 import grupp14.IV1201.entities.Person;
+import grupp14.IV1201.util.LogManager;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -58,11 +59,13 @@ public class ApplicationEJBTest {
     public void testGetPerson() throws Exception {
         EntityManager mockManager = mock(EntityManager.class);
         TypedQuery<Person> mockQuery = mock(TypedQuery.class);
+        LogManager mockLogManager = mock(LogManager.class);
         Person mockPerson = mock(Person.class);
         when((mockManager.createNamedQuery("Person.findByUserName", Person.class))).thenReturn((mockQuery));
         when((mockQuery.getSingleResult())).thenReturn((mockPerson));
         when((mockQuery.setParameter("username", "test"))).thenReturn(mockQuery);
         instance.setEm(mockManager);
+        instance.setLogManager(mockLogManager);
         Assert.assertEquals(mockPerson, instance.getPerson("test"));
         when((mockQuery.getSingleResult())).thenThrow(new NoResultException());
         Assert.assertEquals(null, instance.getPerson("test"));
@@ -76,10 +79,12 @@ public class ApplicationEJBTest {
         EntityManager mockManager = mock(EntityManager.class);
         TypedQuery<Expertise> mockQuery = mock(TypedQuery.class);
         Expertise mockExpertise = mock(Expertise.class);
+        LogManager mockLogManager = mock(LogManager.class);
         when((mockManager.createNamedQuery("Expertise.findByName", Expertise.class))).thenReturn((mockQuery));
         when((mockQuery.getSingleResult())).thenReturn((mockExpertise));
         when((mockQuery.setParameter("expertise", "test"))).thenReturn(mockQuery);
         instance.setEm(mockManager);
+        instance.setLogManager(mockLogManager);
         Assert.assertEquals(mockExpertise, instance.getExpertise("test"));
         when((mockQuery.getSingleResult())).thenThrow(new NoResultException());
         Assert.assertEquals(null, instance.getExpertise("test"));

@@ -1,8 +1,10 @@
-/*
- * Course project - IV1201 Design of Global Applications
- * Royal Institute of Technology
- * 2015 (c) Kim Hammar Alexander Lundh Marcel Mattsson
+/* 
+ * Classname: Expertise
+ * Version: 0.1
+ * Date: 16-3-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
  */
+
 package grupp14.IV1201.entities;
 
 import java.io.Serializable;
@@ -15,7 +17,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 /**
- *
+ * Entity that represents a Expertise.
  * @author marcelmattsson, alexander
  */
 @Entity
@@ -31,53 +33,45 @@ public class Expertise implements Serializable {
     private String expertise;
 
     /**
-     *
+     * Class constructor
      */
     public Expertise() {}
     
     /**
-     *
-     * @param expertis
+     * Class constructor
+     * @param expertis name of the expertise
      */
     public Expertise(String expertis){
         this.expertise = expertis;
     }
 
     /**
-     *
-     * @return
+     * getExpertise
+     * @return name of the expertise
      */
     public String getExpertise() {
         return expertise;
     }
 
     /**
-     *
-     * @param expertise
+     * Updates the expertise name
+     * @param expertise string
      */
     public void setExpertise(String expertise) {
         this.expertise = expertise;
     }
     
     /**
-     *
-     * @return
+     * getId
+     * @return id of the expertise
      */
     public BigInteger getId() {
         return id;
     }
 
     /**
-     *
-     * @param id
-     */
-    public void setId(BigInteger id) {
-        this.id = id;
-    }
-
-    /**
-     *
-     * @return
+     * Generates and returns a hashcode
+     * @return integer hashcode
      */
     @Override
     public int hashCode() {
@@ -87,8 +81,8 @@ public class Expertise implements Serializable {
     }
 
     /**
-     *
-     * @param object
+     * equals method, used to compare if two expertise are equal
+     * @param object object to compare to
      * @return
      */
     @Override
@@ -105,8 +99,8 @@ public class Expertise implements Serializable {
     }
 
     /**
-     *
-     * @return
+     * toString.
+     * @return  a string representation of the person
      */
     @Override
     public String toString() {

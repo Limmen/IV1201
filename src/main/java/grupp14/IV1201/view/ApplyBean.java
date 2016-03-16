@@ -152,10 +152,9 @@ public class ApplyBean implements Serializable
     }
     
     /**
-     * @param AvailableFrom a availableFrom Date 
      *
      * Updates the avilable from date
-     * @param AvailableFrom date from when the applicant is available
+     * @param availableFrom date from when the applicant is available
      */
     public void setAvailableFrom(Date availableFrom)
     {
@@ -163,7 +162,6 @@ public class ApplyBean implements Serializable
     }
     
     /**
-     * @return availabeTo Date from the given ApplyBean
      * getAvailableTo date
      * @return date to when the applicant is available
      */
