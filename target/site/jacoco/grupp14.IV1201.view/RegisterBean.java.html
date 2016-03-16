@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>RegisterBean.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">IV1201</a> &gt; <a href="index.html" class="el_package">grupp14.IV1201.view</a> &gt; <span class="el_source">RegisterBean.java</span></div><h1>RegisterBean.java</h1><pre class="source lang-java linenums">/*
+ * Classname: RegisterBean
+ * Version: 0.1
+ * Date: 15-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+ */
+
+package grupp14.IV1201.view;
+
+import grupp14.IV1201.DTO.PersonDTO;
+import grupp14.IV1201.controller.ControllerEJB;
+import grupp14.IV1201.util.GenericLogger;
+import grupp14.IV1201.util.ValidEmail;
+import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
+import javax.validation.constraints.Size;
+
+/**
+ * Managed bean representing the interface between the model and the register-page.
+ */
+@GenericLogger
+@Named(value = &quot;registerBean&quot;)
+@RequestScoped
+public class RegisterBean implements Serializable
+{
+    @EJB
+    ControllerEJB contr;
+    @Size(min=1, message=&quot;You need to enter a name&quot;)
+    private String name;
+    @Size(min=1, message=&quot;You need to enter a surname&quot;)
+    private String surname;
+    private String ssn;
+    @ValidEmail
+    private String email;
+    @Size(min=3, max=16, message=&quot;username needs to be between&quot;
+            + &quot; 3 and 16 characters long&quot;)
+    private String username;
+    @Size(min=6, max=30, message=&quot;Password needs to be between&quot;
+            + &quot; 6 and 16 characters long&quot;)
+    private String password;
+    private String roll_id;
+<span class="nc" id="L45">    private boolean registerSuccess = false;</span>
+<span class="nc" id="L46">    private boolean registerError = false;</span>
+
+    /**
+     * Class constructor
+     */
+    public RegisterBean()
+<span class="nc" id="L52">    {</span>
+        
+<span class="nc" id="L54">    }</span>
+    
+    /**
+     * Called when user clicks &quot;register&quot; button.
+     * 
+     * This method will try to register the user if the input-data is sufficient.
+     * 
+     * @throws NoSuchAlgorithmException thrown when the encryption phase in the model was invalid.
+     */
+    public void register() throws NoSuchAlgorithmException
+    {
+<span class="nc" id="L65">        PersonDTO person = new PersonDTO(name,surname,ssn,email,username,</span>
+                password, &quot;applicant&quot;);
+<span class="nc" id="L67">        boolean valid = contr.validateRegistration(username);</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">        if (valid) {</span>
+<span class="nc" id="L69">            contr.registerUser(person);</span>
+<span class="nc" id="L70">            registerSuccess = true;</span>
+        }
+        else
+<span class="nc" id="L73">            registerError = true;</span>
+<span class="nc" id="L74">    }</span>
+    
+    private void clear(){
+<span class="nc" id="L77">        name = &quot;&quot;;</span>
+<span class="nc" id="L78">        surname = &quot;&quot;;</span>
+<span class="nc" id="L79">        ssn = &quot;&quot;;</span>
+<span class="nc" id="L80">        email = &quot;&quot;;</span>
+<span class="nc" id="L81">        password=&quot;&quot;;</span>
+<span class="nc" id="L82">        username =&quot;&quot;;</span>
+<span class="nc" id="L83">    }</span>
+   
+    /**
+     * getName
+     * @return name of the person to register
+     */
+    public String getName() 
+    {
+<span class="nc" id="L91">        return name;</span>
+    }
+    
+    /**
+     * Updates name
+     * @param name name of the person to register
+     */
+    public void setName(String name)
+    {
+<span class="nc" id="L100">        this.name = name;</span>
+<span class="nc" id="L101">    }</span>
+    
+    /**
+     * getSurname
+     * @return surname of the person to register
+     */
+    public String getSurname()
+    {
+<span class="nc" id="L109">        return surname;</span>
+    }
+    
+    /**
+     * Updates the surname of the person to register
+     * @param surname
+     */
+    public void setSurname(String surname)
+    {
+<span class="nc" id="L118">        this.surname = surname;</span>
+<span class="nc" id="L119">    }</span>
+    
+    /**
+     * getSsn
+     * @return ssn of the person to register
+     */
+    public String getSsn()
+    {
+<span class="nc" id="L127">        return ssn;</span>
+    }
+    
+    /**
+     * Updates the ssn of the person to register
+     * @param ssn of the person to register
+     */
+    public void setSsn(String ssn)
+    {
+<span class="nc" id="L136">        this.ssn = ssn;</span>
+<span class="nc" id="L137">    }</span>
+    
+    /**
+     * getEmail
+     * @return email of the person to register
+     */
+    public String getEmail()
+    {
+<span class="nc" id="L145">        return email;</span>
+    }
+    
+    /**
+     * Updates the email of the person to register
+     * @param mail of the person to register
+     */
+    public void setEmail(String mail)
+    {
+<span class="nc" id="L154">        this.email = mail;</span>
+<span class="nc" id="L155">    }</span>
+    
+    /**
+     * getUsername
+     * @return username of the person to register
+     */
+    public String getUsername()
+    {
+<span class="nc" id="L163">        return username;</span>
+    }
+    
+    /**
+     * Updates the username of the person to register
+     * @param username
+     */
+    public void setUsername(String username)
+    {
+<span class="nc" id="L172">        this.username = username;</span>
+<span class="nc" id="L173">    }</span>
+    
+    /**
+     * getPassword
+     * @return password of the person to register
+     */
+    public String getPassword() 
+    {
+<span class="nc" id="L181">        return password;</span>
+    }
+    
+    /**
+     * Updates the password of the person to register
+     * @param password of the person to register
+     */
+    public void setPassword(String password)
+    {
+<span class="nc" id="L190">        this.password = password;</span>
+<span class="nc" id="L191">    }</span>
+    
+    /**
+     * getRoll_id
+     * @return roll_id of the person to register
+     */
+    public String getRoll_id()
+    {
+<span class="nc" id="L199">        return roll_id;</span>
+    }    
+
+    /**
+     * Updates the roll_id of the person to register 
+     * @param roll_id of the person to register
+     */
+    public void setRoll_id(String roll_id)
+    {
+<span class="nc" id="L208">        this.roll_id = roll_id;</span>
+<span class="nc" id="L209">    }</span>
+
+    /**
+     * isRegisterSuccess
+     * @return boolean wether the most recent registration was successful or not
+     */
+    public boolean isRegisterSuccess() {
+<span class="nc" id="L216">        return registerSuccess;</span>
+    }
+
+    /**
+     * isRegisterError
+     * @return boolean wether the most recent registration was failed or not
+     */
+    public boolean isRegisterError() {
+<span class="nc" id="L224">        return registerError;</span>
+    }
+    
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.0.201210061924</span></div></body></html>

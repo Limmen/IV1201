@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ApplicationBean.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">IV1201</a> &gt; <a href="index.html" class="el_package">grupp14.IV1201.view</a> &gt; <span class="el_source">ApplicationBean.java</span></div><h1>ApplicationBean.java</h1><pre class="source lang-java linenums">/*
+* Classname: ApplicationBean
+* Version: 0.1
+* Date: 14-3-2016
+* Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+*/ 
+
+package grupp14.IV1201.view;
+
+import com.lowagie.text.DocumentException;
+import grupp14.IV1201.controller.ControllerEJB;
+import grupp14.IV1201.entities.Application;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.inject.Named;
+import javax.faces.view.ViewScoped;
+
+/**
+ * Managed bean representing the interface between the model and the
+ * applications-page.
+ * @author kim
+ */
+@Named(value = &quot;applicationBean&quot;)
+@ViewScoped
+<span class="nc" id="L29">public class ApplicationBean implements Serializable {</span>
+    @EJB
+    private ControllerEJB contr;
+    private List&lt;Application&gt; applications;
+    private Application selectedApplication;
+    
+    /**
+     * This method is called by the cdi-container after dependency-injection
+     * but before the class is put into service.
+     */
+    @PostConstruct
+    public void init(){
+<span class="nc" id="L41">        fetchApplications();        </span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if(applications == null)</span>
+<span class="nc" id="L43">            applications = new ArrayList();        </span>
+<span class="nc" id="L44">    }</span>
+    
+    /**
+     * This method will call the controller to fetch applications from the database.
+     * If it's a applicant requesting the application only the his/hers applications are retrieved.
+     * If it's a recruiter then all applications are retrieved.
+     */
+    public void fetchApplications(){
+<span class="nc" id="L52">        applications = new ArrayList();</span>
+<span class="nc" id="L53">        String username = contr.getUsername();</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">        if(contr.getRole(username).equals(&quot;applicant&quot;)){            </span>
+<span class="nc" id="L55">            applications = contr.getApplicationList(username);</span>
+        }
+        else{
+<span class="nc" id="L58">            applications = contr.getApplicationList();</span>
+        }
+<span class="nc" id="L60">    }</span>
+
+    /**
+     * Calls the controller to produce a PDF-file of the selected application
+     * @throws IOException IOException thrown when the specified URL cannot be found for the 
+     * redirection.
+     * @throws DocumentException Thrown when a error occurs in the creation of the pdf document.
+     */
+    public void createPDF() throws IOException, DocumentException{
+<span class="nc" id="L69">        contr.createPDF(selectedApplication);</span>
+<span class="nc" id="L70">    }</span>
+
+    /**
+     * getApplications
+     * @return list of applications
+     */
+    public List&lt;Application&gt; getApplications() {
+<span class="nc" id="L77">        return applications;</span>
+    }
+
+    /**
+     * getSelectedApplication
+     * @return the application that the user have selected currently
+     */
+    public Application getSelectedApplication() {
+<span class="nc" id="L85">        return selectedApplication;</span>
+    }
+
+    /**
+     * setSelectedApplication
+     * @param selectedApplication updates the selected application.
+     */
+    public void setSelectedApplication(Application selectedApplication) {
+<span class="nc" id="L93">        this.selectedApplication = selectedApplication;</span>
+<span class="nc" id="L94">    }</span>
+        
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.0.201210061924</span></div></body></html>

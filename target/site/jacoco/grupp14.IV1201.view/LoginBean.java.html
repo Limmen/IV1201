@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>LoginBean.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">IV1201</a> &gt; <a href="index.html" class="el_package">grupp14.IV1201.view</a> &gt; <span class="el_source">LoginBean.java</span></div><h1>LoginBean.java</h1><pre class="source lang-java linenums">/*
+* Classname: LoginBean
+* Version: 0.1
+* Date: 15-2-2016
+* Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+*/
+
+package grupp14.IV1201.view;
+
+import grupp14.IV1201.controller.ControllerEJB;
+import grupp14.IV1201.util.GenericLogger;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
+import javax.servlet.http.HttpSession;
+import javax.validation.constraints.Size;
+
+/**
+ * Managed bean representing the interface between the model and the
+ * login-page.
+ * @author kim
+ */
+@GenericLogger
+@Named(value = &quot;loginBean&quot;)
+@RequestScoped
+<span class="nc" id="L28">public class LoginBean</span>
+{
+    @EJB
+    private ControllerEJB contr;
+    @Size(min=3, max=16, message=&quot;username needs to be between&quot;
+            + &quot; 3 and 16 characters long&quot;)
+    private String username;
+    @Size(min=6, max=30, message=&quot;Password needs to be between&quot;
+            + &quot; 6 and 16 characters long&quot;)
+    private String password;
+<span class="nc" id="L38">    private boolean applicant = false;</span>
+<span class="nc" id="L39">    private boolean recruit = false;</span>
+<span class="nc" id="L40">    private boolean failed = false;</span>
+<span class="nc" id="L41">    private boolean logout = false;</span>
+    
+    /**
+     * This method is called when the user clicks the &quot;login&quot; button.
+     *
+     * The method will validate the user's credentials and redirect to the
+     * suitable page.
+     *
+     * @throws NoSuchAlgorithmException thrown when the encryption phase in the model was invalid.
+     */
+    
+    public void login() throws NoSuchAlgorithmException
+    {
+<span class="nc" id="L54">        boolean valid = contr.validateLogin(username, password);</span>
+<span class="nc" id="L55">        String role = contr.getRole(username);</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        if (valid) {</span>
+<span class="nc" id="L57">            HttpSession session = contr.getSession();</span>
+<span class="nc" id="L58">            session.setAttribute(&quot;username&quot;, username);</span>
+<span class="nc" id="L59">            session.setAttribute(&quot;role&quot;, role);</span>
+<span class="nc" id="L60">            navigation(role);</span>
+<span class="nc" id="L61">        } else {</span>
+<span class="nc" id="L62">            failedLogin();</span>
+        }
+<span class="nc" id="L64">    }</span>
+    
+    /**
+     * This method will invalidate the user's session.
+     */
+    public void logout()
+    {
+<span class="nc" id="L71">        HttpSession session = contr.getSession();</span>
+<span class="nc" id="L72">        session.invalidate();</span>
+<span class="nc" id="L73">        logout = true;</span>
+<span class="nc" id="L74">        failed = false;</span>
+<span class="nc" id="L75">        recruit = false;</span>
+<span class="nc" id="L76">        applicant = false;</span>
+<span class="nc" id="L77">    }</span>
+    
+    private void failedLogin()
+    {
+<span class="nc" id="L81">        java.util.logging.Logger.getLogger(&quot;grupp14.IV1201&quot;).log(Level.INFO, &quot;FAILED LOGIN ATTEMPT&quot;);</span>
+<span class="nc" id="L82">        failed = true;</span>
+<span class="nc" id="L83">        recruit = false;</span>
+<span class="nc" id="L84">        applicant = false;</span>
+<span class="nc" id="L85">        logout = false;</span>
+<span class="nc" id="L86">    }</span>
+    
+    private void navigation(String role)
+    {
+<span class="nc bnc" id="L90" title="All 2 branches missed.">        if(role.equals(&quot;applicant&quot;)){</span>
+<span class="nc" id="L91">            applicant = true;</span>
+<span class="nc" id="L92">            recruit = false;</span>
+<span class="nc" id="L93">            failed = false;</span>
+<span class="nc" id="L94">            logout = false;</span>
+        }
+<span class="nc bnc" id="L96" title="All 2 branches missed.">        if(role.equals(&quot;recruit&quot;)){</span>
+<span class="nc" id="L97">            recruit = true;</span>
+<span class="nc" id="L98">            applicant = false;</span>
+<span class="nc" id="L99">            failed = false;</span>
+<span class="nc" id="L100">            logout = false;</span>
+        }
+<span class="nc" id="L102">    }</span>
+    
+    /**
+     * getUsername
+     * @return username
+     */
+    public String getUsername()
+    {
+<span class="nc" id="L110">        return username;</span>
+    }
+    
+    /**
+     * Updates username
+     * @param loginUsername new username
+     */
+    public void setUsername(String loginUsername)
+    {
+<span class="nc" id="L119">        this.username = loginUsername;</span>
+<span class="nc" id="L120">    }</span>
+    
+    /**
+     * getPassword
+     * @return password
+     */
+    public String getPassword()
+    {
+<span class="nc" id="L128">        return password;</span>
+    }
+    
+    /**
+     * Updates password
+     * @param loginPassword new password
+     */
+    public void setPassword(String loginPassword)
+    {
+<span class="nc" id="L137">        this.password = loginPassword;</span>
+<span class="nc" id="L138">    }</span>
+
+    /**
+     * isApplicant 
+     * @return boolean wether the login was a applicant
+     */
+    public boolean isApplicant() 
+    {
+<span class="nc" id="L146">        return applicant;</span>
+    }
+
+    /**
+     * isRecruit
+     * @return boolean wether the login was a recruit
+     */
+    public boolean isRecruit() 
+    {
+<span class="nc" id="L155">        return recruit;</span>
+    }
+
+    /**
+     * isFailed
+     * @return boolean wether the login was failed
+     */
+    public boolean isFailed() 
+    {
+<span class="nc" id="L164">        return failed;</span>
+    }
+
+    /**
+     * isLogout
+     * @return boolean if the user clicked logout
+     */
+    public boolean isLogout() 
+    {
+<span class="nc" id="L173">        return logout;</span>
+    }
+    
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.0.201210061924</span></div></body></html>

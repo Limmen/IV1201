@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>HttpSessionBean.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">IV1201</a> &gt; <a href="index.html" class="el_package">grupp14.IV1201.model</a> &gt; <span class="el_source">HttpSessionBean.java</span></div><h1>HttpSessionBean.java</h1><pre class="source lang-java linenums">/* 
+ * Classname: HttpSessionBean
+ * Version: 0.1
+ * Date: 15-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+ */
+
+package grupp14.IV1201.model;
+
+import javax.ejb.Stateless;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+/**
+ * This class handles HTTP sessions.
+ * @author kim
+ */
+@Stateless
+<span class="fc" id="L20">public class HttpSessionBean</span>
+{
+
+    FacesContext getFacesContext() {
+<span class="nc" id="L24">        return FacesContext.getCurrentInstance();</span>
+    }
+    
+    /**
+     * getSession
+     * @return the http session of the user making the request.
+     */
+    public HttpSession getSession() 
+    {
+<span class="fc" id="L33">        return (HttpSession) getFacesContext()</span>
+                .getExternalContext().getSession(false);
+    }
+    
+    /**
+     * getRequest
+     * @return the current HTTP-request.
+     */
+    public HttpServletRequest getRequest()
+    {
+<span class="fc" id="L43">        return (HttpServletRequest) getFacesContext()</span>
+                .getExternalContext().getRequest();
+    }
+    
+    /**
+     * getUsername
+     * @return username of the current HTTP-session.
+     */
+    public String getUserName()
+    {
+<span class="fc" id="L53">        HttpSession session = (HttpSession) getFacesContext()</span>
+                .getExternalContext().getSession(false);
+<span class="fc" id="L55">        return session.getAttribute(&quot;username&quot;).toString();</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.0.201210061924</span></div></body></html>

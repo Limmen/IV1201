@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>LoginEJB.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">IV1201</a> &gt; <a href="index.html" class="el_package">grupp14.IV1201.model</a> &gt; <span class="el_source">LoginEJB.java</span></div><h1>LoginEJB.java</h1><pre class="source lang-java linenums">/* 
+ * Classname: LoginEJB
+ * Version: 0.1
+ * Date: 15-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+ */
+package grupp14.IV1201.model;
+
+import grupp14.IV1201.entities.Person;
+import grupp14.IV1201.util.LogManager;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.validation.constraints.Size;
+
+/**
+ * EnterpriseBean that handles login-transactions.
+ * @author marcelmattsson, alexander
+ */
+@Stateless
+<span class="fc" id="L26">public class LoginEJB</span>
+{
+    @PersistenceContext(unitName = &quot;grupp14_IV1201_war_1.0-SNAPSHOTPU&quot;)
+    private EntityManager em;
+<span class="fc" id="L30">    private final SHA512 sha = new SHA512();</span>
+    private LogManager logManager;
+
+    void setEm(EntityManager em) 
+    {
+<span class="fc" id="L35">        this.em = em;</span>
+<span class="fc" id="L36">    }        </span>
+    /**
+     * Validates login from user.
+     * 
+     * Uses the entity manager to call the .createNamedQuery method to find a person by username.
+     * Fetches the password if the user is found in the DB and decrypts the encrypted
+     * password in order to check if the @param password is the same. If the user is found and the
+     * password matches it will return true. If it catches an exception it will return false.
+     * 
+     *
+
+     * @param username username of the login-request
+     * @param password password of the login request
+     * @return true if successful login, otherwise false.
+     * @throws java.security.NoSuchAlgorithmException thrown when the encryption phase is invalid.
+     * @throws NoResultException thrown when no user was found with the specified username
+     * @throws NonUniqueResultException thrown when multiple users with the same username was found.
+     */
+    public boolean validateLogin(@Size(min=3, max=16) String username,
+            @Size(min=6, max=30) String password)
+            throws NoSuchAlgorithmException
+    {
+<span class="fc" id="L58">        TypedQuery&lt;Person&gt; query = em.createNamedQuery(&quot;Person.findByUserName&quot;, Person.class);</span>
+<span class="fc" id="L59">        query.setParameter(&quot;username&quot;, username);</span>
+        try {
+<span class="fc" id="L61">            Person p = query.getSingleResult();</span>
+<span class="fc" id="L62">            return p.getPassword().equals(sha.encrypt(password));</span>
+<span class="fc" id="L63">        } catch (NoResultException | NonUniqueResultException e) {</span>
+<span class="fc" id="L64">            logManager.log(&quot;LOGIN VALIDATION FAILED&quot;, Level.WARNING);</span>
+<span class="fc" id="L65">            return false;</span>
+        }
+    }
+
+    /**
+     * Finds the role of a given person.
+     * 
+     * Uses the entity manager to call the .createNamedQuery method to find a person by username. 
+     * If the user is found it returns its role. If an exception is caught it will return false.
+     * 
+     * @param username username of the person in question
+     * @return Role of the person
+     * @throws NoResultException thrown when no user was found with the specified username
+     * @throws NonUniqueResultException thrown when multiple users with the same username was found.
+     */
+    public String getRole(@Size(min=3, max=16) String username)
+    {
+<span class="fc" id="L82">        TypedQuery&lt;Person&gt; query = em.createNamedQuery(&quot;Person.findByUserName&quot;, Person.class);</span>
+<span class="fc" id="L83">        query.setParameter(&quot;username&quot;, username);</span>
+        try {
+<span class="fc" id="L85">            Person p = query.getSingleResult();</span>
+<span class="fc" id="L86">            return p.getRoll_id();</span>
+<span class="fc" id="L87">        } catch (NoResultException | NonUniqueResultException e) {</span>
+<span class="fc" id="L88">            logManager.log(&quot;GET ROLE REQUEST FOR NON-EXISTING USERNAME&quot;, Level.WARNING);</span>
+<span class="fc" id="L89">            return &quot;&quot;;</span>
+        }
+    }
+    
+    /**
+     * Sets the logManager
+     * @param logManager logmanager that is used to log application exceptions
+     */
+    public void setLogManager(LogManager logManager)
+    {
+<span class="fc" id="L99">        this.logManager = logManager;</span>
+<span class="fc" id="L100">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.0.201210061924</span></div></body></html>

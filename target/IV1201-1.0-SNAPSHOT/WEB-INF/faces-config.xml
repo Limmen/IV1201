@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    
+    <!-- Add localization -->
+    <application>
+        <resource-bundle>
+            <base-name>grupp14.IV1201.view.Messages</base-name>
+            <var>messages</var>
+        </resource-bundle>
+    </application>
+    
+    <!-- Navigation rules -->
+    <navigation-rule>
+        <from-view-id>login.xhtml</from-view-id>
+        <navigation-case>
+            <if>#{loginBean.logout}</if>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <if>#{loginBean.applicant}</if>
+            <to-view-id>/applicant/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <if>#{loginBean.recruit}</if>
+            <to-view-id>/recruit/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <if>#{loginBean.failed}</if>
+            <to-view-id>/loginerror.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>       
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>applicant/index.xhtml</from-view-id>
+        <navigation-case>
+            <if>#{loginBean.logout}</if>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>recruit/index.xhtml</from-view-id>
+        <navigation-case>
+            <if>#{loginBean.logout}</if>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule>
+        <from-view-id>applicant/apply.xhtml</from-view-id>
+        <navigation-case>
+            <if>#{applyBean.applicationFailed}</if>
+            <to-view-id>/applicant/applicationerror.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <if>#{applyBean.applicationSuccess}</if>
+            <to-view-id>/applicant/applicationsuccess.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>register.xhtml</from-view-id>
+        <navigation-case>
+            <if>#{registerBean.registerError}</if>
+            <to-view-id>/registererror.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <if>#{registerBean.registerSuccess}</if>
+            <to-view-id>/registersuccess.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>

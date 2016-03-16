@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Application.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">IV1201</a> &gt; <a href="index.html" class="el_package">grupp14.IV1201.entities</a> &gt; <span class="el_source">Application.java</span></div><h1>Application.java</h1><pre class="source lang-java linenums">/*
+* Classname: Application
+* Version: 0.1
+* Date: 15-2-2016
+* Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+*/
+
+package grupp14.IV1201.entities;
+
+import grupp14.IV1201.DTO.ApplicationDTO;
+import java.io.Serializable;
+import java.math.BigInteger;
+import java.sql.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
+/**
+ * Entity that represents a Application.
+ * @author marcelmattsson, alexander
+ */
+@Entity
+@NamedQueries({
+    @NamedQuery(name=&quot;Application.findByUser&quot;,
+            query=&quot;SELECT p FROM Application p WHERE p.person = :person&quot;),
+})
+public class Application implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private BigInteger id;
+    private float yearsOfExperience;
+    @ManyToOne
+    private Person person;
+    @ManyToOne
+    private Expertise expertise;
+    private java.sql.Date dateFrom;
+    private java.sql.Date dateTo;
+    
+    /**
+     * Class constructor
+     */
+<span class="nc" id="L47">    public Application(){}</span>
+    
+    /**
+     * Class constructor
+     * @param applikationInfo DataTransferObject of application parameters
+     */
+    public Application(ApplicationDTO applikationInfo)
+<span class="fc" id="L54">    {</span>
+<span class="fc" id="L55">        this.yearsOfExperience = applikationInfo.getYearsOfExperience();</span>
+<span class="fc" id="L56">        this.person = applikationInfo.getPerson();</span>
+<span class="fc" id="L57">        this.expertise = applikationInfo.getExpertise();</span>
+<span class="fc" id="L58">        this.dateFrom = applikationInfo.getDateFrom();</span>
+<span class="fc" id="L59">        this.dateTo = applikationInfo.getDateTo();</span>
+<span class="fc" id="L60">    }</span>
+    
+    /**
+     * getSerialVersionUid
+     * @return serialVersionUID
+     */
+    public static long getSerialVersionUID() {
+<span class="nc" id="L67">        return serialVersionUID;</span>
+    }
+    
+    /**
+     * getId
+     * @return Id of the application
+     */
+    public BigInteger getId() {
+<span class="nc" id="L75">        return id;</span>
+    }
+    
+    /**
+     * getYearsOfExperience
+     * @return years of experience of the application
+     */
+    public float getYearsOfExperience() {
+<span class="nc" id="L83">        return yearsOfExperience;</span>
+    }
+
+    /**
+     * Updates the years of experience of the application
+     * @param yearsOfExperience float
+     */
+    public void setYearsOfExperience(float yearsOfExperience) {
+<span class="nc" id="L91">        this.yearsOfExperience = yearsOfExperience;</span>
+<span class="nc" id="L92">    }        </span>
+    
+    /**
+     * getPerson
+     * @return person that made the application
+     */
+    public Person getPerson() {
+<span class="nc" id="L99">        return person;</span>
+    }
+
+    /**
+     * Updates the person that made the application
+     * @param person Person
+     */
+    public void setPerson(Person person) {
+<span class="nc" id="L107">        this.person = person;</span>
+<span class="nc" id="L108">    }        </span>
+    
+    /**
+     * getExpertise
+     * @return expertise of the application
+     */
+    public Expertise getExpertise() {
+<span class="nc" id="L115">        return expertise;</span>
+    }
+
+    /**
+     * Updates the expertise profile of the application
+     * @param expertise
+     */
+    public void setExpertise(Expertise expertise) {
+<span class="nc" id="L123">        this.expertise = expertise;</span>
+<span class="nc" id="L124">    }        </span>
+    
+    /**
+     * getDateFrom
+     * @return date from when the person is available
+     */
+    public Date getDateFrom() {
+<span class="nc" id="L131">        return dateFrom;</span>
+    }
+
+    /**
+     * Updates the date from when the person is available of the application
+     * @param dateFrom Date
+     */
+    public void setDateFrom(Date dateFrom) {
+<span class="nc" id="L139">        this.dateFrom = dateFrom;</span>
+<span class="nc" id="L140">    }</span>
+        
+    /**
+     * getDateTo
+     * @return date to when the person is available
+     */
+    public Date getDateTo() {
+<span class="nc" id="L147">        return dateTo;</span>
+    }
+
+    /**
+     * Updates the date to when the person is available of the application
+     * @param dateTo Date
+     */
+    public void setDateTo(Date dateTo) {
+<span class="nc" id="L155">        this.dateTo = dateTo;</span>
+<span class="nc" id="L156">    }</span>
+        
+    /**
+     * Generates and returns a hashcode
+     * @return integer hashcode
+     */
+    @Override
+    public int hashCode() {
+<span class="nc" id="L164">        int hash = 0;</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">        hash += (id != null ? id.hashCode() : 0);</span>
+<span class="nc" id="L166">        return hash;</span>
+    }
+    
+    /**
+     * equals method, used to compare if two applications are equal
+     * @param object object to compare to
+     * @return
+     */
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+<span class="nc bnc" id="L177" title="All 2 branches missed.">        if (!(object instanceof Application)) {</span>
+<span class="nc" id="L178">            return false;</span>
+        }
+<span class="nc" id="L180">        Application other = (Application) object;</span>
+<span class="nc bnc" id="L181" title="All 8 branches missed.">        if ((this.id == null &amp;&amp; other.id != null) || (this.id != null &amp;&amp; !this.id.equals(other.id))) {</span>
+<span class="nc" id="L182">            return false;</span>
+        }
+<span class="nc" id="L184">        return true;</span>
+    }
+    
+    /**
+     * toString.
+     * @return  a string representation of the person
+     */
+    @Override
+    public String toString() {
+<span class="nc" id="L193">        return &quot;grupp14.IV1201.entities.Erfarenhet[ id=&quot; + id + &quot; ]&quot;;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.0.201210061924</span></div></body></html>

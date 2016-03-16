@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>LocaleManager.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">IV1201</a> &gt; <a href="index.html" class="el_package">grupp14.IV1201.util</a> &gt; <span class="el_source">LocaleManager.java</span></div><h1>LocaleManager.java</h1><pre class="source lang-java linenums">/*
+ * Classname: LocaleManager
+ * Version: 0.1
+ * Date: 15-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+ */
+
+package grupp14.IV1201.util;
+
+import java.io.Serializable;
+import java.util.Locale;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.inject.Named;
+
+/**
+ * This class contains state that decides the correct locale for the entire application.
+ */
+@Named(value=&quot;localeManager&quot;)
+@SessionScoped
+<span class="nc" id="L22">public class LocaleManager implements Serializable {</span>
+    
+    private Locale locale;
+    
+    /**
+     * This method is called by the cdi-container after dependency-injection
+     * but before the class is put into service.
+     * 
+     * Initializes the locale.
+     */
+    @PostConstruct
+    public void init(){
+<span class="nc" id="L34">        locale = FacesContext.getCurrentInstance().getExternalContext().getRequestLocale();</span>
+<span class="nc" id="L35">    }</span>
+    /**
+     * Changes the locale of the application.
+     */
+    public void changeLocale() 
+    {
+<span class="nc" id="L41">        locale = new Locale(getLanguageCode());</span>
+<span class="nc" id="L42">        FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);</span>
+<span class="nc" id="L43">    }</span>
+    
+    /**
+     * getLocale
+     * @return the current locale
+     */
+    public Locale getLocale()
+    {
+<span class="nc" id="L51">        return locale;</span>
+    }
+    
+    private String getLanguageCode() 
+    {
+<span class="nc" id="L56">        return FacesContext.getCurrentInstance().getExternalContext()</span>
+                .getRequestParameterMap().get(&quot;languageCode&quot;);
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.0.201210061924</span></div></body></html>

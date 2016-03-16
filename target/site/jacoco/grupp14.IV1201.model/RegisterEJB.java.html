@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>RegisterEJB.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">IV1201</a> &gt; <a href="index.html" class="el_package">grupp14.IV1201.model</a> &gt; <span class="el_source">RegisterEJB.java</span></div><h1>RegisterEJB.java</h1><pre class="source lang-java linenums">/* 
+ * Classname: RegisterEJB
+ * Version: 0.1
+ * Date: 15-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+ */
+
+package grupp14.IV1201.model;
+
+import grupp14.IV1201.DTO.PersonDTO;
+import grupp14.IV1201.entities.Person;
+import grupp14.IV1201.util.LogManager;
+import java.security.NoSuchAlgorithmException;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+/**
+ * EnterpriseBean that handles registration transactions.
+ * @author marcelmattsson, alexander
+ */
+@Stateless
+<span class="fc" id="L26">public class RegisterEJB</span>
+{
+    @PersistenceContext(unitName = &quot;grupp14_IV1201_war_1.0-SNAPSHOTPU&quot;)
+    private EntityManager em;
+    private LogManager logManager;
+
+    void setEm(EntityManager em) 
+    {
+<span class="fc" id="L34">        this.em = em;</span>
+<span class="fc" id="L35">    }</span>
+        
+    /**
+     * Adds a new user(Person) to the DB.
+     * 
+     * Uses entity manager to call the .persist method to add a new user to the DB with the help of
+     * a PersonDTO.
+     * 
+     * @param p data-transfer-object of Person details.
+     * @throws java.security.NoSuchAlgorithmException thrown when the encryption phase is invalid.
+     * 
+     */    
+    public void register(@NotNull PersonDTO p) throws NoSuchAlgorithmException
+    {
+<span class="fc" id="L49">        em.persist(new Person(p));</span>
+<span class="fc" id="L50">    }</span>
+
+    /**
+     * Validates a registration.
+     * 
+     * Uses the entity manager to call the .createNamedQuery to find a person by username in the 
+     * DB. If the username does not exist in the DB it will return true. Otherwise it will return
+     * false
+     * 
+     * @param username username of the person to lookup
+     * @return true if the username exists, otherwise false.
+     */
+    public boolean validateRegistration(@Size(min=3, max=16) String username)
+    {
+<span class="fc" id="L64">        TypedQuery&lt;Person&gt; query = em.createNamedQuery(&quot;Person.findByUserName&quot;, Person.class);</span>
+<span class="fc" id="L65">        query.setParameter(&quot;username&quot;, username);</span>
+<span class="fc" id="L66">        return query.getResultList().isEmpty(); //check if username is taken.</span>
+    }
+    
+    /**
+     * Sets the logManager
+     * @param logManager logmanager that is used to log application exceptions
+     */
+    public void setLogManager(LogManager logManager)
+    {
+<span class="nc" id="L75">        this.logManager = logManager;</span>
+<span class="nc" id="L76">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.0.201210061924</span></div></body></html>

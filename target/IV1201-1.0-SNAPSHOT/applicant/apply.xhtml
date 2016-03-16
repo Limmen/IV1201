@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:p="http://primefaces.org/ui">  
+        
+    <!-- page where applicants can apply -->
+    <ui:composition template="/templates/default/main.xhtml">
+        <ui:define name="content">
+            <b:button value="&lt;" outcome="index"/>
+            <ui:fragment rendered="#{empty username}">
+                <h4 class="margin-top">You need to be logged in to place an application</h4>
+                <h:link value="Log in here" outcome="login"/>
+            </ui:fragment>
+            <ui:fragment rendered="#{not empty username}">
+                <h4 class="applyForm">Create job-application</h4>
+                <h:panelGroup layout="block" id="content">
+                <h:form>                    
+                    <h:outputLabel value="Choose your area of expertise" 
+                                   for="expertise" />
+                    <b:selectOneMenu value="#{applyBean.expertise}" id="expertise" onchange="submit()">
+                        <f:ajax execute="expertise" render=":content"/>
+                        <f:selectItems value="#{applyBean.expertiseList}"/>
+                    </b:selectOneMenu>
+                    <h:message for="expertise"/>
+                    </h:form>
+                <h:form>
+                    <label for="years">Years of experience in the area:</label>
+                    <h:inputText class="form-control" id="years"
+                                 value="#{applyBean.years}" 
+                                 required="true" 
+                                 requiredMessage="Please enter years of experience"
+                                 onblur="submit()">
+                        <f:ajax execute="years" render=":content"/>
+                    </h:inputText>
+                    <h:message for="years" style="color:red"/>
+                    </h:form>
+                <h:form>
+                    <h:outputLabel value="Available from" 
+                                   for="fromDate" />    
+                    <p:calendar id="fromDate" value="#{applyBean.availableFrom}"
+                                pattern="dd/MM/yyyy" onchange="submit()" 
+                                style="display:block"
+                                placeholder="Available from">
+                        <p:ajax event="dateSelect" update=":content" />
+                    </p:calendar> 
+                    <h:message for="fromDate" style="color:red"/>
+                    </h:form>
+                    <h:form>
+                    <h:outputLabel value="Available to" 
+                                   for="toDate" />    
+                    <p:calendar id="toDate" value="#{applyBean.availableTo}"
+                                pattern="MM/dd/yyyy" onchange="submit()" 
+                                style="display:block"
+                                placeholder="Available to">
+                        <p:ajax event="dateSelect" update=":content" />
+                        <h:message for="toDate" style="color:red"/>
+                    </p:calendar>  
+                    </h:form>
+                    <h:form>
+                    <h4 class="yourApp">Your Application</h4>
+                    
+                    <p><span class="bold">Expertise: </span><h:outputText id="expertiseOutput" value="#{applyBean.expertise}"/></p>
+                    <p><span class="bold">Years of experience: </span><h:outputText id="yearsOutput" value="#{applyBean.years}"/></p>
+                    <p><span class="bold">Availability period: </span>
+                        <h:outputText id="availabilityFromOutput" value="#{applyBean.availableFrom}"/>
+                        - <h:outputText id="availabilityToOutput" value="#{applyBean.availableTo}"/></p>
+                    <b:commandButton value="Hand in application" action="#{applyBean.apply()}">
+                        Hand in application
+                    </b:commandButton>
+                    <b:commandButton value="Cancel" action="#{applyBean.clear()}">
+                        Cancel
+                    </b:commandButton>
+                </h:form>
+                    </h:panelGroup>
+            </ui:fragment>
+        </ui:define>
+    </ui:composition>        
+        
+</html>  

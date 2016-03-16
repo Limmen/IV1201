@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>GenericLoggerInterceptor.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">IV1201</a> &gt; <a href="index.html" class="el_package">grupp14.IV1201.util</a> &gt; <span class="el_source">GenericLoggerInterceptor.java</span></div><h1>GenericLoggerInterceptor.java</h1><pre class="source lang-java linenums">/*
+* Classname: GenericLoggerInterceptor
+* Version: 0.1
+* Date: 15-2-2016
+* Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+*/
+
+package grupp14.IV1201.util;
+
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.logging.Level;
+import javax.interceptor.AroundInvoke;
+import javax.interceptor.Interceptor;
+import javax.interceptor.InvocationContext;
+
+/**
+ * Interceptor for Generic logging.
+ *
+ * Will cause the following methods to be called in conjunction with the annotated methods in
+ * managed beans.
+ * @author kim
+ */
+
+@GenericLogger
+@Interceptor
+<span class="nc" id="L27">public class GenericLoggerInterceptor</span>
+{
+    private static final java.util.logging.Logger
+<span class="nc" id="L30">            LOGGER = java.util.logging.Logger.getLogger(&quot;grupp14.IV1201&quot;);</span>
+<span class="nc" id="L31">    private static final Level FINEST = Level.FINEST;</span>
+<span class="nc" id="L32">    private static final Level SEVERE = Level.SEVERE;</span>
+    
+    /**
+     * This method is called when the annotated method is invoked.
+     *
+     * @param ctx context information about the intercepted invocation.
+     * @return the invocated method.
+     * @throws Exception if a exception is called from the intercepted method.
+     */
+    @AroundInvoke
+    public Object logInvocation(InvocationContext ctx) throws Exception
+    {   
+        /* Log entry */
+<span class="nc" id="L45">        Method targetMethod = logEntry(ctx);</span>
+<span class="nc" id="L46">        Object returnValue = null;</span>
+        try {
+            /* Execute method */
+<span class="nc" id="L49">            returnValue = ctx.proceed();</span>
+<span class="nc" id="L50">        } catch (Exception e) {</span>
+            /* Log exception */
+<span class="nc" id="L52">            logException(targetMethod, e);</span>
+<span class="nc" id="L53">        }</span>
+        /* Log exit */
+<span class="nc" id="L55">        logExit(targetMethod, returnValue);</span>
+<span class="nc" id="L56">        return returnValue;</span>
+    }
+    
+    private void logExit(Method targetMethod, Object returnValue)
+    {
+<span class="nc" id="L61">        Object[] args = {targetMethod.getDeclaringClass().getCanonicalName(),</span>
+            targetMethod.getName()};
+<span class="nc" id="L63">        LOGGER.log(FINEST, &quot;Call to {0}.{1} completed&quot;, args);</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        if (!isVoid(targetMethod)) {</span>
+<span class="nc" id="L65">            LOGGER.log(FINEST, &quot;    Return value: {0}&quot;, returnValue);</span>
+        }
+<span class="nc" id="L67">    }</span>
+    
+    private void logException(Method targetMethod, Exception e) throws Exception
+    {
+<span class="nc" id="L71">        Object[] args = {targetMethod.getDeclaringClass().getCanonicalName(),</span>
+            targetMethod.getName(), e.getClass().getCanonicalName()};
+<span class="nc" id="L73">        LOGGER.log(SEVERE, &quot;{0}.{1} threw {2}&quot;, args);</span>
+<span class="nc" id="L74">        throw (e);</span>
+    }
+    
+    private Method logEntry(InvocationContext ctx)
+    {
+<span class="nc" id="L79">        Method targetMethod = ctx.getMethod();</span>
+<span class="nc" id="L80">        Object[] params = ctx.getParameters();</span>
+<span class="nc" id="L81">        LOGGER.log(FINEST, &quot;Entering: {0}&quot;, targetMethod.toGenericString());</span>
+<span class="nc" id="L82">        LOGGER.log(FINEST, &quot;    Parameters: {0}&quot;, Arrays.toString(params));</span>
+<span class="nc" id="L83">        return targetMethod;</span>
+    }
+    
+    private boolean isVoid(Method targetMethod)
+    {
+<span class="nc" id="L88">        return targetMethod.getReturnType().isAssignableFrom(Void.TYPE);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.0.201210061924</span></div></body></html>

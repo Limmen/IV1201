@@ -2,15 +2,18 @@
 
 ## Description
 
-TODO
+Web-based recruitment system with interfaces both for applicants and recruiters. Part of a assignment in a course at KTH Royal Institute of Technology.
+
+![Screenshot](screenshots/screenshot.png "Screenshot")
 
 ## How to run
 
-TODO
+Run the project from inside NetBeans or other IDE that has integrated support for Glassfish server
 
 ## Documentation
 
-TODO
+- Arhitectural document can be found in the folder "report"
+- JavaDoc at target/site/apidocs/index.html
 
 ## Author
 

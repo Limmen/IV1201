@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ApplyBean.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">IV1201</a> &gt; <a href="index.html" class="el_package">grupp14.IV1201.view</a> &gt; <span class="el_source">ApplyBean.java</span></div><h1>ApplyBean.java</h1><pre class="source lang-java linenums">/*
+* Classname: ApplyBean
+* Version: 0.1
+* Date: 15-2-2016
+* Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+*/
+
+package grupp14.IV1201.view;
+
+import grupp14.IV1201.DTO.ApplicationDTO;
+import grupp14.IV1201.controller.ControllerEJB;
+import grupp14.IV1201.entities.Expertise;
+import grupp14.IV1201.entities.Person;
+import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.Future;
+
+/**
+ * ManagedBean representing the interface between the model and the
+ * apply-page.
+ * @author kim
+ */
+
+@Named(value = &quot;applyBean&quot;)
+@SessionScoped
+<span class="nc" id="L34">public class ApplyBean implements Serializable</span>
+{
+    @EJB
+    ControllerEJB contr;
+    private List&lt;String&gt; expertiseList;
+    private String expertise;
+<span class="nc" id="L40">    private Date availableFrom = new Date();</span>
+<span class="nc" id="L41">    @Future(message=&quot;We're only interested in applications from possible&quot;</span>
+            + &quot; future employees&quot;)
+    private Date availableTo = new Date();
+<span class="nc" id="L44">    @DecimalMax(value=&quot;200&quot;)</span>
+    private float years = 0;
+<span class="nc" id="L46">    private boolean applicationSuccess = false;</span>
+<span class="nc" id="L47">    private boolean applicationFailed = false;</span>
+    
+    
+    /**
+     * This method is called by the cdi-container after dependency-injection
+     * but before the class is put into service.
+     */
+    @PostConstruct
+    public void init()
+    {
+<span class="nc" id="L57">        expertiseList = new ArrayList();</span>
+<span class="nc" id="L58">        expertiseList.add(&quot;Please select&quot;);</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        for(Expertise s : contr.getExpertiseList()){</span>
+<span class="nc" id="L60">            expertiseList.add(s.getExpertise());</span>
+<span class="nc" id="L61">        }</span>
+<span class="nc" id="L62">    }</span>
+    
+    /**
+     * This method is called when the user clicks the &quot;apply&quot; button
+     * on the apply-page.
+     *
+     * The method will call the controller to place an application.
+     * @throws NoSuchAlgorithmException thrown when the encryption phase in the model was invalid.
+     */
+    public void apply() throws NoSuchAlgorithmException
+    {
+<span class="nc" id="L73">        String username = contr.getUsername();</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if(username != null){</span>
+<span class="nc" id="L75">            Person person = contr.getPerson(username);</span>
+<span class="nc" id="L76">            Expertise exp = contr.getExpertise(expertise);</span>
+<span class="nc bnc" id="L77" title="All 4 branches missed.">            if(person == null || exp == null){</span>
+<span class="nc" id="L78">                applicationFailed = true;</span>
+<span class="nc" id="L79">                applicationSuccess = false;</span>
+            }
+            
+            else{
+<span class="nc" id="L83">                ApplicationDTO app = new ApplicationDTO(years,person, exp,</span>
+                        new java.sql.Date(availableFrom.getTime()),
+                        new java.sql.Date(availableTo.getTime()));
+                try{
+<span class="nc" id="L87">                    contr.apply(app);</span>
+<span class="nc" id="L88">                    applicationSuccess = true;</span>
+<span class="nc" id="L89">                    applicationFailed = false;</span>
+<span class="nc" id="L90">                }catch(Exception e){</span>
+<span class="nc" id="L91">                    applicationFailed = true;</span>
+<span class="nc" id="L92">                    applicationSuccess = false;</span>
+<span class="nc" id="L93">                }</span>
+            }
+        }
+<span class="nc" id="L96">        clear();</span>
+<span class="nc" id="L97">    }</span>
+    
+    /**
+     * This method clears the filled in fields.
+     */
+    public void clear()
+    {
+<span class="nc" id="L104">        expertise = &quot;&quot;;</span>
+<span class="nc" id="L105">        availableFrom = new Date();</span>
+<span class="nc" id="L106">        availableTo = new Date();</span>
+<span class="nc" id="L107">        years = 0;</span>
+<span class="nc" id="L108">    }</span>
+    
+    /**
+     * getExpertiseList
+     * @return list of expertises
+     */
+    public List&lt;String&gt; getExpertiseList()
+    {
+<span class="nc" id="L116">        return expertiseList;</span>
+    }
+    
+    /**
+     * @param expertiseList a list of expertises
+     */
+    public void setExpertiseList(List&lt;String&gt; expertiseList)
+    {
+<span class="nc" id="L124">        this.expertiseList = expertiseList;</span>
+<span class="nc" id="L125">    }</span>
+    
+    /**
+     * getExpertise
+     * @return the selected expertise
+     */
+    public String getExpertise()
+    {
+<span class="nc" id="L133">        return expertise;</span>
+    }
+    
+    /**
+     * updates the selected expertise
+     * @param expertise  the new selected expertise
+     */
+    public void setExpertise(String expertise)
+    {
+<span class="nc" id="L142">        this.expertise = expertise;</span>
+<span class="nc" id="L143">    }</span>
+    
+    /**
+     * getAvailableFrom date
+     * @return date from when the applicant is available
+     */
+    public Date getAvailableFrom()
+    {
+<span class="nc" id="L151">        return availableFrom;</span>
+    }
+    
+    /**
+     *
+     * Updates the avilable from date
+     * @param availableFrom date from when the applicant is available
+     */
+    public void setAvailableFrom(Date availableFrom)
+    {
+<span class="nc" id="L161">        this.availableFrom = availableFrom;</span>
+<span class="nc" id="L162">    }</span>
+    
+    /**
+     * getAvailableTo date
+     * @return date to when the applicant is available
+     */
+    public Date getAvailableTo()
+    {
+<span class="nc" id="L170">        return availableTo;</span>
+    }
+    
+    /**
+     * Updates the available to date
+     * @param availableTo date to when the applicant is available
+     */
+    public void setAvailableTo(Date availableTo)
+    {
+<span class="nc" id="L179">        this.availableTo = availableTo;</span>
+<span class="nc" id="L180">    }</span>
+    
+    /**
+     * getYears
+     * @return years of experience
+     */
+    public float getYears()
+    {
+<span class="nc" id="L188">        return years;</span>
+    }
+    
+    /**
+     * Updates years of experience
+     * @param years years of experience.
+     */
+    public void setYears(float years)
+    {
+<span class="nc" id="L197">        this.years = years;</span>
+<span class="nc" id="L198">    }</span>
+
+    /**
+     * isApplicationSuccess
+     * @return boolean wether the application was successful
+     */
+    public boolean isApplicationSuccess() {
+<span class="nc" id="L205">        return applicationSuccess;</span>
+    }
+
+    /**
+     * isApplicationFailed
+     * @return boolean wether the application failed
+     */
+    public boolean isApplicationFailed() {
+<span class="nc" id="L213">        return applicationFailed;</span>
+    }
+    
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.0.201210061924</span></div></body></html>

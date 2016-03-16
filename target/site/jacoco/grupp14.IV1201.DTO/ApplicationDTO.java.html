@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ApplicationDTO.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">IV1201</a> &gt; <a href="index.html" class="el_package">grupp14.IV1201.DTO</a> &gt; <span class="el_source">ApplicationDTO.java</span></div><h1>ApplicationDTO.java</h1><pre class="source lang-java linenums">/* 
+ * Classname: ApplicationDTO
+ * Version: 0.1
+ * Date: 16-3-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+ */
+
+package grupp14.IV1201.DTO;
+
+import grupp14.IV1201.entities.Expertise;
+import grupp14.IV1201.entities.Person;
+import java.sql.Date;
+
+/**
+ * DataTransferObject for a application
+ * @author marcelmattsson
+ */
+public class ApplicationDTO {
+    private final float yearsOfExperience;
+    private final Person person;
+    private final Expertise expertise;
+    private final java.sql.Date dateFrom;
+    private final java.sql.Date dateTo;    
+    
+    /**
+     * Class constructor
+     * @param yearsOfExperience years of experience
+     * @param person Person that made the application
+     * @param dateFrom date from when the person is available
+     * @param expertise expertise profile of the application
+     * @param dateTo date to when the person is available
+     */
+    public ApplicationDTO(float yearsOfExperience, Person person, Expertise expertise, 
+            java.sql.Date dateFrom, java.sql.Date dateTo)
+<span class="nc" id="L35">    {</span>
+<span class="nc" id="L36">        this.yearsOfExperience = yearsOfExperience;</span>
+<span class="nc" id="L37">        this.person = person;</span>
+<span class="nc" id="L38">        this.expertise = expertise;</span>
+<span class="nc" id="L39">        this.dateFrom = dateFrom;</span>
+<span class="nc" id="L40">        this.dateTo = dateTo;</span>
+<span class="nc" id="L41">    }</span>
+
+    /**
+     * getYearsOfExperience
+     * @return years of experience of the application
+     */
+    public float getYearsOfExperience() {
+<span class="nc" id="L48">        return yearsOfExperience;</span>
+    }
+
+    /**
+     * getPerson
+     * @return person that made the application
+     */
+    public Person getPerson() {
+<span class="nc" id="L56">        return person;</span>
+    }
+
+    /**
+     * getExpertise
+     * @return expertise if the application
+     */
+    public Expertise getExpertise() {
+<span class="nc" id="L64">        return expertise;</span>
+    }
+
+    /**
+     * getDateFrom
+     * @return date from when the person is available of the application
+     */
+    public Date getDateFrom() {
+<span class="nc" id="L72">        return dateFrom;</span>
+    }
+
+    /**
+     * getDateTo
+     * @return date to when the person is available of the application
+     */
+    public Date getDateTo() {
+<span class="nc" id="L80">        return dateTo;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.0.201210061924</span></div></body></html>

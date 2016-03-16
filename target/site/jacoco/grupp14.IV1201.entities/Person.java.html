@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Person.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">IV1201</a> &gt; <a href="index.html" class="el_package">grupp14.IV1201.entities</a> &gt; <span class="el_source">Person.java</span></div><h1>Person.java</h1><pre class="source lang-java linenums">/* 
+ * Classname: Person
+ * Version: 0.1
+ * Date: 15-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+ */
+
+package grupp14.IV1201.entities;
+
+import grupp14.IV1201.DTO.PersonDTO;
+import grupp14.IV1201.model.SHA512;
+import java.io.Serializable;
+import java.math.BigInteger;
+import java.security.NoSuchAlgorithmException;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
+/**
+ * Entity that represents a Person.
+ * @author marcelmattsson, alexander
+ */
+@Entity
+@NamedQueries({
+    @NamedQuery(name=&quot;Person.findByUserName&quot;,
+            query=&quot;SELECT p FROM Person p WHERE p.username = :username&quot;),
+})
+public class Person implements Serializable
+{
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private BigInteger id;
+    private String name;
+    private String surname;
+    private String ssn;
+    private String mail;
+    @Column(unique = true)
+    private String username;
+    private String password;
+    private String roll_id;
+    
+    /**
+     * Class constructor
+     */
+<span class="nc" id="L50">    public Person(){}</span>
+    
+    /**
+     * Class constructor
+     * @param personInfo DataTransferObject of person information
+     * @throws NoSuchAlgorithmException thrown when the encryption phase is invalid.
+     */
+    public Person(PersonDTO personInfo) throws NoSuchAlgorithmException
+<span class="fc" id="L58">    {</span>
+<span class="fc" id="L59">        this.mail = personInfo.getMail();</span>
+<span class="fc" id="L60">        this.name = personInfo.getName();</span>
+<span class="fc" id="L61">        this.password = new SHA512().encrypt(personInfo.getPassword());</span>
+<span class="fc" id="L62">        this.roll_id = personInfo.getRoll_id();</span>
+<span class="fc" id="L63">        this.ssn = personInfo.getSsn();</span>
+<span class="fc" id="L64">        this.surname = personInfo.getSurname();</span>
+<span class="fc" id="L65">        this.username = personInfo.getUsername();</span>
+<span class="fc" id="L66">    }</span>
+    
+    /**
+     * getId
+     * @return id of the person
+     */
+    public BigInteger getId() 
+    {
+<span class="nc" id="L74">        return id;</span>
+    }
+    
+    /**
+     * Generates and returns a hashcode
+     * @return integer hashcode
+     */
+    @Override
+    public int hashCode()
+    {
+<span class="nc" id="L84">        int hash = 0;</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">        hash += (id != null ? id.hashCode() : 0);</span>
+<span class="nc" id="L86">        return hash;</span>
+    }
+    
+    /**
+     * equals method, used to compare if two persons are equal
+     * @param object object to compare to
+     * @return
+     */
+    @Override
+    public boolean equals(Object object)
+    {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        if (!(object instanceof Person)) {</span>
+<span class="nc" id="L99">            return false;</span>
+        }
+<span class="nc" id="L101">        Person other = (Person) object;</span>
+<span class="nc bnc" id="L102" title="All 8 branches missed.">        if ((this.id == null &amp;&amp; other.id != null) || (this.id != null &amp;&amp; !this.id.equals(other.id)))</span>
+        {
+<span class="nc" id="L104">            return false;</span>
+        }
+<span class="nc" id="L106">        return true;</span>
+    }
+    
+    /**
+     * toString.
+     * @return  a string representation of the person
+     */
+    @Override
+    public String toString() 
+    {
+<span class="nc" id="L116">        return &quot;grupp14.IV1201.model.User[ id=&quot; + id + &quot; ]&quot;;</span>
+    }
+    
+    /**
+     * getName
+     * @return name of the person
+     */
+    public String getName() 
+    {
+<span class="nc" id="L125">        return name;</span>
+    }
+    
+    /**
+     * Updates the name of the person
+     * @param name string
+     */
+    public void setName(String name) 
+    {
+<span class="nc" id="L134">        this.name = name;</span>
+<span class="nc" id="L135">    }</span>
+    
+    /**
+     * getSurname
+     * @return surname of the person
+     */
+    public String getSurname() 
+    {
+<span class="nc" id="L143">        return surname;</span>
+    }
+    
+    /**
+     * Updates the surname of the person
+     * @param surname string
+     */
+    public void setSurname(String surname) 
+    {
+<span class="nc" id="L152">        this.surname = surname;</span>
+<span class="nc" id="L153">    }</span>
+    
+    /**
+     * getSsn
+     * @return ssn of the person
+     */
+    public String getSsn() 
+    {
+<span class="nc" id="L161">        return ssn;</span>
+    }
+    
+    /**
+     * Updates the ssn of the person
+     * @param ssn string
+     */
+    public void setSsn(String ssn) 
+    {
+<span class="nc" id="L170">        this.ssn = ssn;</span>
+<span class="nc" id="L171">    }</span>
+    
+    /**
+     * getMail
+     * @return mail of the person
+     */
+    public String getMail() 
+    {
+<span class="nc" id="L179">        return mail;</span>
+    }
+    
+    /**
+     * Updates the mail of the person
+     * @param mail string
+     */
+    public void setMail(String mail) 
+    {
+<span class="nc" id="L188">        this.mail = mail;</span>
+<span class="nc" id="L189">    }</span>
+    
+    /**
+     * getUsername
+     * @return username of  the person
+     */
+    public String getUsername() 
+    {
+<span class="nc" id="L197">        return username;</span>
+    }
+    
+    /**
+     * Updates the username of the person
+     * @param username string
+     */
+    public void setUsername(String username) 
+    {
+<span class="nc" id="L206">        this.username = username;</span>
+<span class="nc" id="L207">    }</span>
+    
+    /**
+     * getPassword
+     * @return password of the person
+     */
+    public String getPassword() 
+    {
+<span class="nc" id="L215">        return password;</span>
+    }
+    
+    /**
+     * Updates the password of the person
+     * @param password string
+     */
+    public void setPassword(String password) 
+    {
+<span class="nc" id="L224">        this.password = password;</span>
+<span class="nc" id="L225">    }</span>
+    
+    /**
+     * getRoll_id
+     * @return roll_id of the perrson
+     */
+    public String getRoll_id() 
+    {
+<span class="nc" id="L233">        return roll_id;</span>
+    }
+    
+    /**
+     * Updates the roll_id of the person
+     * @param roll_id string
+     */
+    public void setRoll_id(String roll_id) 
+    {
+<span class="nc" id="L242">        this.roll_id = roll_id;</span>
+<span class="nc" id="L243">    }</span>
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.0.201210061924</span></div></body></html>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PDFManager.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">IV1201</a> &gt; <a href="index.html" class="el_package">grupp14.IV1201.util</a> &gt; <span class="el_source">PDFManager.java</span></div><h1>PDFManager.java</h1><pre class="source lang-java linenums">/*
+ * Classname: PDFManager
+ * Version: 0.1
+ * Date: 14-3-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+ */
+
+package grupp14.IV1201.util;
+
+import com.lowagie.text.DocumentException;
+import grupp14.IV1201.entities.Application;
+import java.io.IOException;
+import java.io.OutputStream;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
+import org.xhtmlrenderer.pdf.ITextRenderer;
+
+/**
+ * This class handles creation of PDF-files generated from specific applications.
+ * @author kim
+ */
+<span class="nc" id="L22">public class PDFManager {</span>
+    
+    /**
+     * Produces a PDF-file http response of a application.
+     * @param application Application Entity that is the source of the pdf-file.
+     * @throws IOException thrown when the specified URL cannot be found for the 
+     * redirection.
+     * @throws DocumentException Thrown when a error occurs in the creation of the pdf document.
+     */
+    public static void createPDF(Application application) throws IOException, DocumentException
+    {
+<span class="nc" id="L33">        StringBuilder html = new StringBuilder(&quot;&lt;?xml version='1.0' encoding='UTF-8'?&gt;&quot;);</span>
+<span class="nc" id="L34">        html.append(&quot;&lt;!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' &quot;</span>
+                + &quot;'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'&gt;&quot;);
+<span class="nc" id="L36">        html.append(&quot;&lt;html xmlns='http://www.w3.org/1999/xhtml'&gt;&quot;);</span>
+<span class="nc" id="L37">        html.append(&quot;&lt;body&gt;&quot;);</span>
+<span class="nc" id="L38">        html.append(&quot;&lt;h2 style='color: #353535;font-size: 16px;margin: 0px;padding:&quot;</span>
+                + &quot; 20px 0px;font-weight: bold;'&gt;&quot;);
+<span class="nc" id="L40">        html.append(&quot;Application&quot;);</span>
+<span class="nc" id="L41">        html.append(&quot;&lt;/h2&gt;&quot;);</span>
+<span class="nc" id="L42">        html.append(&quot;&lt;div&gt;&quot;);</span>
+<span class="nc" id="L43">        html.append(&quot;&lt;div&gt;&quot;);</span>
+<span class="nc" id="L44">        html.append(&quot;&lt;p&gt; username: &quot;);</span>
+<span class="nc" id="L45">        html.append(application.getPerson().getUsername());</span>
+<span class="nc" id="L46">        html.append(&quot;&lt;/p&gt;&quot;);</span>
+<span class="nc" id="L47">        html.append(&quot;&lt;p&gt; name: &quot;);</span>
+<span class="nc" id="L48">        html.append(application.getPerson().getName());</span>
+<span class="nc" id="L49">        html.append(&quot;&lt;/p&gt;&quot;);</span>
+<span class="nc" id="L50">        html.append(&quot;&lt;p&gt; surname: &quot;);</span>
+<span class="nc" id="L51">        html.append(application.getPerson().getSurname());</span>
+<span class="nc" id="L52">        html.append(&quot;&lt;/p&gt;&quot;);</span>
+<span class="nc" id="L53">        html.append(&quot;&lt;p&gt; ssn: &quot;);</span>
+<span class="nc" id="L54">        html.append(application.getPerson().getSsn());</span>
+<span class="nc" id="L55">        html.append(&quot;&lt;/p&gt;&quot;);</span>
+<span class="nc" id="L56">        html.append(&quot;&lt;p&gt; mail: &quot;);</span>
+<span class="nc" id="L57">        html.append(application.getPerson().getMail());</span>
+<span class="nc" id="L58">        html.append(&quot;&lt;/p&gt;&quot;);</span>
+<span class="nc" id="L59">        html.append(&quot;&lt;p&gt; Expertise: &quot;);</span>
+<span class="nc" id="L60">        html.append(application.getExpertise().getExpertise());</span>
+<span class="nc" id="L61">        html.append(&quot;&lt;/p&gt;&quot;);</span>
+<span class="nc" id="L62">        html.append(&quot;&lt;p&gt; Years of experience: &quot;);</span>
+<span class="nc" id="L63">        html.append(Float.toString(application.getYearsOfExperience()));</span>
+<span class="nc" id="L64">        html.append(&quot;&lt;/p&gt;&quot;);</span>
+<span class="nc" id="L65">        html.append(&quot;&lt;p&gt; Available from:  &quot;);</span>
+<span class="nc" id="L66">        html.append(application.getDateFrom().toString());</span>
+<span class="nc" id="L67">        html.append(&quot;&lt;/p&gt;&quot;);</span>
+<span class="nc" id="L68">        html.append(&quot;&lt;p&gt; Available to: &quot;);</span>
+<span class="nc" id="L69">        html.append(application.getDateTo().toString());</span>
+<span class="nc" id="L70">        html.append(&quot;&lt;/p&gt;&quot;);</span>
+<span class="nc" id="L71">        html.append(&quot;&lt;/div&gt;&lt;/div&gt;&quot;);</span>
+<span class="nc" id="L72">        html.append(&quot;&lt;/body&gt;&lt;/html&gt;&quot;);</span>
+        
+<span class="nc" id="L74">        ITextRenderer renderer = new ITextRenderer();</span>
+<span class="nc" id="L75">        renderer.setDocumentFromString(html.toString());</span>
+<span class="nc" id="L76">        renderer.layout();</span>
+<span class="nc" id="L77">        HttpServletResponse response = (HttpServletResponse)</span>
+                FacesContext.getCurrentInstance().getExternalContext().getResponse();
+<span class="nc" id="L79">        response.reset();</span>
+<span class="nc" id="L80">        response.setContentType(&quot;application/pdf&quot;);</span>
+<span class="nc" id="L81">        response.setHeader(&quot;Content-Disposition&quot;, &quot;inline; filename=\&quot;&quot; + &quot;application&quot; + application.getId().toString() + &quot;\&quot;&quot;);</span>
+<span class="nc" id="L82">        OutputStream browserStream = response.getOutputStream();</span>
+<span class="nc" id="L83">        renderer.createPDF(browserStream);</span>
+<span class="nc" id="L84">        FacesContext.getCurrentInstance().responseComplete();</span>
+<span class="nc" id="L85">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.0.201210061924</span></div></body></html>

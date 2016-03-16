@@ -1,0 +1,60 @@
+/*
+ * Course project - IV1201 Design of Global Applications
+ * Royal Institute of Technology
+ * 2015 (c) Kim Hammar Alexander Lundh Marcel Mattsson
+ *//* 
+    Created on : 2016-feb-03, 12:39:09
+    Author     : kim
+*/
+
+html
+{
+    font-family: "Times New Roman", Times, serif;
+}
+.jumbo
+{
+    width:100%;
+}
+.title
+{
+    text-align: center;
+    font-weight: bold;
+}
+.footer
+{
+    font-style: italic;
+    margin-top: 100px;
+}
+.bold
+{
+    font-weight: bold;
+}
+.it
+{
+    font-style: italic;
+}
+.link_deco {
+    color: inherit;
+    text-decoration: none;
+}
+
+.link_deco:hover 
+{
+     color:#00A0C6; 
+     text-decoration:none; 
+     cursor:pointer;  
+}
+.center_horizontal
+{
+    margin: auto;
+    width: 35%;
+    padding: 10px;
+}
+.pdf
+{
+    margin-top: 20px;
+}
+.app_success
+{
+    margin-top: 15px;
+}

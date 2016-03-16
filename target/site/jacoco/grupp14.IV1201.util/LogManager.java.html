@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>LogManager.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">IV1201</a> &gt; <a href="index.html" class="el_package">grupp14.IV1201.util</a> &gt; <span class="el_source">LogManager.java</span></div><h1>LogManager.java</h1><pre class="source lang-java linenums">/*
+ * Classname: LogManager
+ * Version: 0.1
+ * Date: 15-3-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+ */
+package grupp14.IV1201.util;
+
+import java.util.logging.Level;
+
+/**
+ * LogManager that handles logging of application exceptions that occur in the business layer.
+ * @author Kim Hammar
+ */
+public class LogManager {
+    
+    private static final java.util.logging.Logger
+<span class="fc" id="L18">            LOGGER = java.util.logging.Logger.getLogger(&quot;grupp14.IV1201&quot;);</span>
+       
+    /**
+     * Class constructor
+     */
+<span class="nc" id="L23">    public LogManager(){</span>
+        
+<span class="nc" id="L25">    }</span>
+   
+    /**
+     * Will logg to the application-server default log
+     * @param message to log
+     * @param level level to log
+     */
+    public void log(String message, Level level){
+<span class="nc" id="L33">        LOGGER.log(level, message);</span>
+<span class="nc" id="L34">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.0.201210061924</span></div></body></html>

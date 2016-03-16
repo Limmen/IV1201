@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PersonDTO.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">IV1201</a> &gt; <a href="index.html" class="el_package">grupp14.IV1201.DTO</a> &gt; <span class="el_source">PersonDTO.java</span></div><h1>PersonDTO.java</h1><pre class="source lang-java linenums">/* 
+ * Classname: PersonDTO
+ * Version: 0.1
+ * Date: 15-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+ */
+
+package grupp14.IV1201.DTO;
+
+/**
+ * DataTransferObject for a Person
+ * @author marcelmattsson
+ */
+public class PersonDTO {
+    private final String name;
+    private final String surname;
+    private final String ssn;
+    private final String mail;
+    private final String username;
+    private final String password;
+    private final String roll_id;
+    
+    /**
+     * Class constructor
+     * @param name name of the person
+     * @param surname surname of the person
+     * @param ssn ssn of the person
+     * @param mail mail of the person
+     * @param username username of the person
+     * @param password password of the person
+     * @param roll_id roll_id of the person
+     */
+    public PersonDTO(String name, String surname, String ssn, String mail, String username, 
+            String password, String roll_id)
+<span class="nc" id="L35">    {</span>
+<span class="nc" id="L36">        this.mail = mail;</span>
+<span class="nc" id="L37">        this.name = name;</span>
+<span class="nc" id="L38">        this.password = password;</span>
+<span class="nc" id="L39">        this.roll_id = roll_id;</span>
+<span class="nc" id="L40">        this.ssn = ssn;</span>
+<span class="nc" id="L41">        this.surname = surname;</span>
+<span class="nc" id="L42">        this.username = username;</span>
+<span class="nc" id="L43">    }</span>
+
+    /**
+     * getName 
+     * @return name of the person
+     */
+    public String getName() 
+    {
+<span class="nc" id="L51">        return name;</span>
+    }
+
+    /**
+     * getSurname
+     * @return surname of the person
+     */
+    public String getSurname()
+    {
+<span class="nc" id="L60">        return surname;</span>
+    }
+
+    /**
+     * getSsn
+     * @return ssn of the person
+     */
+    public String getSsn() 
+    {
+<span class="nc" id="L69">        return ssn;</span>
+    }
+
+    /**
+     * getMail
+     * @return mail of the person
+     */
+    public String getMail()
+    {
+<span class="nc" id="L78">        return mail;</span>
+    }
+
+    /**
+     * getUsername
+     * @return username of the person
+     */
+    public String getUsername()
+    {
+<span class="nc" id="L87">        return username;</span>
+    }
+
+    /**
+     * getPassword
+     * @return password of the person
+     */
+    public String getPassword() 
+    {
+<span class="nc" id="L96">        return password;</span>
+    }
+
+    /**
+     * getRoll_id
+     * @return roll_id of the person
+     */
+    public String getRoll_id() 
+    {
+<span class="nc" id="L105">        return roll_id;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.0.201210061924</span></div></body></html>

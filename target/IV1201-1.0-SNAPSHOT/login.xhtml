@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui">
+    
+    <!-- LOGIN-page -->
+    <ui:composition template="/templates/default/main.xhtml">
+         <ui:define name="content">
+            <b:button value="&lt;" outcome="index"/>
+            <ul class="nav nav-tabs">
+                <li id="loginLink" class="active">
+                    <h:link value="#{messages.Login}" outcome="login" />
+                </li>
+                <li id="registerLink">
+                    <h:link value="#{messages.Register}" outcome="register" />
+                </li>
+            </ul>
+            <ui:fragment rendered="#{empty username}">
+                <h:form styleClass="form-signin" prependId="false">
+                    <h4>#{messages.LoginTitle}</h4>
+                    <div class="form-group">
+                        <label for="loginUsername">#{messages.Username}:</label>
+                        <h:inputText class="form-control" id="loginUsername"
+                                     value="#{loginBean.username}" 
+                                     required="true" 
+                                     requiredMessage="Please enter a username">
+                        </h:inputText>
+                        <h:message for="loginUsername" style="color:red"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">#{messages.Password}:</label>
+                        <h:inputSecret class="form-control" id="loginPassword" 
+                                       value="#{loginBean.password}" 
+                                       required="true" 
+                                       requiredMessage="Please enter a password">
+                        </h:inputSecret> 
+                        <h:message for="loginPassword" style="color:red"/>
+                    </div>
+                    <b:commandButton value="" action="#{loginBean.login()}">
+                        #{messages.Login}
+                    </b:commandButton>
+                </h:form>
+            </ui:fragment>
+            <ui:fragment rendered="#{not empty username}">
+                <h4>#{messages.LoggedIn}</h4>
+                <b:well><p class="it"><span class="bold">#{messages.User}:  </span>#{username} 
+                        <span class="bold">#{messages.Role}:  </span>#{role}</p></b:well>
+                <h:form>
+                    <b:commandButton styleClass="logOutButton" value="" action="#{loginBean.logout()}">
+                        #{messages.Logout}
+                    </b:commandButton>
+                </h:form>
+            </ui:fragment>
+        </ui:define>
+    </ui:composition>          
+</html>
