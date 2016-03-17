@@ -30,7 +30,8 @@ public class LocaleManager implements Serializable {
      * Initializes the locale.
      */
     @PostConstruct
-    public void init(){
+    public void init()
+    {
         locale = FacesContext.getCurrentInstance().getExternalContext().getRequestLocale();
     }
     /**

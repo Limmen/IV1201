@@ -9,8 +9,8 @@ package grupp14.IV1201.view;
 
 import grupp14.IV1201.DTO.ApplicationDTO;
 import grupp14.IV1201.controller.ControllerEJB;
-import grupp14.IV1201.entities.Expertise;
-import grupp14.IV1201.entities.Person;
+import grupp14.IV1201.integration.entities.Expertise;
+import grupp14.IV1201.integration.entities.Person;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -201,16 +201,18 @@ import javax.validation.constraints.Future;
      * isApplicationSuccess
      * @return boolean wether the application was successful
      */
-    public boolean isApplicationSuccess() {
-<span class="nc" id="L205">        return applicationSuccess;</span>
+    public boolean isApplicationSuccess() 
+    {
+<span class="nc" id="L206">        return applicationSuccess;</span>
     }
 
     /**
      * isApplicationFailed
      * @return boolean wether the application failed
      */
-    public boolean isApplicationFailed() {
-<span class="nc" id="L213">        return applicationFailed;</span>
+    public boolean isApplicationFailed() 
+    {
+<span class="nc" id="L215">        return applicationFailed;</span>
     }
     
     

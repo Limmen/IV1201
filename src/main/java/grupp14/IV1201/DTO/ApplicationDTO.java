@@ -7,15 +7,16 @@
 
 package grupp14.IV1201.DTO;
 
-import grupp14.IV1201.entities.Expertise;
-import grupp14.IV1201.entities.Person;
+import grupp14.IV1201.integration.entities.Expertise;
+import grupp14.IV1201.integration.entities.Person;
 import java.sql.Date;
 
 /**
  * DataTransferObject for a application
  * @author marcelmattsson
  */
-public class ApplicationDTO {
+public class ApplicationDTO 
+{
     private final float yearsOfExperience;
     private final Person person;
     private final Expertise expertise;
@@ -44,7 +45,8 @@ public class ApplicationDTO {
      * getYearsOfExperience
      * @return years of experience of the application
      */
-    public float getYearsOfExperience() {
+    public float getYearsOfExperience() 
+    {
         return yearsOfExperience;
     }
 
@@ -52,7 +54,8 @@ public class ApplicationDTO {
      * getPerson
      * @return person that made the application
      */
-    public Person getPerson() {
+    public Person getPerson() 
+    {
         return person;
     }
 
@@ -60,7 +63,8 @@ public class ApplicationDTO {
      * getExpertise
      * @return expertise if the application
      */
-    public Expertise getExpertise() {
+    public Expertise getExpertise() 
+    {
         return expertise;
     }
 
@@ -68,7 +72,8 @@ public class ApplicationDTO {
      * getDateFrom
      * @return date from when the person is available of the application
      */
-    public Date getDateFrom() {
+    public Date getDateFrom() 
+    {
         return dateFrom;
     }
 
@@ -76,7 +81,8 @@ public class ApplicationDTO {
      * getDateTo
      * @return date to when the person is available of the application
      */
-    public Date getDateTo() {
+    public Date getDateTo() 
+    {
         return dateTo;
     }
 

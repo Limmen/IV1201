@@ -10,10 +10,10 @@ package grupp14.IV1201.controller;
 import com.lowagie.text.DocumentException;
 import grupp14.IV1201.DTO.ApplicationDTO;
 import grupp14.IV1201.DTO.PersonDTO;
-import grupp14.IV1201.entities.Application;
-import grupp14.IV1201.entities.Expertise;
-import grupp14.IV1201.entities.Person;
-import grupp14.IV1201.model.ApplicationEJB;
+import grupp14.IV1201.integration.DAO.DataAccessObject;
+import grupp14.IV1201.integration.entities.Application;
+import grupp14.IV1201.integration.entities.Expertise;
+import grupp14.IV1201.integration.entities.Person;
 import grupp14.IV1201.model.HttpSessionBean;
 import grupp14.IV1201.model.LoginEJB;
 import grupp14.IV1201.util.PDFManager;
@@ -34,15 +34,15 @@ import javax.servlet.http.HttpSession;
 @Stateless
 public class ControllerEJB 
 {    
-    
+    @EJB
+    DataAccessObject dao;
     @EJB
     private LoginEJB login;
     @EJB
     private RegisterEJB register;
     @EJB
     private HttpSessionBean session;
-    @EJB
-    private ApplicationEJB app;
+    
     private LogManager logManager;
     
     /**
@@ -55,7 +55,7 @@ public class ControllerEJB
         logManager = new LogManager();
         login.setLogManager(logManager);
         register.setLogManager(logManager);
-        app.setLogManager(logManager);
+        dao.setLogManager(logManager);
     }
     
     /**
@@ -66,7 +66,7 @@ public class ControllerEJB
      */
     public void registerUser(PersonDTO person) throws NoSuchAlgorithmException
     {
-        register.register(person);
+        dao.registerPerson(person);
     }
 
     /**
@@ -90,7 +90,7 @@ public class ControllerEJB
      */
     public String getRole(String username)
     {
-        return login.getRole(username);
+        return dao.getPersonRole(username);
     }
 
     /**
@@ -129,7 +129,7 @@ public class ControllerEJB
      */
     public List<Expertise> getExpertiseList()
     {
-        return app.getExpertiseList();
+        return dao.getExpertiseList();
     }
 
     /**
@@ -138,7 +138,7 @@ public class ControllerEJB
      */
     public List<Application> getApplicationList()
     {
-        return app.getApplicationList();
+        return dao.getApplicationList();
     }
 
     /**
@@ -149,7 +149,7 @@ public class ControllerEJB
      */
     public List<Application> getApplicationList(String username)
     {
-        return app.getApplicationList(username);
+        return dao.getApplicationList(username);
     }
     /**
      * Creates an application.
@@ -160,7 +160,7 @@ public class ControllerEJB
      */
     public void apply(ApplicationDTO application) throws NoSuchAlgorithmException
     {
-        app.placeApplication(application);
+        dao.placeApplication(application);
     }
     
     /**
@@ -171,7 +171,8 @@ public class ControllerEJB
      * redirection.
      * @throws DocumentException Thrown when a error occurs in the creation of the pdf document.
      */
-    public void createPDF(Application application) throws IOException, DocumentException{
+    public void createPDF(Application application) throws IOException, DocumentException
+    {
         PDFManager.createPDF(application);
     }
        
@@ -181,8 +182,9 @@ public class ControllerEJB
      * @param username username of the person
      * @return person
      */
-    public Person getPerson(String username){
-        return app.getPerson(username);
+    public Person getPerson(String username)
+    {
+        return dao.getPersonByUsername(username);
     }
 
     /**
@@ -191,7 +193,8 @@ public class ControllerEJB
      * @param expertise expertise name
      * @return expertise
      */
-    public Expertise getExpertise(String expertise){
-        return app.getExpertise(expertise);
+    public Expertise getExpertise(String expertise)
+    {
+        return dao.getExpertiseByName(expertise);
     }  
 }

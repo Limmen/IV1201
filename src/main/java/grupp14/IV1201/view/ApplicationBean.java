@@ -9,7 +9,7 @@ package grupp14.IV1201.view;
 
 import com.lowagie.text.DocumentException;
 import grupp14.IV1201.controller.ControllerEJB;
-import grupp14.IV1201.entities.Application;
+import grupp14.IV1201.integration.entities.Application;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,7 +26,8 @@ import javax.faces.view.ViewScoped;
  */
 @Named(value = "applicationBean")
 @ViewScoped
-public class ApplicationBean implements Serializable {
+public class ApplicationBean implements Serializable 
+{
     @EJB
     private ControllerEJB contr;
     private List<Application> applications;
@@ -37,7 +38,8 @@ public class ApplicationBean implements Serializable {
      * but before the class is put into service.
      */
     @PostConstruct
-    public void init(){
+    public void init()
+    {
         fetchApplications();        
         if(applications == null)
             applications = new ArrayList();        
@@ -48,7 +50,8 @@ public class ApplicationBean implements Serializable {
      * If it's a applicant requesting the application only the his/hers applications are retrieved.
      * If it's a recruiter then all applications are retrieved.
      */
-    public void fetchApplications(){
+    public void fetchApplications()
+    {
         applications = new ArrayList();
         String username = contr.getUsername();
         if(contr.getRole(username).equals("applicant")){            
@@ -65,7 +68,8 @@ public class ApplicationBean implements Serializable {
      * redirection.
      * @throws DocumentException Thrown when a error occurs in the creation of the pdf document.
      */
-    public void createPDF() throws IOException, DocumentException{
+    public void createPDF() throws IOException, DocumentException
+    {
         contr.createPDF(selectedApplication);
     }
 
@@ -73,7 +77,8 @@ public class ApplicationBean implements Serializable {
      * getApplications
      * @return list of applications
      */
-    public List<Application> getApplications() {
+    public List<Application> getApplications() 
+    {
         return applications;
     }
 
@@ -81,7 +86,8 @@ public class ApplicationBean implements Serializable {
      * getSelectedApplication
      * @return the application that the user have selected currently
      */
-    public Application getSelectedApplication() {
+    public Application getSelectedApplication() 
+    {
         return selectedApplication;
     }
 
@@ -89,7 +95,8 @@ public class ApplicationBean implements Serializable {
      * setSelectedApplication
      * @param selectedApplication updates the selected application.
      */
-    public void setSelectedApplication(Application selectedApplication) {
+    public void setSelectedApplication(Application selectedApplication) 
+    {
         this.selectedApplication = selectedApplication;
     }
         

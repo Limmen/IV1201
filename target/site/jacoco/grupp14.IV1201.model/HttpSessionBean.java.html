@@ -20,8 +20,9 @@ import javax.servlet.http.HttpSession;
 <span class="fc" id="L20">public class HttpSessionBean</span>
 {
 
-    FacesContext getFacesContext() {
-<span class="nc" id="L24">        return FacesContext.getCurrentInstance();</span>
+    FacesContext getFacesContext() 
+    {
+<span class="nc" id="L25">        return FacesContext.getCurrentInstance();</span>
     }
     
     /**
@@ -30,7 +31,7 @@ import javax.servlet.http.HttpSession;
      */
     public HttpSession getSession() 
     {
-<span class="fc" id="L33">        return (HttpSession) getFacesContext()</span>
+<span class="fc" id="L34">        return (HttpSession) getFacesContext()</span>
                 .getExternalContext().getSession(false);
     }
     
@@ -40,7 +41,7 @@ import javax.servlet.http.HttpSession;
      */
     public HttpServletRequest getRequest()
     {
-<span class="fc" id="L43">        return (HttpServletRequest) getFacesContext()</span>
+<span class="fc" id="L44">        return (HttpServletRequest) getFacesContext()</span>
                 .getExternalContext().getRequest();
     }
     
@@ -50,9 +51,9 @@ import javax.servlet.http.HttpSession;
      */
     public String getUserName()
     {
-<span class="fc" id="L53">        HttpSession session = (HttpSession) getFacesContext()</span>
+<span class="fc" id="L54">        HttpSession session = (HttpSession) getFacesContext()</span>
                 .getExternalContext().getSession(false);
-<span class="fc" id="L55">        return session.getAttribute(&quot;username&quot;).toString();</span>
+<span class="fc" id="L56">        return session.getAttribute(&quot;username&quot;).toString();</span>
     }
     
 }

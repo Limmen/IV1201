@@ -73,7 +73,8 @@ public class RegisterBean implements Serializable
             registerError = true;
     }
     
-    private void clear(){
+    private void clear()
+    {
         name = "";
         surname = "";
         ssn = "";

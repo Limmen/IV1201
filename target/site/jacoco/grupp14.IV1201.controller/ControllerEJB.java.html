@@ -10,10 +10,10 @@ package grupp14.IV1201.controller;
 import com.lowagie.text.DocumentException;
 import grupp14.IV1201.DTO.ApplicationDTO;
 import grupp14.IV1201.DTO.PersonDTO;
-import grupp14.IV1201.entities.Application;
-import grupp14.IV1201.entities.Expertise;
-import grupp14.IV1201.entities.Person;
-import grupp14.IV1201.model.ApplicationEJB;
+import grupp14.IV1201.integration.DAO.DataAccessObject;
+import grupp14.IV1201.integration.entities.Application;
+import grupp14.IV1201.integration.entities.Expertise;
+import grupp14.IV1201.integration.entities.Person;
 import grupp14.IV1201.model.HttpSessionBean;
 import grupp14.IV1201.model.LoginEJB;
 import grupp14.IV1201.util.PDFManager;
@@ -34,15 +34,15 @@ import javax.servlet.http.HttpSession;
 @Stateless
 <span class="nc" id="L35">public class ControllerEJB </span>
 {    
-    
+    @EJB
+    DataAccessObject dao;
     @EJB
     private LoginEJB login;
     @EJB
     private RegisterEJB register;
     @EJB
     private HttpSessionBean session;
-    @EJB
-    private ApplicationEJB app;
+    
     private LogManager logManager;
     
     /**
@@ -55,7 +55,7 @@ import javax.servlet.http.HttpSession;
 <span class="nc" id="L55">        logManager = new LogManager();</span>
 <span class="nc" id="L56">        login.setLogManager(logManager);</span>
 <span class="nc" id="L57">        register.setLogManager(logManager);</span>
-<span class="nc" id="L58">        app.setLogManager(logManager);</span>
+<span class="nc" id="L58">        dao.setLogManager(logManager);</span>
 <span class="nc" id="L59">    }</span>
     
     /**
@@ -66,7 +66,7 @@ import javax.servlet.http.HttpSession;
      */
     public void registerUser(PersonDTO person) throws NoSuchAlgorithmException
     {
-<span class="nc" id="L69">        register.register(person);</span>
+<span class="nc" id="L69">        dao.registerPerson(person);</span>
 <span class="nc" id="L70">    }</span>
 
     /**
@@ -90,7 +90,7 @@ import javax.servlet.http.HttpSession;
      */
     public String getRole(String username)
     {
-<span class="nc" id="L93">        return login.getRole(username);</span>
+<span class="nc" id="L93">        return dao.getPersonRole(username);</span>
     }
 
     /**
@@ -129,7 +129,7 @@ import javax.servlet.http.HttpSession;
      */
     public List&lt;Expertise&gt; getExpertiseList()
     {
-<span class="nc" id="L132">        return app.getExpertiseList();</span>
+<span class="nc" id="L132">        return dao.getExpertiseList();</span>
     }
 
     /**
@@ -138,7 +138,7 @@ import javax.servlet.http.HttpSession;
      */
     public List&lt;Application&gt; getApplicationList()
     {
-<span class="nc" id="L141">        return app.getApplicationList();</span>
+<span class="nc" id="L141">        return dao.getApplicationList();</span>
     }
 
     /**
@@ -149,7 +149,7 @@ import javax.servlet.http.HttpSession;
      */
     public List&lt;Application&gt; getApplicationList(String username)
     {
-<span class="nc" id="L152">        return app.getApplicationList(username);</span>
+<span class="nc" id="L152">        return dao.getApplicationList(username);</span>
     }
     /**
      * Creates an application.
@@ -160,7 +160,7 @@ import javax.servlet.http.HttpSession;
      */
     public void apply(ApplicationDTO application) throws NoSuchAlgorithmException
     {
-<span class="nc" id="L163">        app.placeApplication(application);</span>
+<span class="nc" id="L163">        dao.placeApplication(application);</span>
 <span class="nc" id="L164">    }</span>
     
     /**
@@ -171,9 +171,10 @@ import javax.servlet.http.HttpSession;
      * redirection.
      * @throws DocumentException Thrown when a error occurs in the creation of the pdf document.
      */
-    public void createPDF(Application application) throws IOException, DocumentException{
-<span class="nc" id="L175">        PDFManager.createPDF(application);</span>
-<span class="nc" id="L176">    }</span>
+    public void createPDF(Application application) throws IOException, DocumentException
+    {
+<span class="nc" id="L176">        PDFManager.createPDF(application);</span>
+<span class="nc" id="L177">    }</span>
        
     /**
      * Fetches a person by username.
@@ -181,8 +182,9 @@ import javax.servlet.http.HttpSession;
      * @param username username of the person
      * @return person
      */
-    public Person getPerson(String username){
-<span class="nc" id="L185">        return app.getPerson(username);</span>
+    public Person getPerson(String username)
+    {
+<span class="nc" id="L187">        return dao.getPersonByUsername(username);</span>
     }
 
     /**
@@ -191,8 +193,9 @@ import javax.servlet.http.HttpSession;
      * @param expertise expertise name
      * @return expertise
      */
-    public Expertise getExpertise(String expertise){
-<span class="nc" id="L195">        return app.getExpertise(expertise);</span>
+    public Expertise getExpertise(String expertise)
+    {
+<span class="nc" id="L198">        return dao.getExpertiseByName(expertise);</span>
     }  
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.0.201210061924</span></div></body></html>

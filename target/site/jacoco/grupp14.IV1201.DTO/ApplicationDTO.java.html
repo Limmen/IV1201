@@ -7,15 +7,16 @@
 
 package grupp14.IV1201.DTO;
 
-import grupp14.IV1201.entities.Expertise;
-import grupp14.IV1201.entities.Person;
+import grupp14.IV1201.integration.entities.Expertise;
+import grupp14.IV1201.integration.entities.Person;
 import java.sql.Date;
 
 /**
  * DataTransferObject for a application
  * @author marcelmattsson
  */
-public class ApplicationDTO {
+public class ApplicationDTO 
+{
     private final float yearsOfExperience;
     private final Person person;
     private final Expertise expertise;
@@ -32,52 +33,57 @@ public class ApplicationDTO {
      */
     public ApplicationDTO(float yearsOfExperience, Person person, Expertise expertise, 
             java.sql.Date dateFrom, java.sql.Date dateTo)
-<span class="nc" id="L35">    {</span>
-<span class="nc" id="L36">        this.yearsOfExperience = yearsOfExperience;</span>
-<span class="nc" id="L37">        this.person = person;</span>
-<span class="nc" id="L38">        this.expertise = expertise;</span>
-<span class="nc" id="L39">        this.dateFrom = dateFrom;</span>
-<span class="nc" id="L40">        this.dateTo = dateTo;</span>
-<span class="nc" id="L41">    }</span>
+<span class="nc" id="L36">    {</span>
+<span class="nc" id="L37">        this.yearsOfExperience = yearsOfExperience;</span>
+<span class="nc" id="L38">        this.person = person;</span>
+<span class="nc" id="L39">        this.expertise = expertise;</span>
+<span class="nc" id="L40">        this.dateFrom = dateFrom;</span>
+<span class="nc" id="L41">        this.dateTo = dateTo;</span>
+<span class="nc" id="L42">    }</span>
 
     /**
      * getYearsOfExperience
      * @return years of experience of the application
      */
-    public float getYearsOfExperience() {
-<span class="nc" id="L48">        return yearsOfExperience;</span>
+    public float getYearsOfExperience() 
+    {
+<span class="nc" id="L50">        return yearsOfExperience;</span>
     }
 
     /**
      * getPerson
      * @return person that made the application
      */
-    public Person getPerson() {
-<span class="nc" id="L56">        return person;</span>
+    public Person getPerson() 
+    {
+<span class="nc" id="L59">        return person;</span>
     }
 
     /**
      * getExpertise
      * @return expertise if the application
      */
-    public Expertise getExpertise() {
-<span class="nc" id="L64">        return expertise;</span>
+    public Expertise getExpertise() 
+    {
+<span class="nc" id="L68">        return expertise;</span>
     }
 
     /**
      * getDateFrom
      * @return date from when the person is available of the application
      */
-    public Date getDateFrom() {
-<span class="nc" id="L72">        return dateFrom;</span>
+    public Date getDateFrom() 
+    {
+<span class="nc" id="L77">        return dateFrom;</span>
     }
 
     /**
      * getDateTo
      * @return date to when the person is available of the application
      */
-    public Date getDateTo() {
-<span class="nc" id="L80">        return dateTo;</span>
+    public Date getDateTo() 
+    {
+<span class="nc" id="L86">        return dateTo;</span>
     }
 
 }

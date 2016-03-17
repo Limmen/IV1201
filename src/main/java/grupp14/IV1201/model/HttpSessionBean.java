@@ -20,7 +20,8 @@ import javax.servlet.http.HttpSession;
 public class HttpSessionBean
 {
 
-    FacesContext getFacesContext() {
+    FacesContext getFacesContext() 
+    {
         return FacesContext.getCurrentInstance();
     }
     

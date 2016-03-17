@@ -30,17 +30,18 @@ import javax.inject.Named;
      * Initializes the locale.
      */
     @PostConstruct
-    public void init(){
-<span class="nc" id="L34">        locale = FacesContext.getCurrentInstance().getExternalContext().getRequestLocale();</span>
-<span class="nc" id="L35">    }</span>
+    public void init()
+    {
+<span class="nc" id="L35">        locale = FacesContext.getCurrentInstance().getExternalContext().getRequestLocale();</span>
+<span class="nc" id="L36">    }</span>
     /**
      * Changes the locale of the application.
      */
     public void changeLocale() 
     {
-<span class="nc" id="L41">        locale = new Locale(getLanguageCode());</span>
-<span class="nc" id="L42">        FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);</span>
-<span class="nc" id="L43">    }</span>
+<span class="nc" id="L42">        locale = new Locale(getLanguageCode());</span>
+<span class="nc" id="L43">        FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);</span>
+<span class="nc" id="L44">    }</span>
     
     /**
      * getLocale
@@ -48,12 +49,12 @@ import javax.inject.Named;
      */
     public Locale getLocale()
     {
-<span class="nc" id="L51">        return locale;</span>
+<span class="nc" id="L52">        return locale;</span>
     }
     
     private String getLanguageCode() 
     {
-<span class="nc" id="L56">        return FacesContext.getCurrentInstance().getExternalContext()</span>
+<span class="nc" id="L57">        return FacesContext.getCurrentInstance().getExternalContext()</span>
                 .getRequestParameterMap().get(&quot;languageCode&quot;);
     }
 }

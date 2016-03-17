@@ -73,14 +73,15 @@ public class RegisterBean implements Serializable
 <span class="nc" id="L73">            registerError = true;</span>
 <span class="nc" id="L74">    }</span>
     
-    private void clear(){
-<span class="nc" id="L77">        name = &quot;&quot;;</span>
-<span class="nc" id="L78">        surname = &quot;&quot;;</span>
-<span class="nc" id="L79">        ssn = &quot;&quot;;</span>
-<span class="nc" id="L80">        email = &quot;&quot;;</span>
-<span class="nc" id="L81">        password=&quot;&quot;;</span>
-<span class="nc" id="L82">        username =&quot;&quot;;</span>
-<span class="nc" id="L83">    }</span>
+    private void clear()
+    {
+<span class="nc" id="L78">        name = &quot;&quot;;</span>
+<span class="nc" id="L79">        surname = &quot;&quot;;</span>
+<span class="nc" id="L80">        ssn = &quot;&quot;;</span>
+<span class="nc" id="L81">        email = &quot;&quot;;</span>
+<span class="nc" id="L82">        password=&quot;&quot;;</span>
+<span class="nc" id="L83">        username =&quot;&quot;;</span>
+<span class="nc" id="L84">    }</span>
    
     /**
      * getName
@@ -88,7 +89,7 @@ public class RegisterBean implements Serializable
      */
     public String getName() 
     {
-<span class="nc" id="L91">        return name;</span>
+<span class="nc" id="L92">        return name;</span>
     }
     
     /**
@@ -97,8 +98,8 @@ public class RegisterBean implements Serializable
      */
     public void setName(String name)
     {
-<span class="nc" id="L100">        this.name = name;</span>
-<span class="nc" id="L101">    }</span>
+<span class="nc" id="L101">        this.name = name;</span>
+<span class="nc" id="L102">    }</span>
     
     /**
      * getSurname
@@ -106,7 +107,7 @@ public class RegisterBean implements Serializable
      */
     public String getSurname()
     {
-<span class="nc" id="L109">        return surname;</span>
+<span class="nc" id="L110">        return surname;</span>
     }
     
     /**
@@ -115,8 +116,8 @@ public class RegisterBean implements Serializable
      */
     public void setSurname(String surname)
     {
-<span class="nc" id="L118">        this.surname = surname;</span>
-<span class="nc" id="L119">    }</span>
+<span class="nc" id="L119">        this.surname = surname;</span>
+<span class="nc" id="L120">    }</span>
     
     /**
      * getSsn
@@ -124,7 +125,7 @@ public class RegisterBean implements Serializable
      */
     public String getSsn()
     {
-<span class="nc" id="L127">        return ssn;</span>
+<span class="nc" id="L128">        return ssn;</span>
     }
     
     /**
@@ -133,8 +134,8 @@ public class RegisterBean implements Serializable
      */
     public void setSsn(String ssn)
     {
-<span class="nc" id="L136">        this.ssn = ssn;</span>
-<span class="nc" id="L137">    }</span>
+<span class="nc" id="L137">        this.ssn = ssn;</span>
+<span class="nc" id="L138">    }</span>
     
     /**
      * getEmail
@@ -142,7 +143,7 @@ public class RegisterBean implements Serializable
      */
     public String getEmail()
     {
-<span class="nc" id="L145">        return email;</span>
+<span class="nc" id="L146">        return email;</span>
     }
     
     /**
@@ -151,8 +152,8 @@ public class RegisterBean implements Serializable
      */
     public void setEmail(String mail)
     {
-<span class="nc" id="L154">        this.email = mail;</span>
-<span class="nc" id="L155">    }</span>
+<span class="nc" id="L155">        this.email = mail;</span>
+<span class="nc" id="L156">    }</span>
     
     /**
      * getUsername
@@ -160,7 +161,7 @@ public class RegisterBean implements Serializable
      */
     public String getUsername()
     {
-<span class="nc" id="L163">        return username;</span>
+<span class="nc" id="L164">        return username;</span>
     }
     
     /**
@@ -169,8 +170,8 @@ public class RegisterBean implements Serializable
      */
     public void setUsername(String username)
     {
-<span class="nc" id="L172">        this.username = username;</span>
-<span class="nc" id="L173">    }</span>
+<span class="nc" id="L173">        this.username = username;</span>
+<span class="nc" id="L174">    }</span>
     
     /**
      * getPassword
@@ -178,7 +179,7 @@ public class RegisterBean implements Serializable
      */
     public String getPassword() 
     {
-<span class="nc" id="L181">        return password;</span>
+<span class="nc" id="L182">        return password;</span>
     }
     
     /**
@@ -187,8 +188,8 @@ public class RegisterBean implements Serializable
      */
     public void setPassword(String password)
     {
-<span class="nc" id="L190">        this.password = password;</span>
-<span class="nc" id="L191">    }</span>
+<span class="nc" id="L191">        this.password = password;</span>
+<span class="nc" id="L192">    }</span>
     
     /**
      * getRoll_id
@@ -196,7 +197,7 @@ public class RegisterBean implements Serializable
      */
     public String getRoll_id()
     {
-<span class="nc" id="L199">        return roll_id;</span>
+<span class="nc" id="L200">        return roll_id;</span>
     }    
 
     /**
@@ -205,15 +206,15 @@ public class RegisterBean implements Serializable
      */
     public void setRoll_id(String roll_id)
     {
-<span class="nc" id="L208">        this.roll_id = roll_id;</span>
-<span class="nc" id="L209">    }</span>
+<span class="nc" id="L209">        this.roll_id = roll_id;</span>
+<span class="nc" id="L210">    }</span>
 
     /**
      * isRegisterSuccess
      * @return boolean wether the most recent registration was successful or not
      */
     public boolean isRegisterSuccess() {
-<span class="nc" id="L216">        return registerSuccess;</span>
+<span class="nc" id="L217">        return registerSuccess;</span>
     }
 
     /**
@@ -221,7 +222,7 @@ public class RegisterBean implements Serializable
      * @return boolean wether the most recent registration was failed or not
      */
     public boolean isRegisterError() {
-<span class="nc" id="L224">        return registerError;</span>
+<span class="nc" id="L225">        return registerError;</span>
     }
     
     

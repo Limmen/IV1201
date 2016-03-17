@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DataAccessObject.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">IV1201</a> &gt; <a href="index.html" class="el_package">grupp14.IV1201.integration.DAO</a> &gt; <span class="el_source">DataAccessObject.java</span></div><h1>DataAccessObject.java</h1><pre class="source lang-java linenums">/* 
+ * Classname: DataAccessObject
+ * Version: 0.1
+ * Date: 17-3-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
+ */
+package grupp14.IV1201.integration.DAO;
+
+import grupp14.IV1201.DTO.ApplicationDTO;
+import grupp14.IV1201.DTO.PersonDTO;
+import grupp14.IV1201.integration.entities.Application;
+import grupp14.IV1201.integration.entities.Expertise;
+import grupp14.IV1201.integration.entities.Person;
+import grupp14.IV1201.util.LogManager;
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
+import java.util.logging.Level;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+/**
+ * DataAccessObject. This class is responsible to get data from the specified data source.
+ * @author Kim Hammar
+ */
+@Stateless
+<span class="fc" id="L33">public class DataAccessObject</span>
+{
+
+    @PersistenceContext(unitName = &quot;grupp14_IV1201_war_1.0-SNAPSHOTPU&quot;)
+    private EntityManager em;
+    private LogManager logManager;
+    
+    
+    void setEm(EntityManager em) 
+    {
+<span class="fc" id="L43">        this.em = em;</span>
+<span class="fc" id="L44">    }</span>
+    
+    /**
+     * Method to place an application.
+     * @param app data-transfer-object of application details.
+     * @throws NoSuchAlgorithmException thrown when the encryption phase is invalid.
+     */
+    public void placeApplication(ApplicationDTO app) throws NoSuchAlgorithmException
+    {
+<span class="nc" id="L53">        em.persist(new Application(app));</span>
+<span class="nc" id="L54">    }</span>
+
+    /**
+     * Adds a new user(Person) to the DB.
+     * 
+     * Uses entity manager to call the .persist method to add a new user to the DB with the help of
+     * a PersonDTO.
+     * 
+     * @param p data-transfer-object of Person details.
+     * @throws java.security.NoSuchAlgorithmException thrown when the encryption phase is invalid.
+     * 
+     */
+    public void registerPerson(@NotNull PersonDTO p) throws NoSuchAlgorithmException
+    {
+<span class="fc" id="L68">        em.persist(new Person(p));</span>
+<span class="fc" id="L69">    }</span>
+
+   /**
+     * getPersonByUsername
+     * @param username username of the person in question.
+     * @return Person
+     */
+    public Person getPersonByUsername(String username){
+<span class="fc" id="L77">        TypedQuery&lt;Person&gt; query = em.createNamedQuery(&quot;Person.findByUserName&quot;, Person.class);</span>
+<span class="fc" id="L78">        query.setParameter(&quot;username&quot;, username);</span>
+        try{
+<span class="fc" id="L80">            return query.getSingleResult();</span>
+<span class="fc" id="L81">        }catch (NoResultException | NonUniqueResultException e) {</span>
+<span class="fc" id="L82">            logManager.log(&quot;GET PERSON REQUEST FOR NON-EXISTING USERNAME&quot;, Level.WARNING);</span>
+<span class="fc" id="L83">            return null;</span>
+        }
+    }
+
+    /**
+     * getExpertiseByName
+     * @param expertise string that depicts the name of the expertise
+     * @return Expertise
+     */
+    public Expertise getExpertiseByName(String expertise){
+<span class="fc" id="L93">        TypedQuery&lt;Expertise&gt; query = em.createNamedQuery(&quot;Expertise.findByName&quot;, Expertise.class);</span>
+<span class="fc" id="L94">        query.setParameter(&quot;expertise&quot;, expertise);</span>
+        try{
+<span class="fc" id="L96">            return query.getSingleResult();</span>
+<span class="fc" id="L97">        }catch (NoResultException | NonUniqueResultException e) {</span>
+<span class="fc" id="L98">            logManager.log(&quot;GET EXPERTISE REQUEST FOR NON-EXISTING NAME&quot;, Level.WARNING);</span>
+<span class="fc" id="L99">            return null;</span>
+        }
+    }
+
+   /**
+     * getExpertiseList
+     * @return list of expertises that exists in the database
+     */
+    public List&lt;Expertise&gt; getExpertiseList()
+    {
+<span class="fc" id="L109">        Query query = em.createQuery(&quot;SELECT e from Expertise e&quot;);</span>
+<span class="fc" id="L110">        return (List&lt;Expertise&gt;) query.getResultList();</span>
+    }
+
+    /**
+     * getApplicationList
+     * @return list of applications that exists in the database
+     */
+    public List&lt;Application&gt; getApplicationList()
+    {
+<span class="fc" id="L119">        Query query = em.createQuery(&quot;SELECT e from Application e&quot;);</span>
+<span class="fc" id="L120">        return (List&lt;Application&gt;) query.getResultList();</span>
+    }
+
+    /**
+     * getApplicationList
+     * @param username username of the person that are fetching the applications
+     * @return list of all applications made by a particular user.
+     */
+    public List&lt;Application&gt; getApplicationList(String username){
+<span class="nc" id="L129">        TypedQuery&lt;Application&gt; query = em.createNamedQuery(&quot;Application.findByUser&quot;, Application.class);        </span>
+<span class="nc" id="L130">        query.setParameter(&quot;person&quot;, getPersonByUsername(username));        </span>
+<span class="nc" id="L131">        return (List&lt;Application&gt;) query.getResultList();</span>
+    }
+    
+    /**
+     * Get password (hash) of a specific person
+     * @param username
+     * @return String hash
+     */
+    public String getPersonPassword(String username) 
+    {
+<span class="nc" id="L141">        TypedQuery&lt;Person&gt; query = em.createNamedQuery(&quot;Person.findByUserName&quot;, Person.class);</span>
+<span class="nc" id="L142">        query.setParameter(&quot;username&quot;, username);</span>
+        try {
+<span class="nc" id="L144">            Person p = query.getSingleResult();</span>
+<span class="nc" id="L145">            return p.getPassword();</span>
+<span class="nc" id="L146">        } catch (NoResultException | NonUniqueResultException e) {</span>
+<span class="nc" id="L147">            logManager.log(&quot;LOGIN VALIDATION FAILED&quot;, Level.WARNING);</span>
+<span class="nc" id="L148">            return null;</span>
+        }
+    }
+
+    /**
+     * Finds the role of a given person.
+     * 
+     * Uses the entity manager to call the .createNamedQuery method to find a person by username. 
+     * If the user is found it returns its role. If an exception is caught it will return false.
+     * 
+     * @param username username of the person in question
+     * @return Role of the person
+     * @throws NoResultException thrown when no user was found with the specified username
+     * @throws NonUniqueResultException thrown when multiple users with the same username was found.
+     */
+    public String getPersonRole(@Size(min=3, max=16) String username)
+    {
+<span class="fc" id="L165">        TypedQuery&lt;Person&gt; query = em.createNamedQuery(&quot;Person.findByUserName&quot;, Person.class);</span>
+<span class="fc" id="L166">        query.setParameter(&quot;username&quot;, username);</span>
+        try {
+<span class="fc" id="L168">            Person p = query.getSingleResult();</span>
+<span class="fc" id="L169">            return p.getRoll_id();</span>
+<span class="fc" id="L170">        } catch (NoResultException | NonUniqueResultException e) {</span>
+<span class="fc" id="L171">            logManager.log(&quot;GET ROLE REQUEST FOR NON-EXISTING USERNAME&quot;, Level.WARNING);</span>
+<span class="fc" id="L172">            return null;</span>
+        }
+    }
+    
+    /**
+     * Sets the logManager
+     * @param logManager logmanager that is used to log application exceptions
+     */
+    public void setLogManager(LogManager logManager)
+    {
+<span class="fc" id="L182">        this.logManager = logManager;</span>
+<span class="fc" id="L183">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.0.201210061924</span></div></body></html>

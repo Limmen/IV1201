@@ -8,7 +8,7 @@
 package grupp14.IV1201.util;
 
 import com.lowagie.text.DocumentException;
-import grupp14.IV1201.entities.Application;
+import grupp14.IV1201.integration.entities.Application;
 import java.io.IOException;
 import java.io.OutputStream;
 import javax.faces.context.FacesContext;
@@ -19,7 +19,8 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
  * This class handles creation of PDF-files generated from specific applications.
  * @author kim
  */
-public class PDFManager {
+public class PDFManager 
+{
     
     /**
      * Produces a PDF-file http response of a application.

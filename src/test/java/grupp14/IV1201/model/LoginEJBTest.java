@@ -7,11 +7,8 @@
 
 package grupp14.IV1201.model;
 
-import grupp14.IV1201.entities.Person;
+import grupp14.IV1201.integration.DAO.DataAccessObject;
 import grupp14.IV1201.util.LogManager;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -30,14 +27,16 @@ public class LoginEJBTest
     /**
      * Class constructor
      */
-    public LoginEJBTest() {
+    public LoginEJBTest() 
+    {
     }       
 
     /**
      * This method is called before the tests are executed
      */
     @Before
-    public void setUp() {
+    public void setUp() 
+    {
         instance = new LoginEJB();
     }
     
@@ -45,7 +44,8 @@ public class LoginEJBTest
      * This methods is called after the tests have finished
      */
     @After
-    public void tearDown() {
+    public void tearDown() 
+    {
         instance = null;
     }
 
@@ -54,43 +54,17 @@ public class LoginEJBTest
      * @throws java.lang.Exception
      */
     @Test
-    public void testValidateLogin() throws Exception {
-        EntityManager mockManager = mock(EntityManager.class);
-        TypedQuery<Person> mockQuery = mock(TypedQuery.class);
+    public void testValidateLogin() throws Exception 
+    {
         LogManager mockLogManager = mock(LogManager.class);
-        Person mockPerson = mock(Person.class);
-        when((mockPerson.getPassword())).thenReturn(("125d6d03b32c84d492747f79cf0bf6e179d287f341384eb5d6d3197525ad6be8e6df0116032935698f99a09e265073d1d6c32c274591bf1d0a20ad67cba921bc"));
-        when((mockManager.createNamedQuery("Person.findByUserName", Person.class))).thenReturn((mockQuery));
-        when((mockQuery.getSingleResult())).thenReturn((mockPerson));
-        when((mockQuery.setParameter("username", "test"))).thenReturn(mockQuery);
-        instance.setEm(mockManager);
+        DataAccessObject dao = mock(DataAccessObject.class);
+        when((dao.getPersonPassword("test"))).thenReturn("125d6d03b32c84d492747f79cf0bf6e179d287f341384eb5d6d3197525ad6be8e6df0116032935698f99a09e265073d1d6c32c274591bf1d0a20ad67cba921bc");
+        instance.setDao(dao);
         instance.setLogManager(mockLogManager);
         Assert.assertTrue(instance.validateLogin("test", "testtest"));
-        when((mockQuery.getSingleResult())).thenThrow(new NoResultException());
-        Assert.assertFalse(instance.validateLogin("test", "testtest"));
+        Assert.assertFalse(instance.validateLogin("test", "testtestt"));
     }
 
-    /**
-     * Test of getRole method, of class LoginEJB.
-     * @throws java.lang.Exception
-     */
-    @Test
-    public void testGetRole() throws Exception {
-        EntityManager mockManager = mock(EntityManager.class);
-        TypedQuery<Person> mockQuery = mock(TypedQuery.class);
-        LogManager mockLogManager = mock(LogManager.class);
-        Person mockPerson = mock(Person.class);
-        when((mockPerson.getRoll_id())).thenReturn(("applicant"));
-        when((mockManager.createNamedQuery("Person.findByUserName", Person.class))).thenReturn((mockQuery));
-        when((mockQuery.getSingleResult())).thenReturn((mockPerson));
-        when((mockQuery.setParameter("username", "test"))).thenReturn(mockQuery);
-        instance.setEm(mockManager);
-        instance.setLogManager(mockLogManager);
-        Assert.assertEquals("applicant", instance.getRole("test"));
-        when((mockPerson.getRoll_id())).thenReturn(("recruit"));
-        Assert.assertEquals("recruit", instance.getRole("test"));
-        when((mockQuery.getSingleResult())).thenThrow(new NoResultException());
-        Assert.assertEquals("", instance.getRole("test"));
-    }
+    
     
 }

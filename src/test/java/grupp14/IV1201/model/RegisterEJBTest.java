@@ -7,11 +7,8 @@
 
 package grupp14.IV1201.model;
 
-import grupp14.IV1201.DTO.PersonDTO;
-import grupp14.IV1201.entities.Person;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
+import grupp14.IV1201.integration.DAO.DataAccessObject;
+import grupp14.IV1201.integration.entities.Person;
 import org.junit.After;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -60,25 +57,13 @@ public class RegisterEJBTest
     @Test
     public void testValidateRegistration() throws Exception 
     {
-        EntityManager mockManager = mock(EntityManager.class);
-        TypedQuery<Person> mockQuery = mock(TypedQuery.class);
-        List mockList = mock(List.class);
-        when((mockList.isEmpty())).thenReturn((true));
-        when((mockManager.createNamedQuery("Person.findByUserName", Person.class))).thenReturn((mockQuery));
-        when((mockQuery.getResultList())).thenReturn((mockList));
-        when((mockQuery.setParameter("username", "test"))).thenReturn(mockQuery);
-        instance.setEm(mockManager);
-        assertTrue(instance.validateRegistration("test"));
-        when((mockList.isEmpty())).thenReturn((false));
+        DataAccessObject dao = mock(DataAccessObject.class);
+        Person mockPerson = mock(Person.class);
+        when((dao.getPersonByUsername("test"))).thenReturn((mockPerson));        
+        instance.setDao(dao);
         assertFalse(instance.validateRegistration("test"));
+        when((dao.getPersonByUsername("test"))).thenReturn((null));
+        assertTrue(instance.validateRegistration("test"));
     }
-    
-    @Test
-    public void testRegister() throws Exception{
-        EntityManager mockManager = mock(EntityManager.class);
-        PersonDTO person = mock(PersonDTO.class);
-        when((person.getPassword())).thenReturn("test");
-        instance.setEm(mockManager);
-        instance.register(person);
-    }
+
 }

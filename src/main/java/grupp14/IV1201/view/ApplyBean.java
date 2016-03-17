@@ -9,8 +9,8 @@ package grupp14.IV1201.view;
 
 import grupp14.IV1201.DTO.ApplicationDTO;
 import grupp14.IV1201.controller.ControllerEJB;
-import grupp14.IV1201.entities.Expertise;
-import grupp14.IV1201.entities.Person;
+import grupp14.IV1201.integration.entities.Expertise;
+import grupp14.IV1201.integration.entities.Person;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -201,7 +201,8 @@ public class ApplyBean implements Serializable
      * isApplicationSuccess
      * @return boolean wether the application was successful
      */
-    public boolean isApplicationSuccess() {
+    public boolean isApplicationSuccess() 
+    {
         return applicationSuccess;
     }
 
@@ -209,7 +210,8 @@ public class ApplyBean implements Serializable
      * isApplicationFailed
      * @return boolean wether the application failed
      */
-    public boolean isApplicationFailed() {
+    public boolean isApplicationFailed() 
+    {
         return applicationFailed;
     }
     

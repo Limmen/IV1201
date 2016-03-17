@@ -1,7 +1,8 @@
 /*
- * Course project - IV1201 Design of Global Applications
- * Royal Institute of Technology
- * 2015 (c) Kim Hammar Alexander Lundh Marcel Mattsson
+ * Classname: HttpSessionBeanTest
+ * Version: 0.1
+ * Date: 20-2-2016
+ * Copyright Alexander Lundh, Kim Hammar, Marcel Mattsson 2016
  */
 package grupp14.IV1201.model;
 
@@ -20,15 +21,18 @@ import static org.mockito.Mockito.when;
  *
  * @author kim
  */
-public class HttpSessionBeanTest {
+public class HttpSessionBeanTest 
+{
     HttpSessionBean instance;
     FacesContext mockContext;
     ExternalContext mockExternalContext;
-    public HttpSessionBeanTest() {
+    public HttpSessionBeanTest() 
+    {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() 
+    {
         mockContext = mock(FacesContext.class);
         mockExternalContext = mock(ExternalContext.class);
         when((mockContext.getExternalContext())).thenReturn((mockExternalContext));
@@ -42,7 +46,8 @@ public class HttpSessionBeanTest {
     }
     
     @After
-    public void tearDown() {
+    public void tearDown() 
+    {
         instance = null;
     }
 
@@ -51,7 +56,8 @@ public class HttpSessionBeanTest {
      * Test of getSession method, of class HttpSessionBean.
      */
     @Test
-    public void testGetSession() {
+    public void testGetSession() 
+    {
         HttpSession mockSession = mock(HttpSession.class);
         when((mockExternalContext.getSession(false))).thenReturn((null));
         Assert.assertEquals(null, instance.getSession());
@@ -63,7 +69,8 @@ public class HttpSessionBeanTest {
      * Test of getRequest method, of class HttpSessionBean.
      */
     @Test
-    public void testGetRequest() {
+    public void testGetRequest() 
+    {
         HttpServletRequest mockRequest = mock(HttpServletRequest.class);
         when((mockExternalContext.getRequest())).thenReturn((null));
         Assert.assertEquals(null, instance.getRequest());
@@ -75,7 +82,8 @@ public class HttpSessionBeanTest {
      * Test of getUserName method, of class HttpSessionBean.
      */
     @Test
-    public void testGetUserName() {
+    public void testGetUserName() 
+    {
         HttpSession mockSession = mock(HttpSession.class);
         when((mockExternalContext.getSession(false))).thenReturn((mockSession));
         when((mockSession.getAttribute("username"))).thenReturn(("root"));

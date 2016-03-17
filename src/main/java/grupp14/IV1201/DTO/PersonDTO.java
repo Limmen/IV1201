@@ -11,7 +11,8 @@ package grupp14.IV1201.DTO;
  * DataTransferObject for a Person
  * @author marcelmattsson
  */
-public class PersonDTO {
+public class PersonDTO 
+{
     private final String name;
     private final String surname;
     private final String ssn;
