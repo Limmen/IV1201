@@ -51,7 +51,9 @@ import javax.validation.constraints.Size;
     public void placeApplication(ApplicationDTO app) throws NoSuchAlgorithmException
     {
 <span class="nc" id="L53">        em.persist(new Application(app));</span>
-<span class="nc" id="L54">    }</span>
+<span class="nc" id="L54">        logManager.log(&quot;Application from person&quot; + app.getPerson().getName() +  </span>
+                &quot;persisted successfully&quot;, Level.INFO);
+<span class="nc" id="L56">    }</span>
 
     /**
      * Adds a new user(Person) to the DB.
@@ -65,8 +67,10 @@ import javax.validation.constraints.Size;
      */
     public void registerPerson(@NotNull PersonDTO p) throws NoSuchAlgorithmException
     {
-<span class="fc" id="L68">        em.persist(new Person(p));</span>
-<span class="fc" id="L69">    }</span>
+<span class="fc" id="L70">        em.persist(new Person(p));</span>
+<span class="fc" id="L71">        logManager.log(&quot;Person&quot; + p.getName() +  </span>
+                &quot;registered successfully&quot;, Level.INFO);
+<span class="fc" id="L73">    }</span>
 
    /**
      * getPersonByUsername
@@ -74,13 +78,13 @@ import javax.validation.constraints.Size;
      * @return Person
      */
     public Person getPersonByUsername(String username){
-<span class="fc" id="L77">        TypedQuery&lt;Person&gt; query = em.createNamedQuery(&quot;Person.findByUserName&quot;, Person.class);</span>
-<span class="fc" id="L78">        query.setParameter(&quot;username&quot;, username);</span>
+<span class="fc" id="L81">        TypedQuery&lt;Person&gt; query = em.createNamedQuery(&quot;Person.findByUserName&quot;, Person.class);</span>
+<span class="fc" id="L82">        query.setParameter(&quot;username&quot;, username);</span>
         try{
-<span class="fc" id="L80">            return query.getSingleResult();</span>
-<span class="fc" id="L81">        }catch (NoResultException | NonUniqueResultException e) {</span>
-<span class="fc" id="L82">            logManager.log(&quot;GET PERSON REQUEST FOR NON-EXISTING USERNAME&quot;, Level.WARNING);</span>
-<span class="fc" id="L83">            return null;</span>
+<span class="fc" id="L84">            return query.getSingleResult();</span>
+<span class="fc" id="L85">        }catch (NoResultException | NonUniqueResultException e) {</span>
+<span class="fc" id="L86">            logManager.log(&quot;GET PERSON REQUEST FOR NON-EXISTING USERNAME&quot;, Level.WARNING);</span>
+<span class="fc" id="L87">            return null;</span>
         }
     }
 
@@ -90,13 +94,13 @@ import javax.validation.constraints.Size;
      * @return Expertise
      */
     public Expertise getExpertiseByName(String expertise){
-<span class="fc" id="L93">        TypedQuery&lt;Expertise&gt; query = em.createNamedQuery(&quot;Expertise.findByName&quot;, Expertise.class);</span>
-<span class="fc" id="L94">        query.setParameter(&quot;expertise&quot;, expertise);</span>
+<span class="fc" id="L97">        TypedQuery&lt;Expertise&gt; query = em.createNamedQuery(&quot;Expertise.findByName&quot;, Expertise.class);</span>
+<span class="fc" id="L98">        query.setParameter(&quot;expertise&quot;, expertise);</span>
         try{
-<span class="fc" id="L96">            return query.getSingleResult();</span>
-<span class="fc" id="L97">        }catch (NoResultException | NonUniqueResultException e) {</span>
-<span class="fc" id="L98">            logManager.log(&quot;GET EXPERTISE REQUEST FOR NON-EXISTING NAME&quot;, Level.WARNING);</span>
-<span class="fc" id="L99">            return null;</span>
+<span class="fc" id="L100">            return query.getSingleResult();</span>
+<span class="fc" id="L101">        }catch (NoResultException | NonUniqueResultException e) {</span>
+<span class="fc" id="L102">            logManager.log(&quot;GET EXPERTISE REQUEST FOR NON-EXISTING NAME&quot;, Level.WARNING);</span>
+<span class="fc" id="L103">            return null;</span>
         }
     }
 
@@ -106,8 +110,8 @@ import javax.validation.constraints.Size;
      */
     public List&lt;Expertise&gt; getExpertiseList()
     {
-<span class="fc" id="L109">        Query query = em.createQuery(&quot;SELECT e from Expertise e&quot;);</span>
-<span class="fc" id="L110">        return (List&lt;Expertise&gt;) query.getResultList();</span>
+<span class="fc" id="L113">        Query query = em.createQuery(&quot;SELECT e from Expertise e&quot;);</span>
+<span class="fc" id="L114">        return (List&lt;Expertise&gt;) query.getResultList();</span>
     }
 
     /**
@@ -116,8 +120,8 @@ import javax.validation.constraints.Size;
      */
     public List&lt;Application&gt; getApplicationList()
     {
-<span class="fc" id="L119">        Query query = em.createQuery(&quot;SELECT e from Application e&quot;);</span>
-<span class="fc" id="L120">        return (List&lt;Application&gt;) query.getResultList();</span>
+<span class="fc" id="L123">        Query query = em.createQuery(&quot;SELECT e from Application e&quot;);</span>
+<span class="fc" id="L124">        return (List&lt;Application&gt;) query.getResultList();</span>
     }
 
     /**
@@ -126,9 +130,9 @@ import javax.validation.constraints.Size;
      * @return list of all applications made by a particular user.
      */
     public List&lt;Application&gt; getApplicationList(String username){
-<span class="nc" id="L129">        TypedQuery&lt;Application&gt; query = em.createNamedQuery(&quot;Application.findByUser&quot;, Application.class);        </span>
-<span class="nc" id="L130">        query.setParameter(&quot;person&quot;, getPersonByUsername(username));        </span>
-<span class="nc" id="L131">        return (List&lt;Application&gt;) query.getResultList();</span>
+<span class="nc" id="L133">        TypedQuery&lt;Application&gt; query = em.createNamedQuery(&quot;Application.findByUser&quot;, Application.class);        </span>
+<span class="nc" id="L134">        query.setParameter(&quot;person&quot;, getPersonByUsername(username));        </span>
+<span class="nc" id="L135">        return (List&lt;Application&gt;) query.getResultList();</span>
     }
     
     /**
@@ -138,14 +142,14 @@ import javax.validation.constraints.Size;
      */
     public String getPersonPassword(String username) 
     {
-<span class="nc" id="L141">        TypedQuery&lt;Person&gt; query = em.createNamedQuery(&quot;Person.findByUserName&quot;, Person.class);</span>
-<span class="nc" id="L142">        query.setParameter(&quot;username&quot;, username);</span>
+<span class="nc" id="L145">        TypedQuery&lt;Person&gt; query = em.createNamedQuery(&quot;Person.findByUserName&quot;, Person.class);</span>
+<span class="nc" id="L146">        query.setParameter(&quot;username&quot;, username);</span>
         try {
-<span class="nc" id="L144">            Person p = query.getSingleResult();</span>
-<span class="nc" id="L145">            return p.getPassword();</span>
-<span class="nc" id="L146">        } catch (NoResultException | NonUniqueResultException e) {</span>
-<span class="nc" id="L147">            logManager.log(&quot;LOGIN VALIDATION FAILED&quot;, Level.WARNING);</span>
-<span class="nc" id="L148">            return null;</span>
+<span class="nc" id="L148">            Person p = query.getSingleResult();</span>
+<span class="nc" id="L149">            return p.getPassword();</span>
+<span class="nc" id="L150">        } catch (NoResultException | NonUniqueResultException e) {</span>
+<span class="nc" id="L151">            logManager.log(&quot;LOGIN VALIDATION FAILED&quot;, Level.WARNING);</span>
+<span class="nc" id="L152">            return null;</span>
         }
     }
 
@@ -162,14 +166,14 @@ import javax.validation.constraints.Size;
      */
     public String getPersonRole(@Size(min=3, max=16) String username)
     {
-<span class="fc" id="L165">        TypedQuery&lt;Person&gt; query = em.createNamedQuery(&quot;Person.findByUserName&quot;, Person.class);</span>
-<span class="fc" id="L166">        query.setParameter(&quot;username&quot;, username);</span>
+<span class="fc" id="L169">        TypedQuery&lt;Person&gt; query = em.createNamedQuery(&quot;Person.findByUserName&quot;, Person.class);</span>
+<span class="fc" id="L170">        query.setParameter(&quot;username&quot;, username);</span>
         try {
-<span class="fc" id="L168">            Person p = query.getSingleResult();</span>
-<span class="fc" id="L169">            return p.getRoll_id();</span>
-<span class="fc" id="L170">        } catch (NoResultException | NonUniqueResultException e) {</span>
-<span class="fc" id="L171">            logManager.log(&quot;GET ROLE REQUEST FOR NON-EXISTING USERNAME&quot;, Level.WARNING);</span>
-<span class="fc" id="L172">            return null;</span>
+<span class="fc" id="L172">            Person p = query.getSingleResult();</span>
+<span class="fc" id="L173">            return p.getRoll_id();</span>
+<span class="fc" id="L174">        } catch (NoResultException | NonUniqueResultException e) {</span>
+<span class="fc" id="L175">            logManager.log(&quot;GET ROLE REQUEST FOR NON-EXISTING USERNAME&quot;, Level.WARNING);</span>
+<span class="fc" id="L176">            return null;</span>
         }
     }
     
@@ -179,7 +183,7 @@ import javax.validation.constraints.Size;
      */
     public void setLogManager(LogManager logManager)
     {
-<span class="fc" id="L182">        this.logManager = logManager;</span>
-<span class="fc" id="L183">    }</span>
+<span class="fc" id="L186">        this.logManager = logManager;</span>
+<span class="fc" id="L187">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.0.201210061924</span></div></body></html>

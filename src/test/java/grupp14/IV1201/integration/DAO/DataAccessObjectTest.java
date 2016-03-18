@@ -149,7 +149,9 @@ public class DataAccessObjectTest
     {
         EntityManager mockManager = mock(EntityManager.class);
         PersonDTO person = mock(PersonDTO.class);
+        LogManager mockLogManager = mock(LogManager.class);
         when((person.getPassword())).thenReturn("test");
+        instance.setLogManager(mockLogManager);
         instance.setEm(mockManager);
         instance.registerPerson(person);
     }

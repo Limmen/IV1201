@@ -51,6 +51,8 @@ public class DataAccessObject
     public void placeApplication(ApplicationDTO app) throws NoSuchAlgorithmException
     {
         em.persist(new Application(app));
+        logManager.log("Application from person" + app.getPerson().getName() +  
+                "persisted successfully", Level.INFO);
     }
 
     /**
@@ -66,6 +68,8 @@ public class DataAccessObject
     public void registerPerson(@NotNull PersonDTO p) throws NoSuchAlgorithmException
     {
         em.persist(new Person(p));
+        logManager.log("Person" + p.getName() +  
+                "registered successfully", Level.INFO);
     }
 
    /**

@@ -89,7 +89,7 @@ public class Person implements Serializable
     /**
      * equals method, used to compare if two persons are equal
      * @param object object to compare to
-     * @return
+     * @return true if equals otherwise false
      */
     @Override
     public boolean equals(Object object)

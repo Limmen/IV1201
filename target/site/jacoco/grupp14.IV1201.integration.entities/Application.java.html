@@ -183,7 +183,7 @@ public class Application implements Serializable
     /**
      * equals method, used to compare if two applications are equal
      * @param object object to compare to
-     * @return
+     * @return true if equals otherwise false
      */
     @Override
     public boolean equals(Object object) 
