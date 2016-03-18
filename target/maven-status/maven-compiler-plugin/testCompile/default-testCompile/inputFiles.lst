@@ -1,7 +1,7 @@
-/hdd/workspace/java/IV1201/src/test/java/grupp14/IV1201/util/ValidEmailImplementationTest.java
-/hdd/workspace/java/IV1201/src/test/java/grupp14/IV1201/integration/DAO/DataAccessObjectTest.java
-/hdd/workspace/java/IV1201/src/test/java/grupp14/IV1201/model/HttpSessionBeanTest.java
-/hdd/workspace/java/IV1201/src/test/java/grupp14/IV1201/model/RegisterEJBTest.java
-/hdd/workspace/java/IV1201/src/test/java/grupp14/IV1201/model/SHA512Test.java
-/hdd/workspace/java/IV1201/src/test/java/grupp14/IV1201/model/LoginEJBTest.java
-/hdd/workspace/java/IV1201/src/test/java/grupp14/IV1201/view/ViewTest.java
+/home/kim/workspace/java/IV1201/src/test/java/grupp14/IV1201/model/RegisterEJBTest.java
+/home/kim/workspace/java/IV1201/src/test/java/grupp14/IV1201/view/ViewTest.java
+/home/kim/workspace/java/IV1201/src/test/java/grupp14/IV1201/integration/DAO/DataAccessObjectTest.java
+/home/kim/workspace/java/IV1201/src/test/java/grupp14/IV1201/util/ValidEmailImplementationTest.java
+/home/kim/workspace/java/IV1201/src/test/java/grupp14/IV1201/model/HttpSessionBeanTest.java
+/home/kim/workspace/java/IV1201/src/test/java/grupp14/IV1201/model/SHA512Test.java
+/home/kim/workspace/java/IV1201/src/test/java/grupp14/IV1201/model/LoginEJBTest.java

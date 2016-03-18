@@ -21,7 +21,10 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.Pattern;
 
 /**
  * ManagedBean representing the interface between the model and the
@@ -41,7 +44,10 @@ public class ApplyBean implements Serializable
     @Future(message="We're only interested in applications from possible"
             + " future employees")
     private Date availableTo = new Date();
-    @DecimalMax(value="200")
+    @DecimalMax(value="200", message="200 is the maxiumum years of experience")
+    @DecimalMin(value="0", message="0 is the minimum years of experience")
+    @Digits(integer= 10, fraction=10,
+            message="Years of experience must be a valid decimal number, with at most 10 fractions")
     private float years = 0;
     private boolean applicationSuccess = false;
     private boolean applicationFailed = false;
